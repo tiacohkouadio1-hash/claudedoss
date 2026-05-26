@@ -7,9 +7,9 @@
 
 ## 🎯 Contexte du projet
 
-- **Nom du projet :** <!-- ex: MonApp -->
-- **Description :** <!-- Une phrase résumant l'objectif du projet -->
-- **Statut :** <!-- En développement / En production / MVP -->
+- **Nom du projet :** claudedoss
+- **Description :** Projet personnel pour expérimenter avec Claude Code
+- **Statut :** En développement
 
 ---
 
@@ -27,7 +27,7 @@
 - **Style :** <!-- ex: ESLint + Prettier, Black -->
 - **Nommage :** <!-- ex: camelCase pour les variables, PascalCase pour les composants -->
 - **Tests :** <!-- ex: Jest, pytest -->
-- **Commits :** <!-- ex: Conventional Commits (feat:, fix:, chore:) -->
+- **Commits :** Conventional Commits (feat:, fix:, chore:)
 
 ---
 
@@ -91,5 +91,5 @@
 ## 🔗 Ressources utiles
 
 - Documentation : <!-- lien -->
-- Repo : <!-- lien -->
+- Repo : https://github.com/tiacohkouadio1-hash/claudedoss
 - Tickets / Issues : <!-- lien -->
