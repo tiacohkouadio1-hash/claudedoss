@@ -21,6 +21,14 @@ créé: 2026-06-06
 
 ---
 
+## 🛠️ Notes pratiques (au quotidien)
+
+- [[Calendrier éditorial IA TV]] — Planning des épisodes
+- [[Idées d'épisodes IA TV]] — Banque de sujets
+- [[Checklist de production IA TV]] — La routine jour par jour
+
+---
+
 ## 🎯 En une phrase
 
 > **IA TV by Cordixia = l'intelligence artificielle expliquée simplement, chaque jour.**
