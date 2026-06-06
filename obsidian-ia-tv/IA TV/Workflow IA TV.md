@@ -50,9 +50,31 @@ tags: [iatv, workflow, pipeline]
 
 ---
 
-### ÉTAPE 5 — VIDÉO
-**Outil :** InVideo AI
-**Mission :** Créer automatiquement la vidéo.
+### ÉTAPE 5 — VIDÉO (MONTAGE MANUEL — workflow officiel)
+
+Le montage se fait **à la main** pour garder le contrôle total sur le rendu.
+
+```
+ElevenLabs  →  la voix (MP3 Peter - Narrator)
+Canva       →  l'habillage IA TV (Kit D : générique, cartons rubriques, bandeau, conclusion)
+Pexels/Canva → les images et vidéos b-roll, choisies manuellement par sujet
+CapCut      →  le montage final (on assemble voix + habillage + b-roll)
+```
+
+**Pourquoi ce choix plutôt que la génération auto (InVideo) :**
+- Contrôle total du rythme, des images et de l'habillage
+- Cohérence visuelle garantie (vraie identité IA TV)
+- Pas dépendant d'une IA qui choisit mal les visuels
+
+**Ordre de montage dans CapCut :**
+1. Importer le MP3 (voix) → c'est le squelette, tout se cale dessus
+2. Poser le b-roll en fond, segment par segment (mots-clés → [[Banque de visuels - b-roll]])
+3. Poser par-dessus les cartons Canva (Kit D) au moment où la voix annonce la rubrique
+4. Ajouter le bandeau bas + le logo en watermark
+5. Musique de fond légère (-18 dB sous la voix)
+6. Export 1080p
+
+→ Détail pas à pas : [[Montage JT 001 - pas a pas]]
 
 ---
 
