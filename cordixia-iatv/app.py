@@ -1,11 +1,12 @@
 import os
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, send_from_directory
 from dotenv import load_dotenv
 
 load_dotenv()
 
 from agents.veille import fetch_actus_ia
 from agents.script import generer_script
+from agents.voix import generer_voix, lister_voix_disponibles
 
 app = Flask(__name__)
 
@@ -32,6 +33,29 @@ def api_generer_script():
 
     script = generer_script(actus_validees, angle)
     return jsonify({"script": script})
+
+
+@app.route("/api/generer-voix", methods=["POST"])
+def api_generer_voix():
+    data = request.get_json()
+    script = data.get("script", "")
+
+    if not script:
+        return jsonify({"error": "Aucun script fourni"}), 400
+
+    resultat = generer_voix(script)
+    return jsonify(resultat)
+
+
+@app.route("/api/voix-disponibles")
+def api_voix_disponibles():
+    return jsonify(lister_voix_disponibles())
+
+
+@app.route("/static/audio/<path:filename>")
+def serve_audio(filename):
+    audio_dir = os.path.join(os.path.dirname(__file__), "static", "audio")
+    return send_from_directory(audio_dir, filename)
 
 
 if __name__ == "__main__":

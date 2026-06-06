@@ -269,7 +269,41 @@
     }
 
     .btn-copy { background: #3a86ff; color: white; }
-    .btn-download { background: #ff6b35; color: white; }
+    .btn-download { background: #ff6b35; color: white; text-decoration: none; display: inline-block; }
+    .btn-voix { background: #06d6a0; color: #0a0a1a; }
+    .btn-voix:hover { background: #05b88a; }
+
+    .voix-output {
+      display: none;
+      background: #111128;
+      border: 1px solid #06d6a0;
+      border-radius: 12px;
+      padding: 28px;
+      margin-top: 24px;
+    }
+
+    .voix-output h3 {
+      color: #06d6a0;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .voix-output #voix-message {
+      font-size: 14px;
+      color: #bbb;
+      line-height: 1.6;
+    }
+
+    .voix-output .demo-warning {
+      color: #ffd166;
+      font-size: 13px;
+      padding: 12px;
+      background: #ffd1660d;
+      border-radius: 8px;
+      border: 1px solid #ffd16633;
+    }
   </style>
 </head>
 <body>
@@ -308,6 +342,20 @@
     <div class="script-actions">
       <button class="btn-copy" onclick="copierScript()">Copier le script</button>
       <button class="btn-download" onclick="telechargerScript()">Télécharger .txt</button>
+      <button class="btn-voix" onclick="genererVoix()">🎙️ Générer la voix (ElevenLabs)</button>
+    </div>
+  </div>
+
+  <div class="spinner" id="spinner-voix">
+    Génération de la voix par ElevenLabs...
+  </div>
+
+  <div class="voix-output" id="voix-output">
+    <h3>🎙️ Voix du présentateur — CORDIXIA IA TV</h3>
+    <div id="voix-message"></div>
+    <audio id="audio-player" controls style="width:100%; margin-top:16px; display:none;"></audio>
+    <div class="script-actions" id="voix-actions" style="display:none;">
+      <a class="btn-download" id="btn-download-audio" download>Télécharger l'audio .mp3</a>
     </div>
   </div>
 </div>
@@ -401,6 +449,40 @@
     a.href = URL.createObjectURL(blob);
     a.download = `cordixia-iatv-${date}.txt`;
     a.click();
+  }
+
+  async function genererVoix() {
+    const script = document.getElementById('script-text').textContent;
+
+    document.getElementById('spinner-voix').style.display = 'block';
+    document.getElementById('voix-output').style.display = 'none';
+
+    const res = await fetch('/api/generer-voix', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ script })
+    });
+
+    const data = await res.json();
+    document.getElementById('spinner-voix').style.display = 'none';
+    document.getElementById('voix-output').style.display = 'block';
+
+    const messageEl = document.getElementById('voix-message');
+    const player = document.getElementById('audio-player');
+    const actions = document.getElementById('voix-actions');
+
+    if (data.ok && data.fichier) {
+      messageEl.innerHTML = '✅ ' + data.message;
+      player.src = data.fichier;
+      player.style.display = 'block';
+      actions.style.display = 'flex';
+      document.getElementById('btn-download-audio').href = data.fichier;
+    } else {
+      messageEl.innerHTML = '<div class="demo-warning">⚠️ ' + data.message +
+        '<br><br>Tu peux copier le script ci-dessus et le coller manuellement dans ElevenLabs en attendant.</div>';
+      player.style.display = 'none';
+      actions.style.display = 'none';
+    }
   }
 
   chargerActus();
