@@ -16,6 +16,8 @@ créé: 2026-06-06
 - [[Règle éditoriale IA TV]] — Règle n°1 + structure des épisodes
 - [[Format officiel IA TV]] — Durée, segments, format technique, marqueurs d'habitude
 - [[Habillage visuel IA TV]] — Identité visuelle JT (logo, écrans, palette)
+- [[Direction artistique IA TV]] — ADN visuel (références, palette, style)
+- [[Formats par plateforme]] — Quel format pour YouTube, TikTok, Reels…
 - [[Organisation IA TV]] — Qui fait quoi (Thierry, ChatGPT, Claude, ElevenLabs…)
 - [[Objectif 2026]] — Les 4 phases + la règle d'or
 - [[Workflow IA TV]] — Le pipeline de production en 6 étapes
