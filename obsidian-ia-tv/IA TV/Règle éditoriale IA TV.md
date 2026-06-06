@@ -18,6 +18,20 @@ tags: [iatv, editorial, regles]
 
 ---
 
+## Règle n°1 — Le filtre des 3 questions
+
+Une actualité seule ne suffit pas.
+
+Chaque sujet doit répondre à ces trois questions :
+
+1. **Que s'est-il passé ?**
+2. **Pourquoi est-ce important ?**
+3. **Ce que ça change pour vous.**
+
+> Si une information ne répond pas à ces trois questions, elle **ne passe pas** dans le JT.
+
+---
+
 ## Objectif
 
 - Informer rapidement.
