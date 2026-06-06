@@ -11,6 +11,7 @@ créé: 2026-06-06
 
 ## 🗂️ Les notes du projet
 
+- [[Mission officielle IA TV]] — La promesse de la chaîne en texte officiel
 - [[Vision IA TV]] — Pourquoi IA TV existe + le format JT
 - [[Charte de lancement]] — Mission, promesse, ton, public cible
 - [[Règle éditoriale IA TV]] — Règle n°1 + structure des épisodes
