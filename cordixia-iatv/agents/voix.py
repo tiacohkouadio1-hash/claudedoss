@@ -23,14 +23,27 @@ def nettoyer_script(script):
     return "\n\n".join(lignes)
 
 
-def generer_voix(script):
+def generer_voix(script, voice_id=None, apercu=False):
     """Génère la voix du présentateur via ElevenLabs.
+    - voice_id : voix à utiliser (sinon celle du .env)
+    - apercu : si True, ne lit que les 2 premières phrases (test rapide d'un présentateur)
     Retourne le chemin du fichier audio ou une info de démo."""
     os.makedirs(AUDIO_DIR, exist_ok=True)
 
+    voix_choisie = voice_id or ELEVENLABS_VOICE_ID
     texte = nettoyer_script(script)
-    date_str = date.today().isoformat()
-    nom_fichier = f"cordixia-iatv-{date_str}.mp3"
+
+    if apercu:
+        # On garde seulement le début pour tester rapidement une voix
+        phrases = texte.replace("\n", " ").split(". ")
+        texte = ". ".join(phrases[:2]).strip()
+        if not texte.endswith("."):
+            texte += "."
+        nom_fichier = f"apercu-{voix_choisie}.mp3"
+    else:
+        date_str = date.today().isoformat()
+        nom_fichier = f"cordixia-iatv-{date_str}.mp3"
+
     chemin = os.path.join(AUDIO_DIR, nom_fichier)
 
     if not ELEVENLABS_API_KEY:
@@ -42,7 +55,7 @@ def generer_voix(script):
             "fichier": None
         }
 
-    url = f"https://api.elevenlabs.io/v1/text-to-speech/{ELEVENLABS_VOICE_ID}"
+    url = f"https://api.elevenlabs.io/v1/text-to-speech/{voix_choisie}"
     headers = {
         "xi-api-key": ELEVENLABS_API_KEY,
         "Content-Type": "application/json"
@@ -73,16 +86,39 @@ def generer_voix(script):
     }
 
 
-def lister_voix_disponibles():
-    """Liste les voix du compte ElevenLabs pour choisir le présentateur."""
-    if not ELEVENLABS_API_KEY:
-        return []
+# Quelques voix ElevenLabs publiques par défaut, utiles pour la démo
+# et comme présentateurs de départ pour CORDIXIA IA TV.
+VOIX_DEMO = [
+    {"id": "JBFqnCBsd6RMkjVDRZzb", "nom": "George — grave, posé (présentateur JT)", "genre": "homme"},
+    {"id": "onwK4e9ZLuTAKqWW03F9", "nom": "Daniel — clair, autoritaire", "genre": "homme"},
+    {"id": "TX3LPaxmHKxFdv7VOQHJ", "nom": "Liam — jeune, dynamique", "genre": "homme"},
+    {"id": "EXAVITQu4vr4xnSDxMaL", "nom": "Sarah — douce, professionnelle", "genre": "femme"},
+    {"id": "XB0fDUnXU5powFXDhCwa", "nom": "Charlotte — chaleureuse, posée", "genre": "femme"},
+]
 
-    response = requests.get(
-        "https://api.elevenlabs.io/v1/voices",
-        headers={"xi-api-key": ELEVENLABS_API_KEY},
-        timeout=30
-    )
-    response.raise_for_status()
-    voices = response.json().get("voices", [])
-    return [{"id": v["voice_id"], "nom": v["name"]} for v in voices]
+
+def lister_voix_disponibles():
+    """Liste les voix du compte ElevenLabs pour choisir le présentateur.
+    Si pas de clé API, retourne une sélection de voix de démo."""
+    if not ELEVENLABS_API_KEY:
+        return VOIX_DEMO
+
+    try:
+        response = requests.get(
+            "https://api.elevenlabs.io/v1/voices",
+            headers={"xi-api-key": ELEVENLABS_API_KEY},
+            timeout=30
+        )
+        response.raise_for_status()
+        voices = response.json().get("voices", [])
+        return [
+            {
+                "id": v["voice_id"],
+                "nom": v["name"],
+                "genre": v.get("labels", {}).get("gender", "")
+            }
+            for v in voices
+        ]
+    except Exception:
+        # En cas d'erreur réseau/API, on retombe sur les voix de démo
+        return VOIX_DEMO

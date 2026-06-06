@@ -270,8 +270,109 @@
 
     .btn-copy { background: #3a86ff; color: white; }
     .btn-download { background: #ff6b35; color: white; text-decoration: none; display: inline-block; }
-    .btn-voix { background: #06d6a0; color: #0a0a1a; }
+    .btn-voix { background: #06d6a0; color: #0a0a1a; font-weight: 700; width: 100%; margin-top: 16px; }
     .btn-voix:hover { background: #05b88a; }
+    .btn-voix:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .presentateur-section {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid #222244;
+    }
+
+    .presentateur-section > label {
+      display: block;
+      font-size: 13px;
+      color: #06d6a0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    .presentateur-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .presentateur-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #0a0a1a;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 14px 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .presentateur-card:hover { border-color: #06d6a0aa; }
+
+    .presentateur-card.active {
+      border-color: #06d6a0;
+      background: #06d6a00d;
+    }
+
+    .presentateur-radio {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid #555;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .presentateur-card.active .presentateur-radio {
+      border-color: #06d6a0;
+    }
+
+    .presentateur-card.active .presentateur-radio::after {
+      content: '';
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #06d6a0;
+    }
+
+    .presentateur-info { flex: 1; }
+
+    .presentateur-nom {
+      font-size: 14px;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .presentateur-genre {
+      font-size: 11px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-apercu {
+      background: transparent;
+      border: 1px solid #06d6a0;
+      color: #06d6a0;
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .btn-apercu:hover { background: #06d6a01a; }
+    .btn-apercu:disabled { opacity: 0.4; cursor: wait; }
+
+    .apercu-player {
+      width: 100%;
+      margin-top: 10px;
+      height: 36px;
+    }
 
     .voix-output {
       display: none;
@@ -342,7 +443,14 @@
     <div class="script-actions">
       <button class="btn-copy" onclick="copierScript()">Copier le script</button>
       <button class="btn-download" onclick="telechargerScript()">Télécharger .txt</button>
-      <button class="btn-voix" onclick="genererVoix()">🎙️ Générer la voix (ElevenLabs)</button>
+    </div>
+
+    <div class="presentateur-section">
+      <label>🎙️ Choisis ton présentateur</label>
+      <div class="presentateur-list" id="presentateur-list"></div>
+      <button class="btn-voix" id="btn-voix" onclick="genererVoix()" disabled>
+        Générer la voix complète avec ce présentateur
+      </button>
     </div>
   </div>
 
@@ -414,6 +522,9 @@
     document.getElementById('btn-generer').disabled = selectedIds.size === 0;
   }
 
+  let presentateurs = [];
+  let voixSelectionnee = null;
+
   async function genererScript() {
     const actusValidees = actus.filter((_, i) => selectedIds.has(i));
     const angle = document.getElementById('angle').value;
@@ -433,6 +544,72 @@
     document.getElementById('btn-generer').disabled = false;
     document.getElementById('script-text').textContent = data.script;
     document.getElementById('script-output').style.display = 'block';
+
+    chargerPresentateurs();
+  }
+
+  async function chargerPresentateurs() {
+    if (presentateurs.length === 0) {
+      const res = await fetch('/api/voix-disponibles');
+      presentateurs = await res.json();
+    }
+    renderPresentateurs();
+  }
+
+  function renderPresentateurs() {
+    const list = document.getElementById('presentateur-list');
+    list.innerHTML = presentateurs.map((p, i) => `
+      <div>
+        <div class="presentateur-card" id="pres-${i}" onclick="choisirVoix(${i})">
+          <div class="presentateur-radio"></div>
+          <div class="presentateur-info">
+            <div class="presentateur-nom">${p.nom}</div>
+            ${p.genre ? `<div class="presentateur-genre">${p.genre}</div>` : ''}
+          </div>
+          <button class="btn-apercu" id="apercu-btn-${i}" onclick="event.stopPropagation(); ecouterApercu(${i})">
+            ▶ Écouter un extrait
+          </button>
+        </div>
+        <audio class="apercu-player" id="apercu-player-${i}" controls style="display:none;"></audio>
+      </div>
+    `).join('');
+  }
+
+  function choisirVoix(i) {
+    voixSelectionnee = presentateurs[i].id;
+    document.querySelectorAll('.presentateur-card').forEach(c => c.classList.remove('active'));
+    document.getElementById(`pres-${i}`).classList.add('active');
+    document.getElementById('btn-voix').disabled = false;
+  }
+
+  async function ecouterApercu(i) {
+    const script = document.getElementById('script-text').textContent;
+    const btn = document.getElementById(`apercu-btn-${i}`);
+    const player = document.getElementById(`apercu-player-${i}`);
+
+    btn.disabled = true;
+    btn.textContent = '⏳ Génération...';
+
+    const res = await fetch('/api/generer-voix', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ script, voice_id: presentateurs[i].id, apercu: true })
+    });
+
+    const data = await res.json();
+    btn.disabled = false;
+
+    if (data.ok && data.fichier) {
+      btn.textContent = '▶ Réécouter';
+      player.src = data.fichier + '?t=' + Date.now();
+      player.style.display = 'block';
+      player.play();
+      // Choisit automatiquement cette voix après écoute
+      choisirVoix(i);
+    } else {
+      btn.textContent = '⚠️ Clé API requise';
+      alert(data.message);
+    }
   }
 
   function copierScript() {
@@ -460,7 +637,7 @@
     const res = await fetch('/api/generer-voix', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ script })
+      body: JSON.stringify({ script, voice_id: voixSelectionnee })
     });
 
     const data = await res.json();

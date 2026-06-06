@@ -39,11 +39,13 @@ def api_generer_script():
 def api_generer_voix():
     data = request.get_json()
     script = data.get("script", "")
+    voice_id = data.get("voice_id")
+    apercu = data.get("apercu", False)
 
     if not script:
         return jsonify({"error": "Aucun script fourni"}), 400
 
-    resultat = generer_voix(script)
+    resultat = generer_voix(script, voice_id=voice_id, apercu=apercu)
     return jsonify(resultat)
 
 
