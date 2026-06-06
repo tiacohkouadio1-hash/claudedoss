@@ -10,7 +10,7 @@ tags: [iatv, media]
 
 ## Concept
 
-**IA TV** — un journal télévisé quotidien sur l'intelligence artificielle.
+**IA TV by Cordixia** — un journal télévisé quotidien sur l'intelligence artificielle.
 Le format du « 20H », appliqué à l'IA, en français.
 
 ---

@@ -1,6 +1,7 @@
-# Coffre Obsidian — IA TV
+# Coffre Obsidian — IA TV by Cordixia
 
-Coffre du média **IA TV** — entreprise **indépendante de CORDIXIA**.
+Coffre du média **IA TV by Cordixia** — marque média sous l'ombrelle Cordixia,
+distincte de l'app/produit Cordixia.
 
 ## Comment l'importer
 
@@ -23,7 +24,8 @@ IA TV/
 
 ## Important — séparation des projets
 
-- **CORDIXIA** = ton app / entreprise (coffre séparé : MVP, Écrans, Fonctionnalités, Rôles...)
-- **IA TV** = ton média IA (ce coffre-ci)
+- **Cordixia** = maison mère + app / produit (coffre séparé : MVP, Écrans, Fonctionnalités, Rôles...)
+- **IA TV by Cordixia** = la marque média IA (ce coffre-ci)
 
-Garde-les dans **deux coffres distincts** pour éviter de mélanger les notes.
+Même maison mère (Cordixia), mais **deux coffres distincts** pour ne pas mélanger
+le produit/app et le média.

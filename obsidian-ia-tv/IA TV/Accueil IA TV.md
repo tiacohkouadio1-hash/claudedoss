@@ -3,10 +3,11 @@ tags: [iatv, accueil, moc]
 créé: 2026-06-06
 ---
 
-# 📺 Accueil IA TV
+# 📺 Accueil — IA TV by Cordixia
 
-> Coffre du média **IA TV** — entreprise indépendante.
-> (À ne pas confondre avec le projet **CORDIXIA**.)
+> Coffre du média **IA TV by Cordixia**.
+> Marque média sous l'ombrelle **Cordixia** (maison mère),
+> mais distincte de l'app/produit Cordixia.
 
 ---
 
@@ -22,7 +23,10 @@ créé: 2026-06-06
 
 ## 🎯 En une phrase
 
-> **IA TV = l'intelligence artificielle expliquée simplement, chaque jour.**
+> **IA TV by Cordixia = l'intelligence artificielle expliquée simplement, chaque jour.**
+
+**Nom complet :** IA TV by Cordixia
+**Maison mère :** Cordixia
 
 ---
 
