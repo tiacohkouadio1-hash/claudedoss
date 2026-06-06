@@ -16,16 +16,22 @@ distincte de l'app/produit Cordixia.
 IA TV/
 ├── Accueil IA TV.md        ← note centrale (MOC)
 ├── Vision IA TV.md
-├── Le Média IA TV.md
-├── Agents IA — IA TV.md
-├── Automatisations IA TV.md
-└── Business IA TV.md
+├── Workflow IA TV.md
+├── Idées vidéos.md
+├── Scripts/
+│   └── Modèle de script.md
+└── Actualités/
+    └── Modèle - actu du jour.md
 ```
 
-## Important — séparation des projets
+## Comment l'installer dans ton coffre « Cerveau »
 
-- **Cordixia** = maison mère + app / produit (coffre séparé : MVP, Écrans, Fonctionnalités, Rôles...)
-- **IA TV by Cordixia** = la marque média IA (ce coffre-ci)
+IA TV est un **dossier** dans ton coffre unique « Cerveau »
+(situé dans `Documents/Codex`), aux côtés de Cordixia.
 
-Même maison mère (Cordixia), mais **deux coffres distincts** pour ne pas mélanger
-le produit/app et le média.
+1. Copie le dossier `IA TV/` (ci-dessus)
+2. Colle-le à la racine de ton coffre Cerveau (`Documents/Codex`)
+3. Dans Obsidian, le dossier `IA TV` apparaît automatiquement
+
+Les notes restent reliables avec celles de Cordixia, des automatisations
+et du business — c'est tout l'intérêt d'un coffre unique.

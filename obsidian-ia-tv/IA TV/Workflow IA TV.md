@@ -4,7 +4,7 @@ tags: [iatv, workflow, pipeline]
 
 # ⚙️ Workflow IA TV
 
-← [[Accueil IA TV]] · voir aussi [[Automatisations IA TV]]
+← [[Accueil IA TV]]
 
 ---
 
@@ -84,4 +84,20 @@ Diffusion sur toutes les plateformes
 
 ---
 
-Voir aussi : [[Agents IA — IA TV]] · [[Checklist de production IA TV]]
+## 💰 Budget mensuel
+
+| Outil | Prix |
+|---|---|
+| Perplexity Pro | ~20 $ |
+| Claude Pro | ~20 $ |
+| ElevenLabs | ~5 $ |
+| InVideo AI | ~20 $ |
+| Repurpose.io | ~25 $ |
+| Beehiiv (newsletter) | gratuit au début |
+| **Total** | **~90 $/mois** |
+
+> Temps humain : **5-10 min/jour** (la validation, étape 2.5).
+
+---
+
+Voir aussi : [[Idées vidéos]] · [[Modèle de script]]

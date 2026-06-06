@@ -50,3 +50,26 @@ Phase 1 → Voix IA + visuels (pas de visage)
 Phase 2 → Le fondateur apparaît à l'écran
 Phase 3 → Fondateur = rédacteur en chef + agents IA récurrents
 ```
+
+---
+
+## Le format : un JT de l'IA
+
+Structure d'un épisode (2-5 min) :
+
+```
+[GÉNÉRIQUE]      Musique type JT
+[OUVERTURE]      "Bonsoir, voici les titres de l'IA..."
+[RUBRIQUE 1]     La grande actu du jour
+[RUBRIQUE 2]     L'outil de la semaine
+[RUBRIQUE 3]     Le chiffre / la stat
+[RUBRIQUE 4]     Ce que ça change pour vous
+[RUBRIQUE 5]     L'info bonus
+[CLÔTURE]        "À demain. Bonsoir."
+```
+
+**Présentateur :** voix IA (ElevenLabs) — voix testée recommandée : George (grave, posé).
+
+**Diffusion :** YouTube · TikTok · Instagram · Facebook · LinkedIn · Spotify · Apple Podcast.
+
+> Le détail de production : [[Workflow IA TV]]

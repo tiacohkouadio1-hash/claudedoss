@@ -3,53 +3,51 @@ tags: [iatv, accueil, moc]
 créé: 2026-06-06
 ---
 
-# 📺 Accueil — IA TV by Cordixia
+# 📺 Accueil IA TV
 
-> Coffre du média **IA TV by Cordixia**.
-> Marque média sous l'ombrelle **Cordixia** (maison mère),
-> mais distincte de l'app/produit Cordixia.
+> Projet média de **Cordixia** : l'intelligence artificielle expliquée simplement, chaque jour.
 
 ---
 
-## 🗂️ Les piliers
+## 🗂️ Les notes du projet
 
-- [[Vision IA TV]] — Pourquoi IA TV existe
-- [[Le Média IA TV]] — Le concept : journal IA quotidien
-- [[Agents IA — IA TV]] — L'équipe IA qui produit
-- [[Automatisations IA TV]] — Le pipeline de production
-- [[Business IA TV]] — Le modèle économique
+- [[Vision IA TV]] — Pourquoi IA TV existe + le format JT
+- [[Workflow IA TV]] — Le pipeline de production en 6 étapes
+- [[Idées vidéos]] — Banque de sujets à filmer
 
----
+## 📁 Dossiers
 
-## 🛠️ Notes pratiques (au quotidien)
-
-- [[Workflow IA TV]] — Le pipeline en 6 étapes
-- [[Calendrier éditorial IA TV]] — Planning des épisodes
-- [[Idées d'épisodes IA TV]] — Banque de sujets
-- [[Checklist de production IA TV]] — La routine jour par jour
+- **Scripts/** — les scripts des épisodes ([[Modèle de script]])
+- **Actualités/** — la veille du jour ([[Modèle - actu du jour]])
 
 ---
 
-## 🎯 En une phrase
+## 🔗 Connexions avec le reste du cerveau
 
-> **IA TV by Cordixia = l'intelligence artificielle expliquée simplement, chaque jour.**
+```
+IA TV
+   ↓ alimente
+Cordixia          (projet principal)
+   ↓ utilise
+03_Automatisations (mutualisées)
+   ↓ génère
+04_Business        (opportunités)
+```
 
-**Nom complet :** IA TV by Cordixia
-**Maison mère :** Cordixia
+> IA TV n'est pas isolé : ses automatisations servent aussi à **Cordixia**,
+> et les idées business trouvées via IA TV alimentent **04_Business**.
 
 ---
 
 ## 📌 Statut
 
-- [x] Concept défini
+- [x] Concept et workflow définis
 - [x] Pipeline de production codé
-- [x] Sélecteur de présentateur (voix IA)
 - [ ] Premier épisode publié
 - [ ] Distribution multi-plateformes active
-- [ ] Première monétisation
 
 ---
 
-## 👤 Fondateur
+## 🎯 En une phrase
 
-**Thierry**
+> **IA TV by Cordixia = l'IA expliquée simplement, chaque jour, en format JT.**
