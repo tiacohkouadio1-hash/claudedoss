@@ -1,20 +1,18 @@
 ---
 tags: [iatv, script, episode]
-episode: 001
+episode: 0
 date: 2026-06-06
 statut: à produire
 ---
 
-# 🎬 Épisode 001 — Lancement IA TV
+# 🎬 Épisode 0 — Pourquoi IA TV existe
 
 ← [[Accueil IA TV]] · [[Modèle de script]]
 
 **Durée cible :** 2 min 30
 **Présentateur (voix) :** George (ElevenLabs)
-**Angle :** Épisode de lancement — poser le décor + 3 actus fortes
-
-> ⚠️ Avant d'enregistrer : remplacer les actus ci-dessous par celles **du jour**
-> (via [[Modèle - actu du jour]]). Le texte ci-dessous est un modèle prêt à lire.
+**Rôle :** Vidéo de présentation (à épingler en haut de la chaîne).
+Pose le décor et la promesse. **Ce n'est pas un JT** — le vrai journal commence avec [[JT IA 001]].
 
 ---
 
