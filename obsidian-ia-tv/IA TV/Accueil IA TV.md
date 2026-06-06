@@ -12,7 +12,12 @@ créé: 2026-06-06
 ## 🗂️ Les notes du projet
 
 - [[Vision IA TV]] — Pourquoi IA TV existe + le format JT
+- [[Charte de lancement]] — Mission, promesse, ton, public cible
+- [[Règle éditoriale IA TV]] — Structure des épisodes + règles de fond
+- [[Organisation IA TV]] — Qui fait quoi (Thierry, ChatGPT, Claude, ElevenLabs…)
+- [[Objectif 2026]] — Les 4 phases + la règle d'or
 - [[Workflow IA TV]] — Le pipeline de production en 6 étapes
+- [[Signature IA TV]] — La phrase signature de la chaîne
 - [[Idées vidéos]] — Banque de sujets à filmer
 
 ## 📁 Dossiers
