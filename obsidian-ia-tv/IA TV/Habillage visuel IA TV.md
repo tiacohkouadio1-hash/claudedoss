@@ -48,3 +48,19 @@ On change le **contenu** (chiffre, outil, actu), jamais l'**habillage**.
 - **9:16** → versions verticales (Shorts, TikTok, Reels)
 
 > Réalisé dans **Canva** (kit éditable), exporté en PNG (écrans) et MP4 (générique).
+
+---
+
+## 🔗 Kit Canva — Kit D (validé)
+
+Direction : Bloomberg Tech × The Verge × Wired → voir [[Direction artistique IA TV]]
+
+**Master 16:9 (YouTube)**
+- Éditer : https://www.canva.com/d/1jQjPhizCcl0l62
+- Voir : https://www.canva.com/d/2LT7hjinLRpkOAw
+
+**Vertical 9:16 (Shorts / TikTok / Reels)**
+- Éditer : https://www.canva.com/d/5t-8BbFc4p3JNrH
+- Voir : https://www.canva.com/d/sEuRhT9cAqlL56g
+
+> ⚠️ Sur le 9:16, vérifier le recadrage / repositionnement du texte écran par écran.

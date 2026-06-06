@@ -56,6 +56,6 @@ Nous cherchons une identité :
 
 ## Kit retenu
 
-**Kit #4** (provisoire) — à comparer avec la prochaine génération.
+**Kit D** ✅ — validé après régénération avec la direction Bloomberg Tech × The Verge × Wired.
 
-→ [[Habillage visuel IA TV]]
+Liens Canva (16:9 + 9:16) → [[Habillage visuel IA TV]]
