@@ -23,6 +23,7 @@ créé: 2026-06-06
 
 ## 🛠️ Notes pratiques (au quotidien)
 
+- [[Workflow IA TV]] — Le pipeline en 6 étapes
 - [[Calendrier éditorial IA TV]] — Planning des épisodes
 - [[Idées d'épisodes IA TV]] — Banque de sujets
 - [[Checklist de production IA TV]] — La routine jour par jour
