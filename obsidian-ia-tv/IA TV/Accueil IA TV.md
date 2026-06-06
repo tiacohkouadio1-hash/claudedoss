@@ -14,7 +14,8 @@ créé: 2026-06-06
 - [[Vision IA TV]] — Pourquoi IA TV existe + le format JT
 - [[Charte de lancement]] — Mission, promesse, ton, public cible
 - [[Règle éditoriale IA TV]] — Règle n°1 + structure des épisodes
-- [[Format officiel IA TV]] — Durée, segments, règle d'or
+- [[Format officiel IA TV]] — Durée, segments, format technique, marqueurs d'habitude
+- [[Habillage visuel IA TV]] — Identité visuelle JT (logo, écrans, palette)
 - [[Organisation IA TV]] — Qui fait quoi (Thierry, ChatGPT, Claude, ElevenLabs…)
 - [[Objectif 2026]] — Les 4 phases + la règle d'or
 - [[Workflow IA TV]] — Le pipeline de production en 6 étapes
