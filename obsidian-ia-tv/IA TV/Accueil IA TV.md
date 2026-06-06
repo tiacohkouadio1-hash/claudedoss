@@ -18,6 +18,7 @@ créé: 2026-06-06
 - [[Habillage visuel IA TV]] — Identité visuelle JT (logo, écrans, palette)
 - [[Direction artistique IA TV]] — ADN visuel (références, palette, style)
 - [[Formats par plateforme]] — Quel format pour YouTube, TikTok, Reels…
+- [[Banque de visuels - b-roll]] — Mots-clés vidéo par rubrique
 - [[Organisation IA TV]] — Qui fait quoi (Thierry, ChatGPT, Claude, ElevenLabs…)
 - [[Objectif 2026]] — Les 4 phases + la règle d'or
 - [[Workflow IA TV]] — Le pipeline de production en 6 étapes
