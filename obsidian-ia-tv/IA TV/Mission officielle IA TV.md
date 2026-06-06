@@ -10,6 +10,26 @@ créé: 2026-06-06
 
 ---
 
+## 🎙️ Version courte (à l'antenne — ouverture JT)
+
+Avant de commencer :
+
+Chaque jour, des centaines d'informations sur l'intelligence artificielle sont publiées.
+
+Notre travail est simple :
+
+Faire le tri.
+
+Sélectionner ce qui compte vraiment.
+
+Et vous l'expliquer simplement.
+
+Bienvenue sur IA TV.
+
+---
+
+## 📄 Version complète
+
 Chaque jour, des centaines d'informations sur l'intelligence artificielle sont publiées.
 
 Nouveaux modèles, nouveaux outils, annonces d'entreprises, innovations, investissements, recherches...
