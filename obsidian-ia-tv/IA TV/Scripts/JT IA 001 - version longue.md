@@ -30,6 +30,8 @@ Bonsoir et bienvenue. Il est l'heure de votre journal de l'intelligence artifici
 
 Nous sommes le 6 juin 2026, et l'actualité de l'intelligence artificielle n'a jamais été aussi dense. Alors prenez quelques minutes avec moi : en sept minutes, vous saurez l'essentiel de ce qui compte vraiment cette semaine dans l'IA.
 
+Chaque jour, des centaines d'informations sur l'IA sortent. Impossible de tout suivre. Notre travail, c'est de faire le tri pour vous : sélectionner les sujets qui comptent vraiment, écarter le bruit, et vous les expliquer simplement. Suivez ce journal chaque jour, et vous ne serez jamais en retard sur ce qui se passe vraiment.
+
 Au sommaire ce soir :
 
 Anthropic entre en bourse, et veut coiffer OpenAI au poteau dans une course à plusieurs milliards de dollars.
