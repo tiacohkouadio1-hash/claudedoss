@@ -1,14 +1,14 @@
 ---
-tags: [cordixia, agents, outils]
+tags: [iatv, agents, outils]
 ---
 
-# 🤖 Agents IA
+# 🤖 Agents IA — IA TV
 
-← Retour : [[CORDIXIA]]
+← [[Accueil IA TV]]
 
 ---
 
-## L'équipe IA de CORDIXIA
+## L'équipe IA d'IA TV
 
 | Agent | Rôle | Outil |
 |---|---|---|
@@ -19,7 +19,7 @@ tags: [cordixia, agents, outils]
 | 🎬 **Réalisateur** | Monte la vidéo | InVideo AI |
 | 📡 **Diffuseur** | Publie partout | Repurpose.io |
 
-> Le détail du flux : [[Automatisations]]
+> Le flux détaillé : [[Automatisations IA TV]]
 
 ---
 
@@ -48,18 +48,18 @@ DIFFUSION
 ## ElevenLabs
 
 - Modèle : `eleven_multilingual_v2`
-- Voix de départ testées : George, Daniel, Liam, Sarah, Charlotte
+- Voix testées : George, Daniel, Liam, Sarah, Charlotte
 - Le script est **nettoyé** (retrait des `[OUVERTURE]`, `[RUBRIQUE]`) avant lecture
 
 ---
 
 ## Phase 3 — Agents-personnages
 
-Quand IA TV sera connue, créer des personnages récurrents :
+Quand [[Le Média IA TV]] sera connu, créer des personnages récurrents :
 
 - 🤖 **Agent Actualité** — présente les news
 - 🤖 **Agent Business** — analyse les opportunités
-- 🤖 **Agent Afrique** — suit les innovations africaines
+- 🤖 **Agent Afrique** — innovations africaines
 - 🤖 **Agent Terrain** — cas d'usage BTP / industrie
 
-Et Thierry devient **rédacteur en chef**.
+Et le fondateur devient **rédacteur en chef**.

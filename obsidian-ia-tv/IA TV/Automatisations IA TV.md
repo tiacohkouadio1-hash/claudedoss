@@ -1,10 +1,10 @@
 ---
-tags: [cordixia, automatisation, pipeline]
+tags: [iatv, automatisation, pipeline]
 ---
 
-# ⚙️ Automatisations
+# ⚙️ Automatisations IA TV
 
-← Retour : [[CORDIXIA]]
+← [[Accueil IA TV]]
 
 ---
 
@@ -26,16 +26,16 @@ tags: [cordixia, automatisation, pipeline]
 6. DISTRIBUTION       Repurpose.io → 9 plateformes
 ```
 
-> Les outils : [[Agents IA]]
+> Les outils : [[Agents IA — IA TV]]
 
 ---
 
 ## Étape 2.5 — Validation
 
-**Le garde-fou humain.** L'IA ne publie jamais sans Thierry.
+**Le garde-fou humain.** L'IA ne publie jamais sans validation.
 
 - ✅ Valider / rejeter chaque actu
-- ✅ Ajouter l'angle CORDIXIA (terrain, Afrique, business)
+- ✅ Ajouter l'angle éditorial (terrain, Afrique, business)
 - ✅ 5 minutes maximum par jour
 
 Interface web codée (Flask) : tableau de validation style JT.
@@ -45,7 +45,7 @@ Interface web codée (Flask) : tableau de validation style JT.
 ## Stack technique (code)
 
 ```
-cordixia-iatv/
+cordixia-iatv/        (nom du dépôt code)
 ├── agents/
 │   ├── veille.py    → Perplexity
 │   ├── script.py    → Claude
@@ -66,7 +66,7 @@ cordixia-iatv/
 | ElevenLabs | ~5 $ |
 | InVideo AI | ~20 $ |
 | Repurpose.io | ~25 $ |
-| Beehiiv (newsletter) | gratuit au début |
+| Beehiiv | gratuit au début |
 | **Total** | **~90 $/mois** |
 
 ---

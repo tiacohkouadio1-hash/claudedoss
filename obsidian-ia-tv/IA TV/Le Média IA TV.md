@@ -1,16 +1,16 @@
 ---
-tags: [cordixia, media, iatv]
+tags: [iatv, media]
 ---
 
-# 📺 IA TV
+# 📺 Le Média IA TV
 
-← Retour : [[CORDIXIA]]
+← [[Accueil IA TV]]
 
 ---
 
 ## Concept
 
-**CORDIXIA IA TV** — un journal télévisé quotidien sur l'intelligence artificielle.
+**IA TV** — un journal télévisé quotidien sur l'intelligence artificielle.
 Le format du « 20H », appliqué à l'IA, en français.
 
 ---
@@ -32,7 +32,7 @@ Le format du « 20H », appliqué à l'IA, en français.
 
 ## Le présentateur
 
-- Démarrage : **voix IA** ([[Agents IA#ElevenLabs]]) + visuels
+- Démarrage : **voix IA** ([[Agents IA — IA TV]]) + visuels
 - Voix testées : George (grave, posé) · Daniel · Liam · Sarah · Charlotte
 - Recommandation : **George** pour la crédibilité « présentateur télé »
 
@@ -40,16 +40,11 @@ Le format du « 20H », appliqué à l'IA, en français.
 
 ## Diffusion (depuis 1 seule production)
 
-- YouTube
-- TikTok
-- Instagram Reels
-- Facebook
-- LinkedIn
+- YouTube · TikTok · Instagram Reels · Facebook · LinkedIn
 - Spotify / Apple Podcast
-- Site web
-- Newsletter
+- Site web · Newsletter
 
-> Distribution gérée par [[Automatisations]] (Repurpose.io)
+> Distribution gérée par [[Automatisations IA TV]]
 
 ---
 
@@ -57,4 +52,8 @@ Le format du « 20H », appliqué à l'IA, en français.
 
 - **Ton :** sérieux mais accessible
 - **Jamais** de jargon sans explication
-- **Toujours** concret et orienté terrain / business
+- **Toujours** concret, orienté terrain / business
+
+---
+
+Voir aussi : [[Vision IA TV]] · [[Business IA TV]]

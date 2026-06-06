@@ -1,10 +1,10 @@
 ---
-tags: [cordixia, vision]
+tags: [iatv, vision]
 ---
 
-# 🌍 Vision
+# 🌍 Vision IA TV
 
-← Retour : [[CORDIXIA]]
+← [[Accueil IA TV]]
 
 ---
 
@@ -16,7 +16,7 @@ Rendre l'IA accessible au grand public francophone — entrepreneurs, profession
 
 ---
 
-## Pourquoi CORDIXIA ?
+## Pourquoi IA TV ?
 
 - L'IA avance trop vite, les gens sont perdus
 - Peu de contenu **francophone** de qualité et régulier
@@ -28,7 +28,7 @@ Rendre l'IA accessible au grand public francophone — entrepreneurs, profession
 
 Pas un geek, pas un chercheur. **Un entrepreneur du terrain qui vulgarise l'IA.**
 
-> Les gens font davantage confiance à un chef de chantier, superviseur et entrepreneur qui explique les nouveautés qu'à un avatar générique.
+> Les gens font davantage confiance à quelqu'un du terrain qui explique les nouveautés qu'à un avatar générique.
 
 ---
 
@@ -39,7 +39,7 @@ Pas un geek, pas un chercheur. **Un entrepreneur du terrain qui vulgarise l'IA.*
 | **Simplicité** | Jamais de jargon non expliqué |
 | **Régularité** | Chaque jour, sans faute |
 | **Concret** | Toujours « qu'est-ce que ça change pour vous ? » |
-| **Contrôle** | L'humain valide avant publication ([[Automatisations#Étape 2.5]]) |
+| **Contrôle** | L'humain valide avant publication |
 
 ---
 
@@ -47,6 +47,6 @@ Pas un geek, pas un chercheur. **Un entrepreneur du terrain qui vulgarise l'IA.*
 
 ```
 Phase 1 → Voix IA + visuels (pas de visage)
-Phase 2 → Thierry apparaît à l'écran
-Phase 3 → Thierry = rédacteur en chef + [[Agents IA]] récurrents
+Phase 2 → Le fondateur apparaît à l'écran
+Phase 3 → Fondateur = rédacteur en chef + agents IA récurrents
 ```

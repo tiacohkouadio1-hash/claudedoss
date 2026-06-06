@@ -1,18 +1,18 @@
 ---
-tags: [cordixia, business, monétisation]
+tags: [iatv, business, monétisation]
 ---
 
-# 💰 Business
+# 💰 Business IA TV
 
-← Retour : [[CORDIXIA]]
+← [[Accueil IA TV]]
 
 ---
 
-## Comment CORDIXIA génère des revenus
+## Comment IA TV génère des revenus
 
 ### Phase 1 — Construire l'audience
-- Publier chaque jour ([[IA TV]])
-- Distribution maximale ([[Automatisations]])
+- Publier chaque jour ([[Le Média IA TV]])
+- Distribution maximale ([[Automatisations IA TV]])
 - Objectif : visibilité et abonnés
 
 ### Phase 2 — Premières monétisations
@@ -39,15 +39,18 @@ tags: [cordixia, business, monétisation]
 
 ---
 
-## Atouts de Thierry
+## Atouts du fondateur
 
 - Expérience **terrain** (chef de chantier, superviseur, entrepreneur)
-- Réseau : **Leadership Academy**, **Diasp'né**, **Cordixia**
 - Crédibilité auprès d'un public **pro et africain**
 
 ---
 
 ## Objectif
 
-> Faire de CORDIXIA IA TV **la référence francophone** de la vulgarisation IA,
+> Faire d'[[Le Média IA TV|IA TV]] **la référence francophone** de la vulgarisation IA,
 > puis convertir cette audience en **business durable**.
+
+---
+
+Voir aussi : [[Vision IA TV]]
