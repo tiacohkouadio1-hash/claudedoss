@@ -14,7 +14,20 @@ jt: 001
 
 ---
 
-## 🇫🇷 1. SoftBank 75 Md€ en France
+## 🌍 1. Anthropic dépose pour entrer en bourse
+
+| À capturer | Source | Bandeau à afficher |
+|------------|--------|--------------------|
+| Annonce officielle du dépôt S-1 | **Anthropic (site officiel)** | `Source : Anthropic` |
+| Titre CNBC / Fortune sur l'IPO | **CNBC / Fortune** | `Source : CNBC` |
+| Le chiffre 965 milliards $ | Fortune | `Source : Fortune` |
+| Logo Anthropic / Claude (PNG) | google : `Anthropic logo png` | — |
+
+**B-roll complément :** `wall street`, `stock market`, `IPO`, `trading screen`, `financial graph`
+
+---
+
+## 🇫🇷 2. SoftBank 75 Md€ en France
 
 | À capturer | Source | Bandeau à afficher |
 |------------|--------|--------------------|

@@ -32,13 +32,23 @@ Avant de commencer : chaque jour, des centaines d'informations sur l'intelligenc
 
 Bonsoir et bienvenue dans ce tout premier numéro. Pour lancer ce journal, on vous a préparé une édition spéciale : l'essentiel de l'actualité de l'intelligence artificielle de cette semaine, du 1ᵉʳ au 7 juin 2026. Et dès lundi, on passe au rendez-vous quotidien : chaque jour, l'info du jour.
 
-Au sommaire de cette semaine : la France décroche un investissement géant dans l'intelligence artificielle. Une start-up dont l'IA écrit du code lève un milliard de dollars. Le chiffre qui montre que l'IA a envahi les entreprises. Le nouveau modèle géant de NVIDIA. Et la voiture autonome qui débarque en Europe. On commence.
+Au sommaire de cette semaine : Anthropic, le créateur de Claude, prépare une entrée en bourse historique. La France décroche un investissement géant dans l'intelligence artificielle. Une start-up dont l'IA écrit du code lève un milliard de dollars. Le chiffre qui montre que l'IA a envahi les entreprises. Le nouveau modèle géant de NVIDIA. Et la voiture autonome qui débarque en Europe. On commence.
 
 ---
 
-## [ACTUALITÉ PRINCIPALE — SoftBank en France]
+## [ACTUALITÉ PRINCIPALE — Anthropic vers la bourse]
 
-La plus grosse nouvelle de la semaine nous concerne directement, nous en France. Le géant japonais SoftBank a annoncé un investissement pouvant aller jusqu'à 75 milliards d'euros pour construire des centres de données dédiés à l'intelligence artificielle sur le sol français.
+La plus grosse nouvelle de la semaine dans le monde de l'intelligence artificielle, c'est un séisme financier. Anthropic, le créateur de l'assistant Claude, a déposé le 1ᵉʳ juin un dossier confidentiel auprès du gendarme de la bourse américaine, la SEC, pour préparer son entrée en bourse.
+
+Soyons précis : à ce stade, c'est un dépôt confidentiel. Le prix et le nombre d'actions ne sont pas encore fixés, et la date dépendra des marchés. Mais les chiffres donnent le vertige. Juste avant ce dépôt, Anthropic a bouclé une levée de fonds qui la valorise à 965 milliards de dollars. Et ses revenus ont explosé : environ 47 milliards de dollars en rythme annuel, contre 10 milliards un an plus tôt. Si tout se passe bien, son entrée en bourse pourrait dépasser les 1 000 milliards de dollars.
+
+Ce que ça change pour vous : quand une entreprise d'intelligence artificielle atteint ce niveau, c'est que la technologie est devenue un pilier de l'économie mondiale. Les outils que vous utilisez au quotidien, comme Claude ou ChatGPT, sont au cœur d'une course financière colossale. Et plus l'argent afflue, plus ces outils s'améliorent vite, mois après mois.
+
+---
+
+## [ACTUALITÉ FRANCE — SoftBank en France]
+
+Deuxième sujet, et celui-là nous concerne directement, nous en France. Le géant japonais SoftBank a annoncé un investissement pouvant aller jusqu'à 75 milliards d'euros pour construire des centres de données dédiés à l'intelligence artificielle sur le sol français.
 
 Concrètement : 5 gigawatts de capacité de calcul au total. La première phase, c'est déjà 45 milliards d'euros pour bâtir 3,1 gigawatts dans la région des Hauts-de-France — à Dunkerque, Bouchain, Bosquel — d'ici 2031. L'annonce a été faite lors du sommet Choose France, en présence du président Emmanuel Macron. C'est le plus gros investissement dans l'infrastructure d'intelligence artificielle jamais annoncé en Europe.
 
@@ -86,7 +96,7 @@ Ce que ça change pour vous : la voiture autonome n'est plus un fantasme de scie
 
 ## [À RETENIR — récap semaine]
 
-L'essentiel de la semaine en une phrase chacun. La France décroche 75 milliards d'euros de SoftBank pour ses datacenters IA. L'IA qui code propulse Cognition à 25 milliards de dollars. L'adoption de l'IA générative a doublé en deux ans. NVIDIA sort un modèle ouvert géant. Et le robotaxi débarque en Europe. Voilà la semaine de l'intelligence artificielle.
+L'essentiel de la semaine en une phrase chacun. Anthropic dépose pour entrer en bourse, valorisée 965 milliards de dollars. La France décroche 75 milliards d'euros de SoftBank pour ses datacenters IA. L'IA qui code propulse Cognition à 25 milliards de dollars. L'adoption de l'IA générative a doublé en deux ans. NVIDIA sort un modèle ouvert géant. Et le robotaxi débarque en Europe. Voilà la semaine de l'intelligence artificielle.
 
 ---
 
@@ -108,6 +118,7 @@ Alors abonnez-vous, activez la cloche, et rendez-vous dès lundi pour votre prem
 
 | Sujet | Source |
 |-------|--------|
+| Anthropic dépôt IPO (965 Md$) | Anthropic (officiel) · CNBC · Fortune · TechCrunch |
 | SoftBank 75 Md€ France | Communiqué officiel SoftBank Group · Bloomberg · CNBC · Euronews |
 | Cognition / Devin 1 Md$ | TechCrunch · Bloomberg · Yahoo Finance |
 | Adoption IA 33→65 % | Deloitte « State of AI in the Enterprise » 2026 · Writer |
