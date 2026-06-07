@@ -16,7 +16,8 @@ créé: 2026-06-06
 - [[Charte de lancement]] — Mission, promesse, ton, public cible
 - [[Règle éditoriale IA TV]] — Règle n°1 + structure des épisodes
 - [[Format officiel IA TV]] — Durée, segments, format technique, marqueurs d'habitude
-- [[Rubriques officielles IA TV]] — L'ordre figé des 12 rubriques (version finale)
+- [[Rubriques officielles IA TV]] — L'ordre figé des rubriques (version finale)
+- [[Manip du jour - banque d'idées]] — La rubrique « utile » : astuces IA concrètes
 - [[Habillage visuel IA TV]] — Identité visuelle JT (logo, écrans, palette)
 - [[Direction artistique IA TV]] — ADN visuel (références, palette, style)
 - [[Formats par plateforme]] — Quel format pour YouTube, TikTok, Reels…

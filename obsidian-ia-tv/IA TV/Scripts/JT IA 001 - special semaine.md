@@ -94,6 +94,16 @@ Ce que ça change pour vous : la voiture autonome n'est plus un fantasme de scie
 
 ---
 
+## [LA MANIP DU JOUR — résumer un document]
+
+Et avant de conclure, on lance une nouvelle rubrique qui reviendra à chaque épisode : la manip du jour. À chaque numéro, une astuce concrète pour utiliser l'intelligence artificielle dans votre quotidien.
+
+Aujourd'hui : résumer n'importe quel document en trente secondes. Vous avez un document de cinquante pages et seulement cinq minutes devant vous ? Ouvrez Claude ou ChatGPT, glissez votre document, et tapez simplement : « Résume ce document en cinq points clés, puis donne-moi les trois actions à retenir. » En trente secondes, l'essentiel est là. Vous venez de gagner une heure.
+
+Faites le test dès ce soir. Et dites-nous en commentaire quelle manip vous aimeriez voir.
+
+---
+
 ## [À RETENIR — récap semaine]
 
 L'essentiel de la semaine en une phrase chacun. Anthropic dépose pour entrer en bourse, valorisée 965 milliards de dollars. La France décroche 75 milliards d'euros de SoftBank pour ses datacenters IA. L'IA qui code propulse Cognition à 25 milliards de dollars. L'adoption de l'IA générative a doublé en deux ans. NVIDIA sort un modèle ouvert géant. Et le robotaxi débarque en Europe. Voilà la semaine de l'intelligence artificielle.

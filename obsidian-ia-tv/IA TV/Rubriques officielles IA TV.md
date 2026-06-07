@@ -25,9 +25,14 @@ statut: version finale
 | 7 | **Le chiffre du jour** | Un chiffre marquant en perspective |
 | 8 | **L'outil du jour** | Un outil IA à tester |
 | 9 | **Innovation du jour** | Une avancée à surveiller |
-| 10 | **À retenir aujourd'hui** | Le résumé / l'essentiel |
-| 11 | **Conclusion** | Signature + appel à l'abonnement |
-| 12 | **Générique de fin** | Outro, réseaux, à demain |
+| 10 | **La manip du jour** | Une manipulation IA concrète à refaire soi-même (30-60 s) |
+| 11 | **À retenir aujourd'hui** | Le résumé / l'essentiel |
+| 12 | **Conclusion** | Signature + appel à l'abonnement |
+| 13 | **Générique de fin** | Outro, réseaux, à demain |
+
+> 💡 **La manip du jour** = la rubrique signature « utile ». On ne se contente pas
+> d'informer, on apprend au spectateur à *faire*. C'est elle qui transforme une
+> audience passive en communauté fidèle. Voir [[Manip du jour - banque d'idées]].
 
 ---
 
