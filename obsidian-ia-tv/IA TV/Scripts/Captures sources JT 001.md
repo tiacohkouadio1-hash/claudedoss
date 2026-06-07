@@ -3,80 +3,78 @@ tags: [iatv, production, sources, captures, jt]
 jt: 001
 ---
 
-# 📸 Captures sources — JT #001
+# 📸 Captures sources — JT #001 (spécial semaine)
 
-← [[JT IA 001]] · [[JT IA 001 - version longue]] · [[Montage JT 001 - pas a pas]] · [[Banque de visuels - b-roll]]
+← [[JT IA 001 - special semaine]] · [[Montage JT 001 - pas a pas]] · [[Banque de visuels - b-roll]]
 
-> Les **captures d'écran** à prendre depuis les sources Perplexity pour illustrer
-> chaque brève. Objectif : crédibilité « vrai JT ». Toujours afficher la source à l'écran.
+> Captures d'écran à prendre depuis les sources pour illustrer chaque sujet.
+> Objectif : crédibilité « vrai JT ». **Toujours afficher la source à l'écran.**
 
 **Raccourci capture Windows :** `Win + Maj + S` → range dans `IA TV / JT 001 / captures`
 
 ---
 
-## 🎙️ 1. Anthropic entre en bourse
+## 🇫🇷 1. SoftBank 75 Md€ en France
 
 | À capturer | Source | Bandeau à afficher |
 |------------|--------|--------------------|
-| Le titre de l'article sur l'IPO d'Anthropic | **Wall Street Journal** | `Source : Wall Street Journal` |
-| Logo Anthropic (PNG transparent) | google : `Anthropic logo png` | — |
-| Un graphique de valorisation / bourse | l'article ou stock | `Source : WSJ` |
+| Titre de l'annonce SoftBank/France | **Bloomberg / CNBC / Euronews** | `Source : Bloomberg` |
+| Communiqué officiel SoftBank | group.softbank (presse) | `Source : SoftBank Group` |
+| Photo Macron / Choose France | presse | `Source : Choose France 2026` |
+| Logo SoftBank (PNG) | google : `SoftBank logo png` | — |
 
-**Mots-clés b-roll complément :** `stock market`, `wall street`, `IPO`, `trading screen`
+**B-roll complément :** `data center`, `server room`, `France technology`, `Macron`
 
 ---
 
-## 🎙️ 2. ZoomMate (l'outil du jour)
+## 🤖 2. Cognition / Devin lève 1 Md$
 
 | À capturer | Source | Bandeau à afficher |
 |------------|--------|--------------------|
-| Annonce officielle ZoomMate | **Zoom (blog/presse)** | `Source : Zoom` |
-| Capture de l'interface ZoomMate | site Zoom | `Source : Zoom` |
-| Logo Zoom (PNG transparent) | google : `Zoom logo png` | — |
+| Titre TechCrunch sur la levée | **TechCrunch** | `Source : TechCrunch` |
+| Le chiffre 89 % du code écrit par Devin | TechCrunch / TFN | `Source : TechCrunch` |
+| Logo Cognition / Devin (PNG) | google : `Cognition Devin logo png` | — |
 
-**Mots-clés b-roll complément :** `video call`, `online meeting`, `laptop screen`
+**B-roll complément :** `coding`, `software developer`, `programming screen`, `AI agent`
 
 ---
 
-## 🎙️ 3. Microsoft MAI (business)
+## 📊 3. LE CHIFFRE : adoption IA 33→65 %
 
 | À capturer | Source | Bandeau à afficher |
 |------------|--------|--------------------|
-| Titre de l'annonce des modèles MAI | **CNBC** | `Source : CNBC` |
-| Capture conférence Microsoft Build | CNBC / Microsoft | `Source : Microsoft` |
-| Logo Microsoft (PNG transparent) | google : `Microsoft logo png` | — |
+| Le graphique d'adoption IA générative | **Deloitte State of AI 2026** | `Source : Deloitte` |
+| Le chiffre 72 % en production | Deloitte / Writer | `Source : Deloitte 2026` |
 
-**Mots-clés b-roll complément :** `data center`, `coding`, `server room`
+**B-roll complément :** `data visualization`, `growth chart`, `business statistics`, `office`
 
 ---
 
-## 🎙️ 4. Le chiffre : 8 sur 10
+## 🧠 4. NVIDIA Nemotron 3 Ultra
 
 | À capturer | Source | Bandeau à afficher |
 |------------|--------|--------------------|
-| Le chiffre 8/10 dans l'étude | **Orange Business / BpiFrance** | `Source : étude IA 2026` |
-| Comparatif France 44% / USA 28% | l'étude | `Source : BpiFrance` |
-| Un graphique d'adoption de l'IA | l'étude ou stock | `Source : étude IA 2026` |
+| Annonce Nemotron 3 Ultra | **llm-stats.com / NVIDIA** | `Source : NVIDIA` |
+| Tableau comparatif modèles | llm-stats.com | `Source : llm-stats.com` |
+| Logo NVIDIA (PNG) | google : `NVIDIA logo png` | — |
 
-**Mots-clés b-roll complément :** `data visualization`, `growth chart`, `world map`
+**B-roll complément :** `neural network`, `GPU chip`, `AI hardware`, `futuristic technology`
 
 ---
 
-## 🎙️ 5. MiniMax M3 (innovation)
+## 🚕 5. Robotaxi Espagne (Uber + WeRide)
 
 | À capturer | Source | Bandeau à afficher |
 |------------|--------|--------------------|
-| Le record du million de tokens | **llm-stats.com** | `Source : llm-stats.com` |
-| Tableau comparatif de modèles | llm-stats.com | `Source : llm-stats.com` |
-| Logo MiniMax (si dispo) | google : `MiniMax logo png` | — |
+| Annonce du service robotaxi Madrid | **Uber / WeRide** | `Source : Uber` |
+| Logos Uber / WeRide (PNG) | google : `Uber logo png` | — |
 
-**Mots-clés b-roll complément :** `neural network`, `AI brain`, `futuristic technology`
+**B-roll complément :** `self driving car`, `autonomous vehicle`, `Madrid city`, `robotaxi`
 
 ---
 
-## 🎨 Comment « animer » une capture fixe (dans CapCut)
+## 🎨 Comment « animer » une capture fixe (CapCut)
 
-Sur chaque capture statique, ajoute :
 - **Zoom lent** (effet Ken Burns) → l'image respire
 - **Apparition** en fondu ou glissement
 - **Surlignage / cercle** sur le chiffre ou le mot clé
@@ -95,9 +93,9 @@ Sur chaque capture statique, ajoute :
 
 ## ✅ Checklist captures
 
-- [ ] Anthropic — titre WSJ + logo
-- [ ] ZoomMate — annonce Zoom + interface + logo
-- [ ] Microsoft MAI — annonce CNBC + Build + logo
-- [ ] Chiffre 8/10 — étude + comparatif France/USA
-- [ ] MiniMax M3 — record llm-stats + tableau
+- [ ] SoftBank — titre Bloomberg + communiqué + Macron + logo
+- [ ] Cognition — titre TechCrunch + chiffre 89 % + logo
+- [ ] Chiffre — graphique Deloitte adoption IA
+- [ ] NVIDIA — annonce Nemotron + tableau + logo
+- [ ] Robotaxi — annonce Uber/WeRide + logos
 - [ ] Toutes rangées dans `IA TV / JT 001 / captures`
