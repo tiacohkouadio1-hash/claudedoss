@@ -1,7 +1,8 @@
-# Abidjan Photovoltaïque ☀️
+# Cordyxia — Solaire photovoltaïque ☀️
 
-Projet de démonstration autour de l'énergie solaire photovoltaïque à **Abidjan
-(Côte d'Ivoire)**. Il contient deux livrables :
+Supports de **Cordyxia**, société d'énergie solaire photovoltaïque à **Abidjan
+(Côte d'Ivoire)** : audit énergétique, installation et maintenance. Ce dépôt
+contient les livrables commerciaux et techniques :
 
 | Livrable | Fichier | Description |
 |---|---|---|
