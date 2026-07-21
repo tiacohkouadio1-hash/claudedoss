@@ -32,6 +32,11 @@
     .fld label{font-size:12px;font-weight:600;color:var(--muted)}
     .fld input,.fld select{padding:9px 11px;border:1.5px solid var(--line);border-radius:9px;background:var(--soft);color:var(--ink);font-size:14px;font-family:inherit}
     .fld input:focus,.fld select:focus{outline:none;border-color:var(--sun)}
+    .billbox{margin-top:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .billbtn{cursor:pointer;background:color-mix(in srgb,var(--sky) 14%,var(--paper));border:1.5px solid color-mix(in srgb,var(--sky) 45%,transparent);color:var(--sky-deep);font-weight:700;font-size:14px;padding:11px 18px;border-radius:999px}
+    .billhint{font-size:12.5px;color:var(--muted);flex:1;min-width:180px}
+    .billclear{cursor:pointer;background:transparent;border:1.5px solid var(--line);color:var(--muted);border-radius:999px;padding:8px 14px;font-size:13px}
+    .photoprev{margin-top:12px;max-height:150px;border-radius:10px;border:1px solid var(--line);display:block}
     .actions{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
     .btn{border:none;cursor:pointer;background:linear-gradient(135deg,var(--sun),var(--sun-deep));color:#14212b;font-weight:700;font-size:14px;padding:11px 20px;border-radius:999px}
     .btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
@@ -111,7 +116,16 @@
     <!-- BARRE D'OUTILS -->
     <div class="toolbar">
       <h1>🧾 Devis solaire — version simple</h1>
-      <p>Renseignez la facture du client ; le devis met en avant, en couleur, ce qu'il économise. « Imprimer / PDF » pour le remettre.</p>
+      <p>Deux façons de donner la facture : <b>prenez-la en photo</b> ou <b>saisissez-la à la main</b>. Puis le devis calcule et met en avant, en couleur, ce que le client économise.</p>
+
+      <div class="billbox">
+        <label class="billbtn" for="iPhoto">📷 Photo de la facture</label>
+        <input id="iPhoto" type="file" accept="image/*" capture="environment" hidden>
+        <span class="billhint" id="photoHint">Sur mobile, l'appareil photo s'ouvre. La photo est jointe au devis comme justificatif ; recopiez le montant ci-dessous.</span>
+        <button class="billclear" id="photoClear" hidden>✕ retirer</button>
+      </div>
+      <img id="photoPrev" class="photoprev" alt="Aperçu facture" hidden>
+
       <div class="grid">
         <div class="fld"><label>Nom du client</label><input id="iNom" type="text" value="Client Exemple SARL"></div>
         <div class="fld"><label>Ville</label><input id="iVille" type="text" value="Cocody, Abidjan"></div>
@@ -199,6 +213,12 @@
         <div class="ttl">Ce que vous gagnez, année après année</div>
         <div id="chart" role="img" aria-label="Économies nettes cumulées sur 25 ans"></div>
         <p class="note" id="gNote">—</p>
+      </div>
+
+      <!-- FACTURE JOINTE (si photo) -->
+      <div class="chart-card" id="billBlock" style="display:none">
+        <div class="ttl">Facture fournie (justificatif)</div>
+        <img id="billImg" style="max-width:100%;max-height:320px;border-radius:10px;border:1px solid var(--line);display:block">
       </div>
 
       <div class="foot">
@@ -299,6 +319,28 @@
     ['iNom','iVille','iFacture','iPrix','iCouv','iConfig','iMaint'].forEach(id=>{
       const el=document.getElementById(id); el.addEventListener('input',gen); el.addEventListener('change',gen);
     });
+
+    // ---- Photo de la facture ----
+    const iPhoto=document.getElementById('iPhoto'), photoPrev=document.getElementById('photoPrev'),
+          photoHint=document.getElementById('photoHint'), photoClear=document.getElementById('photoClear'),
+          billBlock=document.getElementById('billBlock'), billImg=document.getElementById('billImg');
+    iPhoto.addEventListener('change', e=>{
+      const file=e.target.files&&e.target.files[0]; if(!file) return;
+      const rd=new FileReader();
+      rd.onload=()=>{
+        photoPrev.src=rd.result; photoPrev.hidden=false;
+        billImg.src=rd.result; billBlock.style.display='block';
+        photoHint.textContent='Photo jointe ✓ — recopiez le montant de la facture dans le champ ci-dessous.';
+        photoClear.hidden=false;
+      };
+      rd.readAsDataURL(file);
+    });
+    photoClear.addEventListener('click', ()=>{
+      iPhoto.value=''; photoPrev.hidden=true; photoPrev.removeAttribute('src');
+      billBlock.style.display='none'; billImg.removeAttribute('src'); photoClear.hidden=true;
+      photoHint.textContent="Sur mobile, l'appareil photo s'ouvre. La photo est jointe au devis comme justificatif ; recopiez le montant ci-dessous.";
+    });
+
     gen();
   </script>
 </body>
