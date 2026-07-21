@@ -9,6 +9,7 @@ Projet de démonstration autour de l'énergie solaire photovoltaïque à **Abidj
 | 📄 **Étude technique** | [`docs/etude-photovoltaique-abidjan.md`](docs/etude-photovoltaique-abidjan.md) | Dossier sur le potentiel PV à Abidjan : ressource solaire, réglementation, dimensionnement, coûts et rentabilité. |
 | 📊 **Business plan** | [`docs/business-plan.md`](docs/business-plan.md) | Modèle économique : audit énergétique (cadre 2024), configurations PV, funnel commercial, digitalisation. |
 | 📈 **Modèle financier** | [`docs/modele-financier-pv.xlsx`](docs/modele-financier-pv.xlsx) | Classeur Excel : dimensionnement depuis la facture, comparatif des 3 configs, cash-flow 25 ans, sensibilité. |
+| 🛠️ **Offre de maintenance** | [`docs/offre-maintenance.md`](docs/offre-maintenance.md) | Contrats de maintenance (3 formules) + intervention garantie 48 h ; analyse du marché ivoirien. |
 
 ## Aperçu de la landing page
 
@@ -56,7 +57,8 @@ fictives (démonstration).
 ├── docs/
 │   ├── etude-photovoltaique-abidjan.md     # Étude technique
 │   ├── business-plan.md                    # Business plan
-│   └── modele-financier-pv.xlsx            # Modèle financier (Excel)
+│   ├── modele-financier-pv.xlsx            # Modèle financier (Excel)
+│   └── offre-maintenance.md                # Offre maintenance + intervention 48 h
 ├── README.md                               # Ce fichier
 └── CLAUDE.md                               # Instructions projet
 ```

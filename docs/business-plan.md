@@ -105,6 +105,14 @@ Cibles : **résidences, cliniques, pharmacies, commerces, PME/industrie**.
   (profil jour/nuit, pointes, cos φ) → dimensionnement fiable et devis engageant.
 - Base de la **digitalisation** (voir §7).
 
+### Ligne D — Maintenance & intervention 48 h (revenu récurrent)
+- Contrats de maintenance en **3 formules** (Essentiel / Pro / Critique) avec
+  **délai d'intervention garanti** (48 h Pro, 24 h Critique).
+- Monitoring + astreinte pour les sites sensibles (cliniques, pharmacies).
+- Différenciateur : **engagement contractuel écrit avec pénalités**, là où le
+  marché se contente souvent d'annoncer un délai. → détail dans
+  [`offre-maintenance.md`](offre-maintenance.md).
+
 ---
 
 ## 4. Parcours client type (funnel)
