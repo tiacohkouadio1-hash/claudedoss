@@ -6,6 +6,7 @@ Projet de démonstration autour de l'énergie solaire photovoltaïque à **Abidj
 | Livrable | Fichier | Description |
 |---|---|---|
 | 🖥️ **Landing page** | [`index.html`](index.html) | Site vitrine autonome (HTML/CSS/JS, sans dépendance) présentant une offre d'installation solaire, avec un **calculateur d'estimation** intégré et un formulaire de contact. |
+| 🧾 **Générateur de devis** | [`devis.html`](devis.html) | Devis personnalisé à partir de la facture : prix détaillé poste par poste, **gains à court et long terme**, économies cumulées sur 25 ans, imprimable en PDF. |
 | 📄 **Étude technique** | [`docs/etude-photovoltaique-abidjan.md`](docs/etude-photovoltaique-abidjan.md) | Dossier sur le potentiel PV à Abidjan : ressource solaire, réglementation, dimensionnement, coûts et rentabilité. |
 | 📊 **Business plan** | [`docs/business-plan.md`](docs/business-plan.md) | Modèle économique : audit énergétique (cadre 2024), configurations PV, funnel commercial, digitalisation. |
 | 📈 **Modèle financier** | [`docs/modele-financier-pv.xlsx`](docs/modele-financier-pv.xlsx) | Classeur Excel : dimensionnement depuis la facture, comparatif des 3 configs, cash-flow 25 ans, sensibilité. |
@@ -54,6 +55,7 @@ fictives (démonstration).
 ```
 /
 ├── index.html                              # Landing page (vitrine + calculateur)
+├── devis.html                              # Générateur de devis (imprimable PDF)
 ├── docs/
 │   ├── etude-photovoltaique-abidjan.md     # Étude technique
 │   ├── business-plan.md                    # Business plan
