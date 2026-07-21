@@ -13,6 +13,7 @@ commerciaux et techniques :
 | 📊 **Business plan** | [`docs/business-plan.md`](docs/business-plan.md) | Modèle économique : audit énergétique (cadre 2024), configurations PV, funnel commercial, digitalisation. |
 | 📈 **Modèle financier** | [`docs/modele-financier-pv.xlsx`](docs/modele-financier-pv.xlsx) | Classeur Excel : dimensionnement depuis la facture, comparatif des 3 configs, cash-flow 25 ans, sensibilité. |
 | 🛠️ **Offre de maintenance** | [`docs/offre-maintenance.md`](docs/offre-maintenance.md) | Contrats de maintenance (3 formules) + intervention garantie 48 h ; analyse du marché ivoirien. |
+| 🎤 **Rapport de chantier vocal** | [`chantier.html`](chantier.html) | Prototype : dictée au micro (API Web Speech, fr-FR) → rapport de chantier structuré, imprimable en PDF. Référence pour l'appli cordixia.com. |
 
 ## Aperçu de la landing page
 
@@ -58,6 +59,7 @@ fictives (démonstration).
 /
 ├── index.html                              # Landing page (vitrine + calculateur)
 ├── devis.html                              # Générateur de devis (imprimable PDF)
+├── chantier.html                           # Rapport de chantier vocal (prototype)
 ├── docs/
 │   ├── etude-photovoltaique-abidjan.md     # Étude technique
 │   ├── business-plan.md                    # Business plan
