@@ -7,6 +7,8 @@ Projet de démonstration autour de l'énergie solaire photovoltaïque à **Abidj
 |---|---|---|
 | 🖥️ **Landing page** | [`index.html`](index.html) | Site vitrine autonome (HTML/CSS/JS, sans dépendance) présentant une offre d'installation solaire, avec un **calculateur d'estimation** intégré et un formulaire de contact. |
 | 📄 **Étude technique** | [`docs/etude-photovoltaique-abidjan.md`](docs/etude-photovoltaique-abidjan.md) | Dossier sur le potentiel PV à Abidjan : ressource solaire, réglementation, dimensionnement, coûts et rentabilité. |
+| 📊 **Business plan** | [`docs/business-plan.md`](docs/business-plan.md) | Modèle économique : audit énergétique (cadre 2024), configurations PV, funnel commercial, digitalisation. |
+| 📈 **Modèle financier** | [`docs/modele-financier-pv.xlsx`](docs/modele-financier-pv.xlsx) | Classeur Excel : dimensionnement depuis la facture, comparatif des 3 configs, cash-flow 25 ans, sensibilité. |
 
 ## Aperçu de la landing page
 
@@ -52,7 +54,28 @@ fictives (démonstration).
 /
 ├── index.html                              # Landing page (vitrine + calculateur)
 ├── docs/
-│   └── etude-photovoltaique-abidjan.md     # Étude technique
+│   ├── etude-photovoltaique-abidjan.md     # Étude technique
+│   ├── business-plan.md                    # Business plan
+│   └── modele-financier-pv.xlsx            # Modèle financier (Excel)
 ├── README.md                               # Ce fichier
 └── CLAUDE.md                               # Instructions projet
 ```
+
+## Modèle financier (Excel)
+
+Le classeur `docs/modele-financier-pv.xlsx` contient 7 onglets :
+
+1. **Hypothèses** — tous les paramètres (productible, tarif, coûts/kWc…). Cellules
+   bleues/jaunes = à modifier.
+2. **Cas client** — entrez la facture mensuelle, le tarif et le taux de couverture ;
+   le dimensionnement (kWc, panneaux, surface) se calcule automatiquement.
+3. **Comparatif configs** — B1 / B2 / B3 côte à côte : CAPEX, économies, payback, VAN.
+4. **Cash-flow B1 / B2 / B3** — projection sur 25 ans (production, économies,
+   remplacements, flux cumulé, VAN, année de rentabilité).
+5. **Sensibilité** — payback selon le tarif électricité × le coût du kWc.
+
+> Le classeur se **recalcule à l'ouverture**. Les chiffres par défaut sont un
+> exemple (facture 45 000 FCFA/mois) — remplacez-les par les données réelles du
+> client. Résultat clé à retenir : au tarif actuel, **B1 (sans batterie)
+> s'amortit** alors que les configs **avec batterie se justifient par le confort
+> et la résilience** (coupures, clim nocturne), pas par le seul retour financier.
