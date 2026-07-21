@@ -3,100 +3,106 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Générateur de devis — Abidjan Photovoltaïque</title>
-  <meta name="description" content="Générez un devis solaire personnalisé à partir de la facture d'électricité : prix détaillé, économies à court et long terme, retour sur investissement.">
+  <title>Devis solaire — Abidjan Photovoltaïque</title>
+  <meta name="description" content="Devis solaire simple et visuel : ce que vous payez aujourd'hui, ce que vous économisez, et votre gain net sur 25 ans.">
   <style>
     :root{
       --sun:#f5a623;--sun-deep:#e8890b;--sky:#0a7d8c;--sky-deep:#075a66;
-      --ink:#14212b;--muted:#5b6b78;--bg:#eef2f4;--paper:#fff;--soft:#f4f7f9;
-      --line:#e2e9ee;--good:#0a7d3f;--bad:#c0392b;--radius:14px;
-      --shadow:0 6px 24px rgba(10,40,60,.10);
+      --ink:#14212b;--muted:#5b6b78;--bg:#eef2f4;--paper:#fff;--soft:#f4f7f9;--line:#e2e9ee;
+      --gain:#12a150;--gain-deep:#0a7d3f;--gain-soft:#e7f6ee;
+      --spend:#d64545;--spend-deep:#b02a2a;--spend-soft:#fdecec;
+      --radius:16px;--shadow:0 6px 24px rgba(10,40,60,.10);
     }
     @media (prefers-color-scheme:dark){:root{
-      --ink:#eef4f7;--muted:#a3b3bf;--bg:#0b1116;--paper:#111a20;--soft:#16222a;
-      --line:#24333c;--shadow:0 6px 24px rgba(0,0,0,.4);
+      --ink:#eef4f7;--muted:#a3b3bf;--bg:#0b1116;--paper:#111a20;--soft:#16222a;--line:#24333c;
+      --gain:#22c26b;--gain-deep:#3ad07f;--gain-soft:#12241a;
+      --spend:#e56a6a;--spend-deep:#f08a8a;--spend-soft:#2a1516;
     }}
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
-    .wrap{max-width:940px;margin:0 auto;padding:24px 18px 60px}
+    body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased}
+    .wrap{max-width:860px;margin:0 auto;padding:24px 18px 60px}
 
     /* Barre d'outils (masquée à l'impression) */
-    .toolbar{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);margin-bottom:26px}
-    .toolbar h1{font-size:1.25rem;letter-spacing:-.02em}
-    .toolbar p{color:var(--muted);font-size:14px;margin-top:4px}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+    .toolbar{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);margin-bottom:24px}
+    .toolbar h1{font-size:1.15rem;letter-spacing:-.02em}
+    .toolbar p{color:var(--muted);font-size:13.5px;margin-top:4px}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
     @media(max-width:720px){.grid{grid-template-columns:1fr 1fr}}
-    .fld{display:flex;flex-direction:column;gap:6px}
-    .fld label{font-size:12.5px;font-weight:600;color:var(--muted)}
-    .fld input,.fld select{padding:10px 12px;border:1.5px solid var(--line);border-radius:9px;background:var(--soft);color:var(--ink);font-size:14px;font-family:inherit}
+    .fld{display:flex;flex-direction:column;gap:5px}
+    .fld label{font-size:12px;font-weight:600;color:var(--muted)}
+    .fld input,.fld select{padding:9px 11px;border:1.5px solid var(--line);border-radius:9px;background:var(--soft);color:var(--ink);font-size:14px;font-family:inherit}
     .fld input:focus,.fld select:focus{outline:none;border-color:var(--sun)}
-    .actions{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+    .actions{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
     .btn{border:none;cursor:pointer;background:linear-gradient(135deg,var(--sun),var(--sun-deep));color:#14212b;font-weight:700;font-size:14px;padding:11px 20px;border-radius:999px}
     .btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
 
-    /* Document devis */
-    .paper{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:38px;overflow:hidden}
-    .doc-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;border-bottom:2px solid var(--line);padding-bottom:20px}
-    .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1.15rem;letter-spacing:-.02em}
+    /* Papier */
+    .paper{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:34px;overflow:hidden}
+    .doc-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;align-items:flex-start}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1.1rem;letter-spacing:-.02em}
     .brand .mark{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--sun),var(--sun-deep));display:grid;place-items:center;font-size:20px}
     .brand small{display:block;font-weight:500;font-size:12px;color:var(--muted)}
-    .doc-meta{text-align:right;font-size:13px;color:var(--muted)}
+    .doc-meta{text-align:right;font-size:12.5px;color:var(--muted)}
     .doc-meta b{color:var(--ink)}
-    .doc-title{margin:22px 0 6px;font-size:1.5rem;letter-spacing:-.02em}
-    .to{color:var(--muted);font-size:14px}
+    .to{margin-top:16px;color:var(--muted);font-size:14px}
     .to b{color:var(--ink)}
 
-    .sec{margin-top:26px}
-    .sec h3{font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;color:var(--sun-deep);font-weight:700;margin-bottom:12px}
-    table{width:100%;border-collapse:collapse}
-    .tbl-scroll{overflow-x:auto}
-    th,td{padding:10px 12px;border-bottom:1px solid var(--line);font-size:13.5px;text-align:right}
-    th:first-child,td:first-child{text-align:left}
-    thead th{font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
-    tfoot td{font-weight:800;border-top:2px solid var(--line);border-bottom:none;font-size:15px}
-    td.num,th.num{font-variant-numeric:tabular-nums}
+    /* Bandeau gain (le point fort) */
+    .hero{margin-top:22px;border-radius:18px;padding:26px 28px;text-align:center;
+      background:linear-gradient(135deg,var(--gain-deep),var(--gain));color:#fff;
+      box-shadow:0 10px 30px rgba(18,161,80,.28)}
+    .hero .lbl{font-size:14px;font-weight:600;opacity:.92;letter-spacing:.02em}
+    .hero .big{font-size:clamp(2.2rem,7vw,3.4rem);font-weight:900;letter-spacing:-.03em;line-height:1.05;margin:6px 0}
+    .hero .sub{font-size:13.5px;opacity:.9}
 
-    /* Situation actuelle */
-    .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-    @media(max-width:720px){.cards{grid-template-columns:repeat(2,1fr)}}
-    .card{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:15px}
-    .card .l{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
-    .card .n{font-size:1.35rem;font-weight:800;letter-spacing:-.02em;margin-top:3px}
+    /* Comparaison rouge / vert */
+    .vs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+    @media(max-width:600px){.vs{grid-template-columns:1fr}}
+    .col{border-radius:16px;padding:20px;border:1.5px solid}
+    .col.now{background:var(--spend-soft);border-color:color-mix(in srgb,var(--spend) 40%,transparent)}
+    .col.solar{background:var(--gain-soft);border-color:color-mix(in srgb,var(--gain) 45%,transparent)}
+    .col h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:7px}
+    .col.now h3{color:var(--spend-deep)} .col.solar h3{color:var(--gain-deep)}
+    .row{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px dashed var(--line);font-size:14px}
+    .row:last-child{border-bottom:none}
+    .row .v{font-weight:800;font-variant-numeric:tabular-nums}
+    .row .v.mega{font-size:1.5rem}
+    .row .v.now{color:var(--spend-deep)} .row .v.solar{color:var(--gain-deep)}
 
-    /* Gains */
-    .gains{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-    @media(max-width:720px){.gains{grid-template-columns:1fr}}
-    .gain-box{border-radius:14px;padding:22px;border:1px solid var(--line)}
-    .gain-box.short{background:color-mix(in srgb,var(--sun) 12%,var(--paper))}
-    .gain-box.long{background:color-mix(in srgb,var(--sky) 12%,var(--paper))}
-    .gain-box h4{font-size:1rem;letter-spacing:-.01em;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-    .gain-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed var(--line);font-size:14px}
-    .gain-row:last-child{border-bottom:none}
-    .gain-row .v{font-weight:800}
-    .hero-num{font-size:1.9rem;font-weight:800;letter-spacing:-.02em;color:var(--sky-deep)}
-    .good{color:var(--good)} .bad{color:var(--bad)}
+    /* 3 tuiles court/moyen/long */
+    .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+    @media(max-width:600px){.tiles{grid-template-columns:1fr}}
+    .tile{background:var(--gain-soft);border:1.5px solid color-mix(in srgb,var(--gain) 35%,transparent);border-radius:14px;padding:18px;text-align:center}
+    .tile .t-l{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+    .tile .t-n{font-size:1.7rem;font-weight:900;letter-spacing:-.02em;color:var(--gain-deep);margin-top:4px}
+    .tile .t-s{font-size:12px;color:var(--muted);margin-top:2px}
+
+    /* Investissement */
+    .invest{margin-top:22px;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+    .invest .k{font-size:13px;color:var(--muted)}
+    .invest .p{font-size:1.5rem;font-weight:900;letter-spacing:-.02em}
+    .invest .comp{font-size:12px;color:var(--muted);margin-top:4px}
 
     /* Chart */
-    .chart-card{margin-top:14px}
+    .chart-card{margin-top:24px}
+    .chart-card .ttl{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;margin-bottom:10px}
     .chart-card svg{width:100%;height:auto;display:block}
-    .area{fill:color-mix(in srgb,var(--sky) 22%,transparent)}
-    .aline{fill:none;stroke:var(--sky);stroke-width:2}
+    .area{fill:color-mix(in srgb,var(--gain) 20%,transparent)}
+    .aline{fill:none;stroke:var(--gain);stroke-width:2.5}
     .zero{stroke:var(--line);stroke-width:1}
     .pay{stroke:var(--sun-deep);stroke-width:1.5;stroke-dasharray:4 3}
     .clbl{fill:var(--muted);font:500 11px system-ui,sans-serif}
     .paylbl{fill:var(--sun-deep);font:700 11px system-ui,sans-serif}
-
     .note{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5}
-    .foot{margin-top:30px;border-top:1px solid var(--line);padding-top:16px;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+    .foot{margin-top:26px;border-top:1px solid var(--line);padding-top:14px;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 
     @media print{
       body{background:#fff}
       .toolbar{display:none}
       .wrap{max-width:none;padding:0}
       .paper{border:none;box-shadow:none;border-radius:0;padding:0}
-      .gain-box.short{background:#fdf3e2}
-      .gain-box.long{background:#e6f1f3}
-      .card{background:#f4f7f9}
+      .hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      .col.now{background:#fdecec}.col.solar,.tile{background:#e7f6ee}
     }
   </style>
 </head>
@@ -104,17 +110,11 @@
   <div class="wrap">
     <!-- BARRE D'OUTILS -->
     <div class="toolbar">
-      <h1>🧾 Générateur de devis solaire</h1>
-      <p>Renseignez les données de la facture du client ; le devis, les prix et les gains se calculent automatiquement. Cliquez sur « Imprimer / PDF » pour le remettre au client.</p>
+      <h1>🧾 Devis solaire — version simple</h1>
+      <p>Renseignez la facture du client ; le devis met en avant, en couleur, ce qu'il économise. « Imprimer / PDF » pour le remettre.</p>
       <div class="grid">
         <div class="fld"><label>Nom du client</label><input id="iNom" type="text" value="Client Exemple SARL"></div>
-        <div class="fld"><label>Commune / ville</label><input id="iVille" type="text" value="Cocody, Abidjan"></div>
-        <div class="fld"><label>Secteur</label>
-          <select id="iSecteur">
-            <option>Résidentiel</option><option selected>Commerce / bureau</option>
-            <option>Clinique</option><option>Pharmacie</option><option>Industrie / PME</option>
-          </select>
-        </div>
+        <div class="fld"><label>Ville</label><input id="iVille" type="text" value="Cocody, Abidjan"></div>
         <div class="fld"><label>Facture mensuelle (FCFA)</label><input id="iFacture" type="number" value="120000" min="0" step="1000"></div>
         <div class="fld"><label>Prix du kWh (FCFA)</label><input id="iPrix" type="number" value="80" min="1" step="1"></div>
         <div class="fld"><label>Couverture visée</label>
@@ -122,14 +122,14 @@
         </div>
         <div class="fld"><label>Configuration</label>
           <select id="iConfig">
-            <option value="B1" selected>B1 · Injection directe (sans batterie)</option>
-            <option value="B2">B2 · Hybride (avec batterie)</option>
-            <option value="B3">B3 · Sur-mesure (batterie partielle)</option>
+            <option value="B1" selected>B1 · sans batterie</option>
+            <option value="B2">B2 · avec batterie</option>
+            <option value="B3">B3 · batterie partielle</option>
           </select>
         </div>
-        <div class="fld"><label>Contrat de maintenance</label>
+        <div class="fld"><label>Maintenance</label>
           <select id="iMaint">
-            <option value="0">Aucun</option>
+            <option value="0">Aucune</option>
             <option value="0.02">Essentiel (2 %/an)</option>
             <option value="0.035" selected>Pro · 48 h (3,5 %/an)</option>
             <option value="0.055">Critique · 24 h (5,5 %/an)</option>
@@ -142,7 +142,7 @@
       </div>
     </div>
 
-    <!-- DOCUMENT DEVIS -->
+    <!-- DEVIS -->
     <div class="paper" id="devis">
       <div class="doc-head">
         <div class="brand"><span class="mark">☀️</span><span>Abidjan Photovoltaïque<small>Énergie solaire · Côte d'Ivoire</small></span></div>
@@ -152,207 +152,151 @@
           <div>Validité : <b>30 jours</b></div>
         </div>
       </div>
+      <p class="to">Pour : <b id="oNom">—</b> · <span id="oVille">—</span> · installation <b id="oKwc">—</b> (<span id="oPan">—</span> panneaux)</p>
 
-      <h2 class="doc-title">Devis — Installation photovoltaïque</h2>
-      <p class="to">À l'attention de : <b id="oNom">—</b> · <span id="oVille">—</span> · <span id="oSecteur">—</span></p>
-
-      <!-- Situation actuelle -->
-      <div class="sec">
-        <h3>Votre situation actuelle</h3>
-        <div class="cards">
-          <div class="card"><div class="l">Facture mensuelle</div><div class="n" id="oFactM">—</div></div>
-          <div class="card"><div class="l">Consommation / an</div><div class="n" id="oConso">—</div></div>
-          <div class="card"><div class="l">Dépense élec. / an</div><div class="n" id="oDepA">—</div></div>
-          <div class="card"><div class="l">Dépense sur 25 ans*</div><div class="n" id="oDep25">—</div></div>
-        </div>
-        <p class="note">* En intégrant une hausse du tarif de l'électricité de 3 %/an. Sans solaire, cette dépense continue d'augmenter.</p>
+      <!-- LE GAIN, EN GROS -->
+      <div class="hero">
+        <div class="lbl">Avec le solaire, vous gagnez au total</div>
+        <div class="big" id="hGain">—</div>
+        <div class="sub">sur 25 ans — après avoir payé l'installation <span id="hSubMaint"></span></div>
       </div>
 
-      <!-- Solution proposée -->
-      <div class="sec">
-        <h3>Solution proposée</h3>
-        <div class="cards">
-          <div class="card"><div class="l">Puissance</div><div class="n" id="oKwc">—</div></div>
-          <div class="card"><div class="l">Panneaux (~500 Wc)</div><div class="n" id="oPan">—</div></div>
-          <div class="card"><div class="l">Surface toiture</div><div class="n" id="oSurf">—</div></div>
-          <div class="card"><div class="l">Production / an</div><div class="n" id="oProd">—</div></div>
+      <!-- AUJOURD'HUI vs AVEC LE SOLAIRE -->
+      <div class="vs">
+        <div class="col now">
+          <h3>🔴 Sans rien changer</h3>
+          <div class="row"><span>Facture aujourd'hui</span><span class="v now" id="nFactM">—</span></div>
+          <div class="row"><span>Sur 25 ans, vous paierez*</span><span class="v now mega" id="nDep25">—</span></div>
         </div>
-        <p class="note" id="oConfigTxt">—</p>
+        <div class="col solar">
+          <h3>🟢 Avec le solaire</h3>
+          <div class="row"><span>Votre nouvelle facture</span><span class="v solar" id="sFactM">—</span></div>
+          <div class="row"><span>Vous économisez chaque mois</span><span class="v solar mega" id="sEcoM">—</span></div>
+        </div>
       </div>
 
-      <!-- Détail des prix -->
-      <div class="sec">
-        <h3>Détail du devis</h3>
-        <div class="tbl-scroll">
-        <table>
-          <thead><tr><th>Poste</th><th class="num">Quantité</th><th class="num">Montant (FCFA)</th></tr></thead>
-          <tbody id="oLignes"></tbody>
-          <tfoot>
-            <tr><td>Investissement total</td><td></td><td class="num" id="oTotal">—</td></tr>
-          </tfoot>
-        </table>
-        </div>
-        <p class="note" id="oMaintNote"></p>
+      <!-- 3 REPÈRES -->
+      <div class="tiles">
+        <div class="tile"><div class="t-l">Économie année 1</div><div class="t-n" id="tAn1">—</div><div class="t-s">soit <span id="tPart">—</span> de la facture</div></div>
+        <div class="tile"><div class="t-l">Remboursé en</div><div class="t-n" id="tPay">—</div><div class="t-s">ensuite, tout est gain</div></div>
+        <div class="tile"><div class="t-l">Économies sur 25 ans</div><div class="t-n" id="tCumul">—</div><div class="t-s">au total sur vos factures</div></div>
       </div>
 
-      <!-- Ce que vous gagnez -->
-      <div class="sec">
-        <h3>Ce que vous gagnez</h3>
-        <div class="gains">
-          <div class="gain-box short">
-            <h4>⚡ À court terme</h4>
-            <div class="gain-row"><span>Économie dès le 1er mois</span><span class="v" id="gMois">—</span></div>
-            <div class="gain-row"><span>Économie année 1</span><span class="v" id="gAn1">—</span></div>
-            <div class="gain-row"><span>Part de facture réduite</span><span class="v" id="gPart">—</span></div>
-            <div class="gain-row"><span>Retour sur investissement</span><span class="v" id="gPay">—</span></div>
-          </div>
-          <div class="gain-box long">
-            <h4>📈 À long terme (25 ans)</h4>
-            <div class="gain-row"><span>Économies cumulées</span><span class="v" id="gCumul">—</span></div>
-            <div class="gain-row"><span>Investissement + maintenance</span><span class="v" id="gCout">—</span></div>
-            <div class="gain-row"><span>Gain net sur 25 ans</span><span class="v hero-num" id="gNet">—</span></div>
-          </div>
+      <!-- INVESTISSEMENT -->
+      <div class="invest">
+        <div>
+          <div class="k">Votre investissement</div>
+          <div class="comp" id="oComp">Modules, onduleur, structure, pose, études</div>
         </div>
-        <div class="chart-card">
-          <div id="chart" role="img" aria-label="Économies nettes cumulées sur 25 ans"></div>
-          <p class="note" id="gNote">—</p>
+        <div style="text-align:right">
+          <div class="p" id="oTotal">—</div>
+          <div class="comp" id="oMaintLine"></div>
         </div>
+      </div>
+
+      <!-- COURBE -->
+      <div class="chart-card">
+        <div class="ttl">Ce que vous gagnez, année après année</div>
+        <div id="chart" role="img" aria-label="Économies nettes cumulées sur 25 ans"></div>
+        <p class="note" id="gNote">—</p>
       </div>
 
       <div class="foot">
         <div>Abidjan Photovoltaïque · contact@abidjan-photovoltaique.ci · +225 XX XX XX XX XX</div>
-        <div>Devis indicatif — chiffres à confirmer après visite technique.</div>
+        <div>* Tarif +3 %/an. Devis indicatif — à confirmer après visite technique.</div>
       </div>
     </div>
   </div>
 
   <script>
-    // Constantes alignées sur docs/modele-financier-pv.xlsx
-    const PRODUCTIBLE=1400, WC=500, M2=6.5, DEGR=0.007, INFL=0.03, OM=0.015, ACTU=0.08, DUREE=25;
+    const PRODUCTIBLE=1400, WC=500, M2=6.5, DEGR=0.007, INFL=0.03, ACTU=0.08, DUREE=25;
     const CONFIGS={
-      B1:{nom:'Injection directe (sans batterie)',cost:700000,auto:0.65,bat:0.00,ond:0.08,batterie:false},
-      B2:{nom:'Hybride avec batterie lithium',cost:1500000,auto:0.90,bat:0.30,ond:0.08,batterie:true},
-      B3:{nom:'Sur-mesure (batterie partielle)',cost:1100000,auto:0.80,bat:0.15,ond:0.08,batterie:true},
+      B1:{nom:'sans batterie',cost:700000,auto:0.65,bat:0.00,ond:0.08,batterie:false},
+      B2:{nom:'avec batterie',cost:1500000,auto:0.90,bat:0.30,ond:0.08,batterie:true},
+      B3:{nom:'batterie partielle',cost:1100000,auto:0.80,bat:0.15,ond:0.08,batterie:true},
     };
     const f=n=>new Intl.NumberFormat('fr-FR').format(Math.round(n));
     const fcfa=n=>f(n)+' FCFA';
+    const signe=n=>(n>=0?'+ ':'− ')+f(Math.abs(n))+' FCFA';
 
     function evalConfig(kwc,consoAn,prix,cfg,maintRate){
       const capex=kwc*cfg.cost;
-      const auto1=Math.min(kwc*PRODUCTIBLE*cfg.auto,consoAn);
-      const eco1=auto1*prix;                       // économie brute an 1 (avant O&M)
-      let cumEco=0, cumFlux=-capex, van=-capex, payback=null;
+      const eco1=Math.min(kwc*PRODUCTIBLE*cfg.auto,consoAn)*prix;
+      let cumEco=0,cumFlux=-capex,van=-capex,payback=null,dep25=0;
       const serie=[{y:0,v:-capex}];
-      let depense25=0;
       for(let n=1;n<=DUREE;n++){
-        const prod=kwc*PRODUCTIBLE*Math.pow(1-DEGR,n-1);
-        const tarif=prix*Math.pow(1+INFL,n-1);
-        const auto=Math.min(prod*cfg.auto,consoAn);
-        const eco=auto*tarif;
-        const maint=capex*maintRate;               // coût maintenance annuel (prix client)
-        const rempl=(n===10?capex*cfg.bat:0)+(n===12?capex*cfg.ond:0);
-        const net=eco-maint-rempl;
-        cumEco+=eco;
-        const prev=cumFlux; cumFlux+=net;
-        van+=net/Math.pow(1+ACTU,n);
+        const prod=kwc*PRODUCTIBLE*Math.pow(1-DEGR,n-1), tarif=prix*Math.pow(1+INFL,n-1);
+        const auto=Math.min(prod*cfg.auto,consoAn), eco=auto*tarif, maint=capex*maintRate;
+        const rempl=(n===10?capex*cfg.bat:0)+(n===12?capex*cfg.ond:0), net=eco-maint-rempl;
+        cumEco+=eco; const prev=cumFlux; cumFlux+=net; van+=net/Math.pow(1+ACTU,n);
         if(payback===null&&prev<0&&cumFlux>=0)payback=n;
-        serie.push({y:n,v:cumFlux});
-        depense25+=consoAn*tarif;                   // dépense élec. totale sans solaire
+        serie.push({y:n,v:cumFlux}); dep25+=consoAn*tarif;
       }
-      return {capex,eco1,cumEco,cumFlux,van,payback,serie,depense25};
-    }
-
-    // Détail des postes (répartition du CAPEX)
-    function lignes(kwc,cfg){
-      const base=kwc*700000;                         // socle "sans batterie"
-      const batterie=kwc*(cfg.cost-700000);          // surcoût batterie
-      const rows=[
-        ['Modules photovoltaïques (~'+Math.ceil(kwc*1000/WC)+' × 500 Wc)', Math.ceil(kwc*1000/WC)+' u', base*0.45],
-        ['Onduleur '+(cfg.batterie?'hybride':'réseau'), '1 u', base*0.15],
-        ['Structure de fixation & câblage', kwc.toFixed(1)+' kWc', base*0.15],
-        ['Pose & mise en service', 'forfait', base*0.18],
-        ['Études, protections & administratif', 'forfait', base*0.07],
-      ];
-      if(batterie>0) rows.splice(2,0,['Stockage batterie lithium','forfait',batterie]);
-      return rows;
+      return {capex,eco1,cumEco,cumFlux,van,payback,serie,dep25};
     }
 
     function buildChart(serie,payback){
-      const W=860,H=230,padL=54,padR=14,padT=16,padB=26;
-      const xs=serie.map(p=>p.y), vs=serie.map(p=>p.v);
-      const vMin=Math.min(...vs,0), vMax=Math.max(...vs,0);
+      const W=820,H=210,padL=52,padR=14,padT=16,padB=26;
+      const vs=serie.map(p=>p.v), vMin=Math.min(...vs,0), vMax=Math.max(...vs,0);
       const x=y=>padL+(y/DUREE)*(W-padL-padR);
-      const yv=v=>padT+(vMax-v)/(vMax-vMin)*(H-padT-padB);
+      const yv=v=>padT+(vMax-v)/((vMax-vMin)||1)*(H-padT-padB);
       let area=`M ${x(0)} ${yv(0)}`, line='';
       serie.forEach((p,i)=>{area+=` L ${x(p.y).toFixed(1)} ${yv(p.v).toFixed(1)}`; line+=(i?'L':'M')+` ${x(p.y).toFixed(1)} ${yv(p.v).toFixed(1)} `;});
       area+=` L ${x(DUREE)} ${yv(0)} Z`;
       let s=`<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">`;
       s+=`<line class="zero" x1="${padL}" y1="${yv(0).toFixed(1)}" x2="${W-padR}" y2="${yv(0).toFixed(1)}"/>`;
       s+=`<path class="area" d="${area}"/><path class="aline" d="${line.trim()}"/>`;
-      // libellés Y (0 et max)
       s+=`<text class="clbl" x="6" y="${(yv(0)+4).toFixed(1)}">0</text>`;
       s+=`<text class="clbl" x="6" y="${(yv(vMax)+4).toFixed(1)}">${f(vMax/1e6)} M</text>`;
-      // axe X
-      [0,5,10,15,20,25].forEach(t=>{s+=`<text class="clbl" x="${x(t).toFixed(1)}" y="${H-8}" text-anchor="middle">${t} an${t>1?'s':''}</text>`;});
-      // marqueur payback
+      [0,5,10,15,20,25].forEach(t=>{s+=`<text class="clbl" x="${x(t).toFixed(1)}" y="${H-8}" text-anchor="middle">${t}</text>`;});
       if(payback){s+=`<line class="pay" x1="${x(payback).toFixed(1)}" y1="${padT}" x2="${x(payback).toFixed(1)}" y2="${H-padB}"/>`;
-        s+=`<text class="paylbl" x="${x(payback).toFixed(1)}" y="${padT+2}" text-anchor="middle">rentable an ${payback}</text>`;}
+        s+=`<text class="paylbl" x="${x(payback).toFixed(1)}" y="${padT+2}" text-anchor="middle">remboursé an ${payback}</text>`;}
       s+='</svg>';
       document.getElementById('chart').innerHTML=s;
     }
 
     function gen(){
-      const nom=iNom.value, ville=iVille.value, secteur=iSecteur.value;
       const facture=Math.max(0,+iFacture.value||0), prix=Math.max(1,+iPrix.value||1);
       const couv=+iCouv.value, cfg=CONFIGS[iConfig.value], maintRate=+iMaint.value;
-      const consoAn=(facture/prix)*12;
-      const kwc=(consoAn*couv)/PRODUCTIBLE;
-      const prodAn=kwc*PRODUCTIBLE;
+      const consoAn=(facture/prix)*12, kwc=(consoAn*couv)/PRODUCTIBLE;
       const r=evalConfig(kwc,consoAn,prix,cfg,maintRate);
-
-      // En-tête
       const d=new Date();
+
       oNum.textContent='AP-'+d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'-'+String(Math.floor(Math.random()*900+100));
       oDate.textContent=d.toLocaleDateString('fr-FR');
-      oNom.textContent=nom; oVille.textContent=ville; oSecteur.textContent=secteur;
-
-      // Situation
-      oFactM.textContent=fcfa(facture); oConso.textContent=f(consoAn)+' kWh';
-      oDepA.textContent=fcfa(consoAn*prix); oDep25.textContent=fcfa(r.depense25);
-
-      // Solution
+      oNom.textContent=iNom.value; oVille.textContent=iVille.value;
       oKwc.textContent=kwc.toFixed(1)+' kWc'; oPan.textContent=Math.ceil(kwc*1000/WC);
-      oSurf.textContent=f(kwc*M2)+' m²'; oProd.textContent=f(prodAn)+' kWh';
-      oConfigTxt.textContent='Configuration '+iConfig.value+' — '+cfg.nom+'. Autoconsommation estimée '+Math.round(cfg.auto*100)+' %.';
 
-      // Lignes de prix
-      const rows=lignes(kwc,cfg);
-      oLignes.innerHTML=rows.map(([l,q,m])=>`<tr><td>${l}</td><td class="num">${q}</td><td class="num">${f(m)}</td></tr>`).join('');
+      // Bandeau gain
+      hGain.textContent=signe(r.cumFlux);
+      hSubMaint.textContent = maintRate>0 ? 'et son entretien' : '';
+
+      // Comparaison
+      nFactM.textContent=fcfa(facture);
+      nDep25.textContent=fcfa(r.dep25);
+      const nouvelleFact=Math.max(0,facture-r.eco1/12);
+      sFactM.textContent=fcfa(nouvelleFact);
+      sEcoM.textContent='+ '+fcfa(r.eco1/12);
+
+      // Tuiles
+      tAn1.textContent='+ '+fcfa(r.eco1);
+      tPart.textContent=Math.round(Math.min(r.eco1/(consoAn*prix),1)*100)+' %';
+      tPay.textContent=r.payback? ('~'+r.payback+' ans') : '> 25 ans';
+      tCumul.textContent=fcfa(r.cumEco);
+
+      // Investissement
       oTotal.textContent=fcfa(r.capex);
-      oMaintNote.textContent = maintRate>0
-        ? 'Contrat de maintenance sélectionné : '+fcfa(r.capex*maintRate)+' /an (inclus dans le calcul des gains long terme).'
-        : 'Aucun contrat de maintenance sélectionné. Nous recommandons au minimum une visite annuelle.';
-
-      // Gains court terme
-      gMois.textContent=fcfa(r.eco1/12); gAn1.textContent=fcfa(r.eco1);
-      gPart.textContent=Math.round(Math.min(r.eco1/(consoAn*prix),1)*100)+' %';
-      gPay.textContent=r.payback? ('~'+r.payback+' ans') : '> 25 ans';
-
-      // Gains long terme
-      // cumFlux = cumEco − (capex + maintenance + remplacements)  ⇒  coûts = cumEco − cumFlux
-      const coutTotal=r.cumEco-r.cumFlux; // investissement + maintenance + remplacements
-      gCumul.textContent=fcfa(r.cumEco);
-      gCout.textContent=fcfa(coutTotal);
-      const net=r.cumFlux; // = cumEco - coûts - capex
-      gNet.textContent=(net>=0?'+':'−')+fcfa(Math.abs(net)).replace('FCFA','')+'FCFA';
-      gNet.className='v hero-num '+(net>=0?'good':'bad');
+      oComp.textContent = cfg.batterie
+        ? 'Modules, onduleur hybride, batterie, structure, pose, études'
+        : 'Modules, onduleur, structure, pose, études';
+      oMaintLine.textContent = maintRate>0 ? '+ entretien '+fcfa(r.capex*maintRate)+'/an' : '';
 
       buildChart(r.serie,r.payback);
       gNote.textContent = cfg.batterie
-        ? "La courbe intègre le remplacement de la batterie (~an 10). Pour un site avec batterie, une partie de la valeur est le confort et la continuité (coupures, climatisation la nuit), au-delà du seul gain financier."
-        : "Économies nettes cumulées (après investissement et maintenance). La ligne pointillée marque l'année où l'installation est remboursée ; ensuite, tout est gain.";
+        ? "Courbe des économies nettes cumulées (batterie remplacée vers l'an 10). Une partie de la valeur d'une batterie est le confort et la continuité (coupures, climatisation la nuit)."
+        : "Économies nettes cumulées, entretien déduit. Après l'année de remboursement, la courbe ne fait que monter : c'est du gain net.";
     }
-    ['iNom','iVille','iSecteur','iFacture','iPrix','iCouv','iConfig','iMaint'].forEach(id=>{
+    ['iNom','iVille','iFacture','iPrix','iCouv','iConfig','iMaint'].forEach(id=>{
       const el=document.getElementById(id); el.addEventListener('input',gen); el.addEventListener('change',gen);
     });
     gen();
