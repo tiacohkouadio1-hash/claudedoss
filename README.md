@@ -1,6 +1,6 @@
-# Cordyxia — Solaire photovoltaïque ☀️
+# Cordixia — Solaire photovoltaïque ☀️
 
-Supports de **Cordyxia**, société d'énergie solaire photovoltaïque à **Abidjan
+Supports de **Cordixia**, société d'énergie solaire photovoltaïque à **Abidjan
 (Côte d'Ivoire)** : audit énergétique, installation et maintenance. Ce dépôt
 contient les livrables commerciaux et techniques :
 
