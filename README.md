@@ -1,8 +1,9 @@
 # Cordixia — Solaire photovoltaïque ☀️
 
-Supports de **Cordixia**, société d'énergie solaire photovoltaïque à **Abidjan
-(Côte d'Ivoire)** : audit énergétique, installation et maintenance. Ce dépôt
-contient les livrables commerciaux et techniques :
+Supports de **Cordixia** ([cordixia.com](https://cordixia.com)), société
+d'énergie solaire photovoltaïque à **Abidjan (Côte d'Ivoire)** : audit
+énergétique, installation et maintenance. Ce dépôt contient les livrables
+commerciaux et techniques :
 
 | Livrable | Fichier | Description |
 |---|---|---|
