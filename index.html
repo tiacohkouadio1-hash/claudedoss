@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cordixia — Énergie solaire clé en main</title>
+  <meta name="description" content="Installation de panneaux solaires photovoltaïques à Abidjan : autoconsommation, systèmes hybrides avec batterie, étude et devis. Réduisez votre facture CIE.">
+  <style>
+    :root {
+      --sun: #f5a623;
+      --sun-deep: #e8890b;
+      --sky: #0a7d8c;
+      --sky-deep: #075a66;
+      --ink: #14212b;
+      --muted: #5b6b78;
+      --bg: #ffffff;
+      --soft: #f4f7f9;
+      --line: #e2e9ee;
+      --card: #ffffff;
+      --radius: 16px;
+      --shadow: 0 6px 24px rgba(10, 40, 60, 0.08);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink: #eef4f7;
+        --muted: #a3b3bf;
+        --bg: #0e1519;
+        --soft: #141e24;
+        --line: #24333c;
+        --card: #16222a;
+        --shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 66px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: -0.02em; }
+    .brand .mark {
+      width: 34px; height: 34px; border-radius: 9px;
+      background: linear-gradient(135deg, var(--sun), var(--sun-deep));
+      display: grid; place-items: center; font-size: 18px;
+    }
+    .nav-links { display: flex; gap: 26px; align-items: center; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-weight: 500; font-size: 15px; }
+    .nav-links a:hover { color: var(--ink); }
+    .btn {
+      display: inline-block; border: none; cursor: pointer;
+      background: linear-gradient(135deg, var(--sun), var(--sun-deep));
+      color: #14212b; font-weight: 700; font-size: 15px;
+      padding: 12px 22px; border-radius: 999px; text-decoration: none;
+      transition: transform .15s ease, box-shadow .15s ease;
+      box-shadow: 0 4px 14px rgba(245, 166, 35, 0.35);
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(245, 166, 35, 0.45); }
+    .btn.ghost { background: transparent; color: var(--ink); box-shadow: none; border: 1.5px solid var(--line); }
+    @media (max-width: 720px) { .nav-links a:not(.btn) { display: none; } }
+
+    /* Hero */
+    .hero {
+      position: relative; overflow: hidden;
+      padding: 80px 0 70px;
+      background:
+        radial-gradient(900px 500px at 85% -10%, rgba(245,166,35,0.18), transparent 60%),
+        radial-gradient(700px 500px at 0% 20%, rgba(10,125,140,0.12), transparent 55%);
+    }
+    .hero h1 {
+      font-size: clamp(2.1rem, 5vw, 3.5rem); line-height: 1.08;
+      letter-spacing: -0.03em; max-width: 16ch;
+    }
+    .hero h1 .grad {
+      background: linear-gradient(120deg, var(--sun-deep), var(--sun));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero p.lead { margin-top: 20px; font-size: 1.18rem; color: var(--muted); max-width: 52ch; }
+    .hero-cta { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--soft); border: 1px solid var(--line);
+      padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--muted);
+      margin-bottom: 22px;
+    }
+    .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sun); }
+
+    /* Stats */
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 56px; }
+    .stat { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); }
+    .stat .n { font-size: 1.9rem; font-weight: 800; letter-spacing: -0.02em; color: var(--sky); }
+    .stat .l { font-size: 13.5px; color: var(--muted); margin-top: 4px; }
+    @media (max-width: 720px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+
+    /* Sections */
+    section.block { padding: 72px 0; }
+    .eyebrow { color: var(--sun-deep); font-weight: 700; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; }
+    h2.title { font-size: clamp(1.6rem, 3.4vw, 2.3rem); letter-spacing: -0.02em; margin-top: 8px; }
+    .section-intro { color: var(--muted); max-width: 60ch; margin-top: 12px; }
+
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 40px; }
+    @media (max-width: 820px) { .grid3 { grid-template-columns: 1fr; } }
+    .feature { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); }
+    .feature .ico { width: 46px; height: 46px; border-radius: 12px; background: color-mix(in srgb, var(--sky) 14%, transparent); display: grid; place-items: center; font-size: 22px; margin-bottom: 16px; }
+    .feature h3 { font-size: 1.15rem; letter-spacing: -0.01em; }
+    .feature p { color: var(--muted); margin-top: 8px; font-size: 15px; }
+
+    /* Offers */
+    .offers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 40px; }
+    @media (max-width: 820px) { .offers { grid-template-columns: 1fr; } }
+    .offer { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; position: relative; box-shadow: var(--shadow); }
+    .offer.popular { border-color: var(--sun); box-shadow: 0 10px 30px rgba(245,166,35,0.22); }
+    .offer .tag { position: absolute; top: -12px; right: 22px; background: var(--sun); color: #14212b; font-weight: 700; font-size: 12px; padding: 5px 12px; border-radius: 999px; }
+    .offer h3 { font-size: 1.25rem; }
+    .offer .price { font-size: 1.05rem; color: var(--sky); font-weight: 700; margin: 6px 0 4px; }
+    .offer .sub { color: var(--muted); font-size: 14px; }
+    .offer ul { list-style: none; margin-top: 18px; display: grid; gap: 10px; }
+    .offer li { font-size: 15px; display: flex; gap: 10px; align-items: flex-start; }
+    .offer li::before { content: "☀"; color: var(--sun-deep); }
+
+    /* Calculator */
+    .calc-wrap { background: var(--soft); border: 1px solid var(--line); border-radius: 22px; padding: 34px; margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 34px; }
+    @media (max-width: 820px) { .calc-wrap { grid-template-columns: 1fr; } }
+    .field { margin-bottom: 20px; }
+    .field label { display: block; font-weight: 600; font-size: 14.5px; margin-bottom: 8px; }
+    .field .hint { color: var(--muted); font-weight: 400; font-size: 13px; }
+    .field input, .field select {
+      width: 100%; padding: 12px 14px; border-radius: 10px; border: 1.5px solid var(--line);
+      background: var(--bg); color: var(--ink); font-size: 15px; font-family: inherit;
+    }
+    .field input:focus, .field select:focus { outline: none; border-color: var(--sun); }
+    .results { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 26px; box-shadow: var(--shadow); }
+    .res-row { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 0; border-bottom: 1px dashed var(--line); }
+    .res-row:last-child { border-bottom: none; }
+    .res-row .k { color: var(--muted); font-size: 14.5px; }
+    .res-row .v { font-weight: 800; font-size: 1.15rem; color: var(--ink); }
+    .res-row .v.big { color: var(--sun-deep); font-size: 1.4rem; }
+    .disclaimer { font-size: 12.5px; color: var(--muted); margin-top: 16px; }
+
+    /* Chart + comparatif */
+    .chart-card, .compare { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 26px; margin-top: 22px; box-shadow: var(--shadow); }
+    .chart-card h3, .compare h3 { font-size: 1.15rem; letter-spacing: -0.01em; }
+    .chart-card .csub, .compare .csub { color: var(--muted); font-size: 14px; margin: 6px 0 18px; max-width: 62ch; }
+    .chart-card svg { width: 100%; height: auto; display: block; }
+    .chart-card .bar { fill: var(--sun-deep); transition: fill .15s; }
+    .chart-card .bar:hover { fill: var(--sun); }
+    .chart-card .axis { stroke: var(--line); stroke-width: 1; }
+    .chart-card .mlabel { fill: var(--muted); font: 500 11px system-ui, sans-serif; }
+    .chart-card .vlabel { fill: var(--ink); font: 700 11px system-ui, sans-serif; }
+    .compare .tbl-scroll { overflow-x: auto; }
+    .compare table { width: 100%; border-collapse: collapse; min-width: 460px; }
+    .compare th, .compare td { padding: 12px 14px; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+    .compare thead th { font-size: 13px; color: var(--muted); font-weight: 700; text-align: center; }
+    .compare thead th:first-child { text-align: left; }
+    .compare tbody th { font-weight: 600; color: var(--ink); text-align: left; }
+    .compare tbody td { text-align: center; font-variant-numeric: tabular-nums; }
+    .compare .best { background: color-mix(in srgb, var(--sun) 13%, transparent); }
+    .compare .cfg-name { font-weight: 800; display: block; }
+    .compare .cfg-sub { color: var(--muted); font-size: 12px; font-weight: 500; }
+    .compare .pill { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; }
+    .compare .pill.win { background: var(--sun); color: #14212b; }
+    .compare .pill.res { background: color-mix(in srgb, var(--sky) 20%, transparent); color: var(--sky-deep); }
+    .compare .note { color: var(--muted); font-size: 12.5px; margin-top: 16px; line-height: 1.5; }
+
+    /* Contact */
+    .contact { background: linear-gradient(135deg, var(--sky-deep), var(--sky)); border-radius: 24px; padding: 46px; color: #fff; margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    @media (max-width: 820px) { .contact { grid-template-columns: 1fr; padding: 32px; } }
+    .contact h2 { font-size: 1.9rem; letter-spacing: -0.02em; }
+    .contact p { color: rgba(255,255,255,0.85); margin-top: 10px; }
+    .contact .info { margin-top: 22px; display: grid; gap: 12px; font-size: 15px; }
+    .contact .info div { display: flex; gap: 10px; align-items: center; }
+    .form-card { background: #fff; border-radius: 16px; padding: 26px; color: var(--ink); }
+    .form-card .field input, .form-card .field select, .form-card .field textarea {
+      width: 100%; padding: 12px 14px; border-radius: 10px; border: 1.5px solid #e2e9ee;
+      background: #fff; color: #14212b; font-size: 15px; font-family: inherit;
+    }
+    .form-card textarea { resize: vertical; min-height: 90px; }
+    .form-card .btn { width: 100%; text-align: center; margin-top: 6px; }
+    .form-msg { margin-top: 14px; font-size: 14px; font-weight: 600; color: var(--sky-deep); display: none; }
+
+    footer { border-top: 1px solid var(--line); padding: 34px 0; margin-top: 20px; color: var(--muted); font-size: 14px; }
+    .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; align-items: center; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <div class="brand"><span class="mark">☀️</span> Cordixia</div>
+      <nav class="nav-links">
+        <a href="#avantages">Avantages</a>
+        <a href="#offres">Offres</a>
+        <a href="#calcul">Estimation</a>
+        <a href="#contact" class="btn">Devis gratuit</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <span class="badge"><span class="dot"></span> Côte d'Ivoire · District Autonome d'Abidjan</span>
+      <h1>Passez au <span class="grad">solaire</span> et allégez votre facture d'électricité</h1>
+      <p class="lead">Installation de panneaux photovoltaïques clé en main à Abidjan : autoconsommation, systèmes hybrides avec batterie pour tenir pendant les coupures, étude et devis personnalisés.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn">Demander un devis gratuit</a>
+        <a href="devis.html" class="btn ghost">🧾 Générer un devis chiffré</a>
+        <a href="#calcul" class="btn ghost">Estimer mon installation</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="n">~1 400</div><div class="l">kWh produits par kWc et par an à Abidjan</div></div>
+        <div class="stat"><div class="n">~5 h</div><div class="l">d'ensoleillement plein équivalent / jour</div></div>
+        <div class="stat"><div class="n">~6 ans</div><div class="l">de retour sur investissement (on-grid)</div></div>
+        <div class="stat"><div class="n">25 ans</div><div class="l">de durée de vie des panneaux</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVANTAGES -->
+  <section class="block wrap" id="avantages">
+    <span class="eyebrow">Pourquoi le solaire à Abidjan</span>
+    <h2 class="title">Un ensoleillement idéal, toute l'année</h2>
+    <p class="section-intro">Proche de l'équateur, Abidjan reçoit un rayonnement solaire élevé et régulier. Le photovoltaïque y est particulièrement rentable et fiable.</p>
+    <div class="grid3">
+      <div class="feature"><div class="ico">💡</div><h3>Réduisez votre facture</h3><p>Produisez votre propre électricité en journée et diminuez fortement votre facture CIE.</p></div>
+      <div class="feature"><div class="ico">🔋</div><h3>Tenez pendant les coupures</h3><p>Les systèmes hybrides avec batterie prennent le relais lors des délestages et micro-coupures.</p></div>
+      <div class="feature"><div class="ico">🌍</div><h3>Énergie propre</h3><p>Une électricité bas-carbone, silencieuse, sans carburant ni fumées de groupe électrogène.</p></div>
+      <div class="feature"><div class="ico">📈</div><h3>Investissement durable</h3><p>Panneaux garantis ~25 ans : après amortissement, votre énergie est quasi gratuite.</p></div>
+      <div class="feature"><div class="ico">🛠️</div><h3>Clé en main</h3><p>Étude, dimensionnement, pose, mise en service et maintenance par des équipes locales.</p></div>
+      <div class="feature"><div class="ico">🏠</div><h3>Sur-mesure</h3><p>Du foyer à la PME industrielle, chaque installation est dimensionnée selon vos besoins réels.</p></div>
+    </div>
+  </section>
+
+  <!-- OFFRES -->
+  <section class="block wrap" id="offres">
+    <span class="eyebrow">Nos formules</span>
+    <h2 class="title">Des solutions pour chaque besoin</h2>
+    <p class="section-intro">Trois architectures selon votre priorité : économie, résilience ou autonomie totale. Tarifs indicatifs — devis précis après étude.</p>
+    <div class="offers">
+      <div class="offer">
+        <h3>Essentiel · On-grid</h3>
+        <div class="price">à partir de ~1,7 M FCFA</div>
+        <div class="sub">Résidentiel 1–3 kWc, sans batterie</div>
+        <ul>
+          <li>Raccordé au réseau CIE</li>
+          <li>Maximum d'économies en journée</li>
+          <li>Installation rapide, coût optimisé</li>
+          <li>Idéal pour réduire la facture</li>
+        </ul>
+      </div>
+      <div class="offer popular">
+        <span class="tag">Le plus choisi</span>
+        <h3>Confort · Hybride</h3>
+        <div class="price">à partir de ~4,5 M FCFA</div>
+        <div class="sub">Résidentiel 3–6 kWc + batterie</div>
+        <ul>
+          <li>Solaire + stockage lithium</li>
+          <li>Secours pendant les coupures</li>
+          <li>Autoconsommation optimisée</li>
+          <li>Climatisation et gros appareils</li>
+        </ul>
+      </div>
+      <div class="offer">
+        <h3>Pro · Sur-mesure</h3>
+        <div class="price">sur étude</div>
+        <div class="sub">Commerce, PME & industrie · 10 kWc et +</div>
+        <ul>
+          <li>Dimensionnement selon vos process</li>
+          <li>Solutions hybrides évolutives</li>
+          <li>Suivi de production</li>
+          <li>Contrat de maintenance</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALCULATEUR -->
+  <section class="block wrap" id="calcul">
+    <span class="eyebrow">Estimation express</span>
+    <h2 class="title">Estimez votre installation en 30 secondes</h2>
+    <p class="section-intro">Entrez votre consommation et découvrez la puissance, le nombre de panneaux et l'économie estimée. Simulation indicative — à confirmer par une étude.</p>
+    <div class="calc-wrap">
+      <div>
+        <div class="field">
+          <label>Facture mensuelle moyenne <span class="hint">(FCFA/mois)</span></label>
+          <input type="number" id="facture" value="45000" min="0" step="1000">
+        </div>
+        <div class="field">
+          <label>Prix moyen du kWh <span class="hint">(FCFA/kWh, tarif CIE indicatif)</span></label>
+          <input type="number" id="prix" value="80" min="1" step="1">
+        </div>
+        <div class="field">
+          <label>Taux de couverture solaire visé</label>
+          <select id="couverture">
+            <option value="0.6">60 % — je réduis ma facture</option>
+            <option value="0.8" selected>80 % — bon équilibre</option>
+            <option value="0.95">95 % — quasi-autonomie</option>
+          </select>
+        </div>
+        <p class="disclaimer">⚠️ Productible retenu ~1 400 kWh/kWc/an à Abidjan. Résultats indicatifs — ils ne remplacent pas une étude sur site.</p>
+      </div>
+      <div class="results">
+        <div class="res-row"><span class="k">Consommation estimée</span><span class="v" id="rConso">—</span></div>
+        <div class="res-row"><span class="k">Puissance recommandée</span><span class="v big" id="rKwc">—</span></div>
+        <div class="res-row"><span class="k">Nombre de panneaux (~500 Wc)</span><span class="v" id="rPan">—</span></div>
+        <div class="res-row"><span class="k">Surface de toiture</span><span class="v" id="rSurf">—</span></div>
+        <div class="res-row"><span class="k">Production annuelle</span><span class="v" id="rProd">—</span></div>
+      </div>
+    </div>
+
+    <!-- Graphique production mensuelle -->
+    <div class="chart-card">
+      <h3>Production solaire mensuelle estimée</h3>
+      <p class="csub">Répartition sur l'année à Abidjan — plus forte en saison sèche (déc.–mars), plus faible pendant les saisons des pluies. Survolez une barre pour la valeur.</p>
+      <div id="chart" role="img" aria-label="Production mensuelle estimée en kWh"></div>
+    </div>
+
+    <!-- Comparatif des 3 configurations -->
+    <div class="compare">
+      <h3>Comparez les 3 configurations</h3>
+      <p class="csub">Même puissance, trois architectures. La colonne surlignée offre le meilleur retour sur investissement.</p>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>Indicateur</th><th id="hB1"></th><th id="hB2"></th><th id="hB3"></th></tr></thead>
+          <tbody id="cmpBody"></tbody>
+        </table>
+      </div>
+      <p class="note">💡 Les configurations avec batterie (B2, B3) coûtent plus cher et s'amortissent plus lentement : on les choisit pour le <strong>confort et la continuité</strong> (coupures, climatisation la nuit), pas pour le seul retour financier. VAN calculée sur 25 ans, taux d'actualisation 8 %.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="block wrap" id="contact">
+    <div class="contact">
+      <div>
+        <h2>Demandez votre devis gratuit</h2>
+        <p>Décrivez votre besoin, nous vous recontactons avec une étude personnalisée et un devis adapté à votre toiture et votre consommation à Abidjan.</p>
+        <div class="info">
+          <div>📍 Abidjan, Côte d'Ivoire</div>
+          <div>📞 +225 XX XX XX XX XX</div>
+          <div>✉️ contact@cordixia.com</div>
+          <div>🌐 cordixia.com</div>
+          <div>🕑 Lun–Sam · 8h–18h</div>
+        </div>
+      </div>
+      <form class="form-card" id="devisForm" novalidate>
+        <div class="field"><label for="nom">Nom complet</label><input type="text" id="nom" required></div>
+        <div class="field"><label for="tel">Téléphone</label><input type="tel" id="tel" required></div>
+        <div class="field"><label for="commune">Commune</label>
+          <select id="commune">
+            <option>Cocody</option><option>Plateau</option><option>Yopougon</option>
+            <option>Marcory</option><option>Treichville</option><option>Abobo</option>
+            <option>Adjamé</option><option>Koumassi</option><option>Port-Bouët</option>
+            <option>Bingerville</option><option>Autre</option>
+          </select>
+        </div>
+        <div class="field"><label for="msg">Votre projet</label><textarea id="msg" placeholder="Ex : villa à Cocody, facture ~60 000 FCFA/mois, coupures fréquentes…"></textarea></div>
+        <button type="submit" class="btn">Envoyer ma demande</button>
+        <p class="form-msg" id="formMsg">✅ Merci ! Votre demande a bien été enregistrée. Nous vous recontactons rapidement.</p>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot">
+      <div>© <span id="year"></span> Cordixia — Énergie solaire à Abidjan</div>
+      <div>Site de démonstration · chiffres indicatifs</div>
+    </div>
+  </footer>
+
+  <script>
+    // Année dynamique
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // --- Calculateur (aligné sur docs/modele-financier-pv.xlsx) ---
+    const PRODUCTIBLE = 1400;   // kWh/kWc/an à Abidjan
+    const WC_PAR_PANNEAU = 500; // Wc
+    const M2_PAR_KWC = 6.5;     // m²/kWc
+    const DEGR = 0.007;         // dégradation annuelle des modules
+    const INFL = 0.03;          // inflation du tarif électricité
+    const OM = 0.015;           // O&M annuel (% CAPEX)
+    const ACTU = 0.08;          // taux d'actualisation (VAN)
+    const DUREE = 25;           // ans
+
+    const CONFIGS = [
+      { id:'B1', nom:'B1 · Injection', sub:'sans batterie',      cost:700000,  auto:0.65, bat:0.00, ond:0.08 },
+      { id:'B2', nom:'B2 · Hybride',   sub:'avec batterie',      cost:1500000, auto:0.90, bat:0.30, ond:0.08 },
+      { id:'B3', nom:'B3 · Sur-mesure',sub:'batterie partielle', cost:1100000, auto:0.80, bat:0.15, ond:0.08 },
+    ];
+
+    // Répartition mensuelle de la production à Abidjan (normalisée dans le code)
+    const MOIS = ['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
+    const PART_RAW = [9.2, 9.0, 9.3, 8.6, 8.0, 7.2, 7.0, 7.4, 7.6, 8.1, 8.4, 9.2];
+    const SOMME_PART = PART_RAW.reduce((a,b)=>a+b,0);
+    const PART = PART_RAW.map(v => v / SOMME_PART);
+
+    const f = (n) => new Intl.NumberFormat('fr-FR').format(Math.round(n));
+
+    // Économie & rentabilité sur 25 ans pour une config donnée
+    function evalConfig(kwc, consoAn, prix, cfg) {
+      const capex = kwc * cfg.cost;
+      const prod1 = kwc * PRODUCTIBLE;
+      const auto1 = Math.min(prod1 * cfg.auto, consoAn);
+      const netAn1 = auto1 * prix - capex * OM;   // année 1, sans remplacement
+      let cumule = -capex, van = -capex, payback = null;
+      for (let n = 1; n <= DUREE; n++) {
+        const prod = kwc * PRODUCTIBLE * Math.pow(1 - DEGR, n - 1);
+        const tarif = prix * Math.pow(1 + INFL, n - 1);
+        const auto = Math.min(prod * cfg.auto, consoAn);
+        const eco = auto * tarif;
+        const om = capex * OM;
+        const rempl = (n === 10 ? capex * cfg.bat : 0) + (n === 12 ? capex * cfg.ond : 0);
+        const net = eco - om - rempl;
+        van += net / Math.pow(1 + ACTU, n);
+        const prev = cumule; cumule += net;
+        if (payback === null && prev < 0 && cumule >= 0) payback = n;
+      }
+      return { capex, netAn1, payback, van, cumule };
+    }
+
+    // Graphique SVG des productions mensuelles (série unique)
+    function buildChart(prodAn) {
+      const W = 720, H = 250, padL = 8, padR = 8, padT = 26, padB = 30;
+      const baseY = H - padB, n = 12, gap = 8;
+      const barW = (W - padL - padR - (n - 1) * gap) / n;
+      const vals = PART.map(p => p * prodAn);
+      const yMax = Math.max(...vals) || 1;
+      const scale = (baseY - padT) / yMax;
+      const peak = vals.indexOf(yMax);
+      let s = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">`;
+      vals.forEach((v, i) => {
+        const x = padL + i * (barW + gap);
+        const h = v * scale, y = baseY - h;
+        s += `<rect class="bar" x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${h.toFixed(1)}" rx="4">`
+           + `<title>${MOIS[i]} : ${f(v)} kWh</title></rect>`;
+        s += `<text class="mlabel" x="${(x + barW/2).toFixed(1)}" y="${H - 12}" text-anchor="middle">${MOIS[i]}</text>`;
+        if (i === peak) s += `<text class="vlabel" x="${(x + barW/2).toFixed(1)}" y="${(y - 7).toFixed(1)}" text-anchor="middle">${f(v)}</text>`;
+      });
+      s += `<line class="axis" x1="${padL}" y1="${baseY}" x2="${W - padR}" y2="${baseY}"/></svg>`;
+      document.getElementById('chart').innerHTML = s;
+    }
+
+    function calcul() {
+      const facture = Math.max(0, +document.getElementById('facture').value || 0);
+      const prix = Math.max(1, +document.getElementById('prix').value || 1);
+      const couv = +document.getElementById('couverture').value;
+
+      const consoAn = (facture / prix) * 12;
+      const kwc = (consoAn * couv) / PRODUCTIBLE;
+      const panneaux = Math.ceil((kwc * 1000) / WC_PAR_PANNEAU);
+      const prodAn = kwc * PRODUCTIBLE;
+
+      document.getElementById('rConso').textContent = f(consoAn) + ' kWh/an';
+      document.getElementById('rKwc').textContent = kwc.toFixed(1) + ' kWc';
+      document.getElementById('rPan').textContent = panneaux + ' panneaux';
+      document.getElementById('rSurf').textContent = f(kwc * M2_PAR_KWC) + ' m²';
+      document.getElementById('rProd').textContent = f(prodAn) + ' kWh/an';
+
+      buildChart(prodAn);
+
+      // Comparatif des 3 configs
+      const res = CONFIGS.map(c => ({ c, r: evalConfig(kwc, consoAn, prix, c) }));
+      const bestPay = Math.min(...res.map(x => x.r.payback ?? Infinity));
+      CONFIGS.forEach((c, i) => {
+        document.getElementById('h' + c.id).innerHTML =
+          `<span class="cfg-name">${c.nom}</span><span class="cfg-sub">${c.sub}</span>`;
+      });
+      const fpay = (p) => p ? p + ' ans' : '> 25 ans';
+      const fvan = (v) => (v >= 0 ? '' : '−') + f(Math.abs(v)) + ' FCFA';
+      const rows = [
+        ['CAPEX (investissement)', x => f(x.r.capex) + ' FCFA'],
+        ['Autoconsommation',       x => Math.round(x.c.auto * 100) + ' %'],
+        ['Économie nette an 1',    x => f(x.r.netAn1) + ' FCFA'],
+        ['Retour sur invest.',     x => fpay(x.r.payback)],
+        ['VAN sur 25 ans',         x => fvan(x.r.van)],
+      ];
+      let body = '';
+      rows.forEach(([label, fn]) => {
+        body += `<tr><th>${label}</th>`;
+        res.forEach(x => {
+          const best = (label === 'Retour sur invest.' && x.r.payback === bestPay) ? ' class="best"' : '';
+          body += `<td${best}>${fn(x)}</td>`;
+        });
+        body += '</tr>';
+      });
+      // Ligne recommandation
+      body += '<tr><th>Idéal pour</th>';
+      const reco = { B1:'Réduire la facture (8h–17h)', B2:'Clim la nuit + coupures', B3:'Clinique / pharmacie' };
+      const pill = { B1:'win', B2:'res', B3:'res' };
+      const pillTxt = { B1:'Meilleur ROI', B2:'Confort', B3:'Continuité' };
+      res.forEach(x => {
+        body += `<td><span class="pill ${pill[x.c.id]}">${pillTxt[x.c.id]}</span><br><span class="cfg-sub">${reco[x.c.id]}</span></td>`;
+      });
+      body += '</tr>';
+      document.getElementById('cmpBody').innerHTML = body;
+    }
+
+    ['facture','prix','couverture'].forEach(id =>
+      document.getElementById(id).addEventListener('input', calcul));
+    calcul();
+
+    // --- Formulaire (démo, pas d'envoi réseau) ---
+    document.getElementById('devisForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const nom = document.getElementById('nom').value.trim();
+      const tel = document.getElementById('tel').value.trim();
+      if (!nom || !tel) { alert('Merci de renseigner votre nom et votre téléphone.'); return; }
+      document.getElementById('formMsg').style.display = 'block';
+      this.reset();
+    });
+  </script>
+</body>
+</html>
