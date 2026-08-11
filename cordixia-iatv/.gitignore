@@ -1,0 +1,11 @@
+# Clés API et secrets
+.env
+
+# Fichiers audio générés
+static/audio/*.mp3
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/

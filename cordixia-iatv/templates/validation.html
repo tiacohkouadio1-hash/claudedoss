@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CORDIXIA IA TV — Validation</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0a0a1a;
+      color: #e0e0e0;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a1a3e, #0d0d2b);
+      border-bottom: 2px solid #3a86ff;
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    header .logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #3a86ff;
+    }
+
+    header .logo span { color: #ff6b35; }
+
+    header .date {
+      margin-left: auto;
+      font-size: 13px;
+      color: #888;
+      background: rgba(58,134,255,0.1);
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid #3a86ff33;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+
+    h2 {
+      font-size: 18px;
+      color: #aaa;
+      margin-bottom: 24px;
+      font-weight: 400;
+    }
+
+    h2 strong { color: #fff; }
+
+    .actu-card {
+      background: #111128;
+      border: 1px solid #222244;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+      position: relative;
+    }
+
+    .actu-card.selected {
+      border-color: #3a86ff;
+      background: #111a3e;
+    }
+
+    .actu-card.rejected {
+      border-color: #ff4444;
+      background: #1a0d0d;
+      opacity: 0.6;
+    }
+
+    .actu-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .actu-number {
+      font-size: 28px;
+      font-weight: 900;
+      color: #3a86ff33;
+      min-width: 36px;
+      line-height: 1;
+    }
+
+    .actu-content { flex: 1; }
+
+    .actu-titre {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .actu-source {
+      font-size: 11px;
+      color: #3a86ff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .actu-resume {
+      font-size: 14px;
+      color: #bbb;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .actu-impact {
+      font-size: 13px;
+      color: #ff6b35;
+      font-style: italic;
+    }
+
+    .actu-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .btn-valider, .btn-rejeter {
+      padding: 8px 18px;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-valider {
+      background: #3a86ff;
+      color: white;
+    }
+
+    .btn-valider:hover { background: #2270e0; }
+
+    .btn-rejeter {
+      background: transparent;
+      color: #ff4444;
+      border: 1px solid #ff4444;
+    }
+
+    .btn-rejeter:hover { background: #ff44441a; }
+
+    .angle-section {
+      background: #111128;
+      border: 1px solid #3a86ff33;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .angle-section label {
+      display: block;
+      font-size: 13px;
+      color: #3a86ff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .angle-section textarea {
+      width: 100%;
+      background: #0a0a1a;
+      border: 1px solid #333;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 14px;
+      padding: 12px;
+      resize: vertical;
+      min-height: 80px;
+      font-family: inherit;
+    }
+
+    .angle-section textarea:focus {
+      outline: none;
+      border-color: #3a86ff;
+    }
+
+    .btn-generer {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, #3a86ff, #ff6b35);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      text-transform: uppercase;
+    }
+
+    .btn-generer:hover { opacity: 0.9; }
+    .btn-generer:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding: 12px 18px;
+      background: #111128;
+      border-radius: 8px;
+      border: 1px solid #222244;
+    }
+
+    .status-bar .count {
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    .status-bar .count strong { color: #3a86ff; }
+
+    .spinner { display: none; text-align: center; padding: 24px; color: #3a86ff; }
+
+    .script-output {
+      display: none;
+      background: #111128;
+      border: 1px solid #3a86ff;
+      border-radius: 12px;
+      padding: 28px;
+      margin-top: 24px;
+    }
+
+    .script-output h3 {
+      color: #3a86ff;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .script-output pre {
+      white-space: pre-wrap;
+      font-family: inherit;
+      font-size: 15px;
+      line-height: 1.8;
+      color: #e0e0e0;
+    }
+
+    .script-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .btn-copy, .btn-download {
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .btn-copy { background: #3a86ff; color: white; }
+    .btn-download { background: #ff6b35; color: white; text-decoration: none; display: inline-block; }
+    .btn-voix { background: #06d6a0; color: #0a0a1a; font-weight: 700; width: 100%; margin-top: 16px; }
+    .btn-voix:hover { background: #05b88a; }
+    .btn-voix:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .presentateur-section {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid #222244;
+    }
+
+    .presentateur-section > label {
+      display: block;
+      font-size: 13px;
+      color: #06d6a0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    .presentateur-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .presentateur-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #0a0a1a;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 14px 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .presentateur-card:hover { border-color: #06d6a0aa; }
+
+    .presentateur-card.active {
+      border-color: #06d6a0;
+      background: #06d6a00d;
+    }
+
+    .presentateur-radio {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid #555;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .presentateur-card.active .presentateur-radio {
+      border-color: #06d6a0;
+    }
+
+    .presentateur-card.active .presentateur-radio::after {
+      content: '';
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #06d6a0;
+    }
+
+    .presentateur-info { flex: 1; }
+
+    .presentateur-nom {
+      font-size: 14px;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .presentateur-genre {
+      font-size: 11px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-apercu {
+      background: transparent;
+      border: 1px solid #06d6a0;
+      color: #06d6a0;
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .btn-apercu:hover { background: #06d6a01a; }
+    .btn-apercu:disabled { opacity: 0.4; cursor: wait; }
+
+    .apercu-player {
+      width: 100%;
+      margin-top: 10px;
+      height: 36px;
+    }
+
+    .voix-output {
+      display: none;
+      background: #111128;
+      border: 1px solid #06d6a0;
+      border-radius: 12px;
+      padding: 28px;
+      margin-top: 24px;
+    }
+
+    .voix-output h3 {
+      color: #06d6a0;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .voix-output #voix-message {
+      font-size: 14px;
+      color: #bbb;
+      line-height: 1.6;
+    }
+
+    .voix-output .demo-warning {
+      color: #ffd166;
+      font-size: 13px;
+      padding: 12px;
+      background: #ffd1660d;
+      border-radius: 8px;
+      border: 1px solid #ffd16633;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">CORDIXIA <span>IA TV</span></div>
+  <div class="date" id="date-display"></div>
+</header>
+
+<div class="container">
+  <h2><strong>Étape 2.5 — Validation éditoriale</strong> &nbsp;·&nbsp; 5 minutes max</h2>
+
+  <div class="status-bar">
+    <div class="count">Actus sélectionnées : <strong id="count-selected">5</strong> / 5</div>
+    <div style="font-size:12px; color:#666;">Valide ou rejette chaque actu, puis génère le script.</div>
+  </div>
+
+  <div id="actus-container"></div>
+
+  <div class="angle-section">
+    <label>Ton angle éditorial du jour (optionnel)</label>
+    <textarea id="angle" placeholder="Ex: Mettre en avant l'impact pour les entrepreneurs africains, ou le lien avec le BTP..."></textarea>
+  </div>
+
+  <button class="btn-generer" id="btn-generer" onclick="genererScript()">
+    Générer le script JT
+  </button>
+
+  <div class="spinner" id="spinner">
+    Rédaction du script en cours par Claude...
+  </div>
+
+  <div class="script-output" id="script-output">
+    <h3>Script CORDIXIA IA TV — Prêt pour ElevenLabs</h3>
+    <pre id="script-text"></pre>
+    <div class="script-actions">
+      <button class="btn-copy" onclick="copierScript()">Copier le script</button>
+      <button class="btn-download" onclick="telechargerScript()">Télécharger .txt</button>
+    </div>
+
+    <div class="presentateur-section">
+      <label>🎙️ Choisis ton présentateur</label>
+      <div class="presentateur-list" id="presentateur-list"></div>
+      <button class="btn-voix" id="btn-voix" onclick="genererVoix()" disabled>
+        Générer la voix complète avec ce présentateur
+      </button>
+    </div>
+  </div>
+
+  <div class="spinner" id="spinner-voix">
+    Génération de la voix par ElevenLabs...
+  </div>
+
+  <div class="voix-output" id="voix-output">
+    <h3>🎙️ Voix du présentateur — CORDIXIA IA TV</h3>
+    <div id="voix-message"></div>
+    <audio id="audio-player" controls style="width:100%; margin-top:16px; display:none;"></audio>
+    <div class="script-actions" id="voix-actions" style="display:none;">
+      <a class="btn-download" id="btn-download-audio" download>Télécharger l'audio .mp3</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  let actus = [];
+  let selectedIds = new Set();
+
+  document.getElementById('date-display').textContent = new Date().toLocaleDateString('fr-FR', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+
+  async function chargerActus() {
+    const res = await fetch('/api/actus');
+    actus = await res.json();
+    selectedIds = new Set(actus.map((_, i) => i));
+    renderActus();
+  }
+
+  function renderActus() {
+    const container = document.getElementById('actus-container');
+    container.innerHTML = actus.map((actu, i) => `
+      <div class="actu-card selected" id="card-${i}">
+        <div class="actu-header">
+          <div class="actu-number">${i + 1}</div>
+          <div class="actu-content">
+            <div class="actu-source">${actu.source}</div>
+            <div class="actu-titre">${actu.titre}</div>
+            <div class="actu-resume">${actu.resume}</div>
+            <div class="actu-impact">Impact : ${actu.impact}</div>
+          </div>
+        </div>
+        <div class="actu-actions">
+          <button class="btn-valider" onclick="valider(${i})">✅ Valider</button>
+          <button class="btn-rejeter" onclick="rejeter(${i})">❌ Rejeter</button>
+        </div>
+      </div>
+    `).join('');
+    updateCount();
+  }
+
+  function valider(i) {
+    selectedIds.add(i);
+    document.getElementById(`card-${i}`).className = 'actu-card selected';
+    updateCount();
+  }
+
+  function rejeter(i) {
+    selectedIds.delete(i);
+    document.getElementById(`card-${i}`).className = 'actu-card rejected';
+    updateCount();
+  }
+
+  function updateCount() {
+    document.getElementById('count-selected').textContent = selectedIds.size;
+    document.getElementById('btn-generer').disabled = selectedIds.size === 0;
+  }
+
+  let presentateurs = [];
+  let voixSelectionnee = null;
+
+  async function genererScript() {
+    const actusValidees = actus.filter((_, i) => selectedIds.has(i));
+    const angle = document.getElementById('angle').value;
+
+    document.getElementById('spinner').style.display = 'block';
+    document.getElementById('btn-generer').disabled = true;
+    document.getElementById('script-output').style.display = 'none';
+
+    const res = await fetch('/api/generer-script', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ actus: actusValidees, angle })
+    });
+
+    const data = await res.json();
+    document.getElementById('spinner').style.display = 'none';
+    document.getElementById('btn-generer').disabled = false;
+    document.getElementById('script-text').textContent = data.script;
+    document.getElementById('script-output').style.display = 'block';
+
+    chargerPresentateurs();
+  }
+
+  async function chargerPresentateurs() {
+    if (presentateurs.length === 0) {
+      const res = await fetch('/api/voix-disponibles');
+      presentateurs = await res.json();
+    }
+    renderPresentateurs();
+  }
+
+  function renderPresentateurs() {
+    const list = document.getElementById('presentateur-list');
+    list.innerHTML = presentateurs.map((p, i) => `
+      <div>
+        <div class="presentateur-card" id="pres-${i}" onclick="choisirVoix(${i})">
+          <div class="presentateur-radio"></div>
+          <div class="presentateur-info">
+            <div class="presentateur-nom">${p.nom}</div>
+            ${p.genre ? `<div class="presentateur-genre">${p.genre}</div>` : ''}
+          </div>
+          <button class="btn-apercu" id="apercu-btn-${i}" onclick="event.stopPropagation(); ecouterApercu(${i})">
+            ▶ Écouter un extrait
+          </button>
+        </div>
+        <audio class="apercu-player" id="apercu-player-${i}" controls style="display:none;"></audio>
+      </div>
+    `).join('');
+  }
+
+  function choisirVoix(i) {
+    voixSelectionnee = presentateurs[i].id;
+    document.querySelectorAll('.presentateur-card').forEach(c => c.classList.remove('active'));
+    document.getElementById(`pres-${i}`).classList.add('active');
+    document.getElementById('btn-voix').disabled = false;
+  }
+
+  async function ecouterApercu(i) {
+    const script = document.getElementById('script-text').textContent;
+    const btn = document.getElementById(`apercu-btn-${i}`);
+    const player = document.getElementById(`apercu-player-${i}`);
+
+    btn.disabled = true;
+    btn.textContent = '⏳ Génération...';
+
+    const res = await fetch('/api/generer-voix', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ script, voice_id: presentateurs[i].id, apercu: true })
+    });
+
+    const data = await res.json();
+    btn.disabled = false;
+
+    if (data.ok && data.fichier) {
+      btn.textContent = '▶ Réécouter';
+      player.src = data.fichier + '?t=' + Date.now();
+      player.style.display = 'block';
+      player.play();
+      // Choisit automatiquement cette voix après écoute
+      choisirVoix(i);
+    } else {
+      btn.textContent = '⚠️ Clé API requise';
+      alert(data.message);
+    }
+  }
+
+  function copierScript() {
+    const texte = document.getElementById('script-text').textContent;
+    navigator.clipboard.writeText(texte);
+    alert('Script copié ! Colle-le dans ElevenLabs.');
+  }
+
+  function telechargerScript() {
+    const texte = document.getElementById('script-text').textContent;
+    const date = new Date().toISOString().split('T')[0];
+    const blob = new Blob([texte], { type: 'text/plain' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `cordixia-iatv-${date}.txt`;
+    a.click();
+  }
+
+  async function genererVoix() {
+    const script = document.getElementById('script-text').textContent;
+
+    document.getElementById('spinner-voix').style.display = 'block';
+    document.getElementById('voix-output').style.display = 'none';
+
+    const res = await fetch('/api/generer-voix', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ script, voice_id: voixSelectionnee })
+    });
+
+    const data = await res.json();
+    document.getElementById('spinner-voix').style.display = 'none';
+    document.getElementById('voix-output').style.display = 'block';
+
+    const messageEl = document.getElementById('voix-message');
+    const player = document.getElementById('audio-player');
+    const actions = document.getElementById('voix-actions');
+
+    if (data.ok && data.fichier) {
+      messageEl.innerHTML = '✅ ' + data.message;
+      player.src = data.fichier;
+      player.style.display = 'block';
+      actions.style.display = 'flex';
+      document.getElementById('btn-download-audio').href = data.fichier;
+    } else {
+      messageEl.innerHTML = '<div class="demo-warning">⚠️ ' + data.message +
+        '<br><br>Tu peux copier le script ci-dessus et le coller manuellement dans ElevenLabs en attendant.</div>';
+      player.style.display = 'none';
+      actions.style.display = 'none';
+    }
+  }
+
+  chargerActus();
+</script>
+
+</body>
+</html>
