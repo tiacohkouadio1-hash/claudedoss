@@ -8,6 +8,7 @@ commerciaux et techniques :
 | Livrable | Fichier | Description |
 |---|---|---|
 | 🖥️ **Landing page** | [`index.html`](index.html) | Site vitrine autonome (HTML/CSS/JS, sans dépendance) présentant une offre d'installation solaire, avec un **calculateur d'estimation** intégré et un formulaire de contact. |
+| 🌐 **Pages du site** | [`audit.html`](audit.html) · [`maintenance.html`](maintenance.html) · [`a-propos.html`](a-propos.html) | Site multi-pages : audit énergétique obligatoire (arrêté 2024), formules de maintenance + intervention 48 h, méthode et équipe. Styles et scripts partagés dans `assets/`. |
 | 🧾 **Générateur de devis** | [`devis.html`](devis.html) | Devis personnalisé à partir de la facture : prix détaillé poste par poste, **gains à court et long terme**, économies cumulées sur 25 ans, imprimable en PDF. |
 | 📄 **Étude technique** | [`docs/etude-photovoltaique-abidjan.md`](docs/etude-photovoltaique-abidjan.md) | Dossier sur le potentiel PV à Abidjan : ressource solaire, réglementation, dimensionnement, coûts et rentabilité. |
 | 📊 **Business plan** | [`docs/business-plan.md`](docs/business-plan.md) | Modèle économique : audit énergétique (cadre 2024), configurations PV, funnel commercial, digitalisation. |
@@ -57,7 +58,13 @@ fictives (démonstration).
 
 ```
 /
-├── index.html                              # Landing page (vitrine + calculateur)
+├── index.html                              # Accueil (vitrine + calculateur + contact)
+├── audit.html                              # Page Audit énergétique
+├── maintenance.html                        # Page Maintenance & intervention 48 h
+├── a-propos.html                           # Page À propos (méthode, équipe)
+├── assets/
+│   ├── site.css                            # Styles partagés des pages
+│   └── site.js                             # Menu mobile + année
 ├── devis.html                              # Générateur de devis (imprimable PDF)
 ├── chantier.html                           # Rapport de chantier vocal (prototype)
 ├── docs/
