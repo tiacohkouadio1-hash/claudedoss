@@ -106,7 +106,7 @@
     @media (max-width: 720px) { .stats { grid-template-columns: repeat(2, 1fr); } }
 
     /* Sections */
-    section.block { padding-top: 72px; padding-bottom: 72px; }
+    section.block { padding: 72px 0; }
     .eyebrow { color: var(--sun-deep); font-weight: 700; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; }
     h2.title { font-size: clamp(1.6rem, 3.4vw, 2.3rem); letter-spacing: -0.02em; margin-top: 8px; }
     .section-intro { color: var(--muted); max-width: 60ch; margin-top: 12px; }
@@ -192,9 +192,6 @@
     .form-msg { margin-top: 14px; font-size: 14px; font-weight: 600; color: var(--sky-deep); display: none; }
 
     footer { border-top: 1px solid var(--line); padding: 34px 0; margin-top: 20px; color: var(--muted); font-size: 14px; }
-    .foot-links { display: flex; gap: 18px; flex-wrap: wrap; }
-    .foot-links a { text-decoration: none; }
-    .foot-links a:hover { color: var(--ink); }
     .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; align-items: center; }
   </style>
 </head>
@@ -203,10 +200,8 @@
     <div class="wrap nav">
       <div class="brand"><span class="mark">☀️</span> Cordixia</div>
       <nav class="nav-links">
+        <a href="#avantages">Avantages</a>
         <a href="#offres">Offres</a>
-        <a href="audit.html">Audit énergétique</a>
-        <a href="maintenance.html">Maintenance</a>
-        <a href="a-propos.html">À propos</a>
         <a href="#calcul">Estimation</a>
         <a href="#contact" class="btn">Devis gratuit</a>
       </nav>
@@ -286,7 +281,7 @@
           <li>Dimensionnement selon vos process</li>
           <li>Solutions hybrides évolutives</li>
           <li>Suivi de production</li>
-          <li><a href="maintenance.html">Contrat de maintenance</a></li>
+          <li>Contrat de maintenance</li>
         </ul>
       </div>
     </div>
@@ -382,12 +377,6 @@
   <footer>
     <div class="wrap foot">
       <div>© <span id="year"></span> Cordixia — Énergie solaire à Abidjan</div>
-      <div class="foot-links">
-        <a href="audit.html">Audit énergétique</a>
-        <a href="maintenance.html">Maintenance</a>
-        <a href="a-propos.html">À propos</a>
-        <a href="devis.html">Devis chiffré</a>
-      </div>
       <div>Site de démonstration · chiffres indicatifs</div>
     </div>
   </footer>
