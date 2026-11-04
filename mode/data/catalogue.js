@@ -5,22 +5,21 @@
    • Ajouter une collection → ajouter un bloc dans `collections`
    • Annoncer un pop-up     → ajouter un bloc dans `popups`
    Les photos vont dans le dossier mode/images/ (voir mode/README.md).
-   Les pièces ci-dessous sont illustrées par vos croquis : remplacez noms, tailles,
-   statuts et photos par les vraies informations.
+   Les pièces ci-dessous viennent de vos photos : vérifiez noms, tailles,
+   statuts et matières (« À préciser » = information manquante).
    ========================================================================== */
 
 window.CATALOGUE = {
 
-  /* --- Identité de la marque ------------------------------------------- */
+  /* --- Identité de la marque de mode (le nom de la maison est dans site.js) ------------------------------------------- */
   marque: {
-    nom: "Nom de la marque",
+    nom: "IYAM Paris",
     signature: "Créations couture & pièces de défilé",
-    accroche: "Wax, velours et tulle : des pièces de défilé et des prototypes pensés comme des œuvres, en exemplaire unique.",
-    presentation: "Chaque pièce présentée ici a été imaginée, coupée et assemblée à l'atelier. La plupart existent en un seul exemplaire et dans une seule taille. Certaines peuvent être reproduites sur commande, à vos mesures.",
-    email: "contact@exemple.com",
-    instagram: "https://instagram.com/votre-compte",
+    accroche: "Wax, velours, tulle et plumes : des pièces de défilé et des prototypes pensés comme des œuvres, en exemplaire unique.",
+    presentation: "Chaque pièce présentée ici a été imaginée, coupée et assemblée à l'atelier, à Paris. La plupart existent en un seul exemplaire et dans une seule taille. Certaines peuvent être reproduites sur commande, à vos mesures.",
+    email: "iyam.deco@gmail.com",                 // ← à remplacer si la mode a sa propre adresse
+    instagram: "https://instagram.com/iyam_deco", // ← idem pour le compte Instagram mode
     ville: "Paris"
-    // logo: "logo.png"   ← décommentez et placez le fichier dans images/ pour remplacer le nom écrit
   },
 
   /* --- Réglages d'affichage -------------------------------------------- */
@@ -46,10 +45,10 @@ window.CATALOGUE = {
      visible: false → la collection et ses pièces restent cachées
      (pratique pour préparer une collection avant son lancement).        */
   collections: [
-    { id: "defile-2025", titre: "Défilé 2025",      famille: "creation",      annee: 2025, visible: true,
-      description: "Les silhouettes présentées lors du défilé 2025." },
-    { id: "prototypes",  titre: "Prototypes",       famille: "creation",      annee: 2024, visible: true,
-      description: "Recherches de formes, de matières et de construction." },
+    { id: "defile",      titre: "Pièces de défilé", famille: "creation",      annee: null, visible: true,
+      description: "Les silhouettes créées pour le défilé : wax, tulle, velours et plumes." },
+    { id: "creations",   titre: "Créations",        famille: "creation",      annee: null, visible: true,
+      description: "Prototypes et pièces uniques, entre couture et vestiaire de tous les jours." },
     { id: "capsule-01",  titre: "Capsule 01",       famille: "pret-a-porter", annee: 2026, visible: false,
       description: "Première capsule de prêt-à-porter — bientôt disponible." }
   ],
@@ -65,77 +64,50 @@ window.CATALOGUE = {
      enAvant     : true → mise en avant sur la page d'accueil                */
   pieces: [
     {
-      ref: "DF-01", nom: "Robe à traîne velours", collection: "defile-2025",
-      categorie: "Robe", statut: "archive", taille: "36",
-      matieres: ["Velours vert", "Plumes orange", "Wax"],
-      description: "Robe longue en velours vert, poignets et ourlet de traîne bordés de plumes orange.",
-      photos: ["croquis-robe-traine-verte.jpg"], prix: null, enAvant: true
+      ref: "DF-01", nom: "Ensemble wax, velours & plumes", collection: "defile",
+      categorie: "Ensemble", statut: "archive", taille: "À préciser",
+      matieres: ["Wax orange", "Tulle orange", "Velours vert", "Plumes"],
+      description: "Bustier en velours vert rehaussé de plumes orange, jupe à volants superposés en wax et longue traîne de tulle.",
+      photos: ["mode-wax-plumes-face.jpg", "mode-wax-plumes-escalier.jpg", "mode-wax-plumes-miroir.jpg", "mode-wax-plumes-escalier-2.jpg", "mode-wax-plumes-escalier-3.jpg"],
+      prix: null, enAvant: true
     },
     {
-      ref: "DF-02", nom: "Robe sirène wax", collection: "defile-2025",
-      categorie: "Robe", statut: "disponible", taille: "38",
-      matieres: ["Wax orange", "Doublure satin"],
-      description: "Fourreau sirène en wax orange, col drapé et évasé en corolle au bas de la jambe.",
-      photos: ["croquis-robe-sirene-orange.jpg"], prix: null, enAvant: true
+      ref: "CR-01", nom: "Ensemble lin passepoilé", collection: "creations",
+      categorie: "Ensemble", statut: "disponible", taille: "À préciser",
+      matieres: ["Lin gris", "Passepoil orange"],
+      description: "Veste kimono à manches courtes et pantalon droit en lin, soulignés d'un passepoil orange.",
+      photos: ["mode-lin-passepoil-face.jpg", "mode-lin-passepoil-profil.jpg"], prix: null, enAvant: true
     },
     {
-      ref: "DF-03", nom: "Bustier vert & volute", collection: "defile-2025",
-      categorie: "Haut", statut: "archive", taille: "S",
-      matieres: ["Velours vert", "Organza orange"],
-      description: "Bustier plongeant en velours, épaule enveloppée d'une volute d'organza dégradé.",
-      photos: ["croquis-bustier-vert.jpg"], prix: null, enAvant: true
+      ref: "CR-02", nom: "Gilet wax", collection: "creations",
+      categorie: "Gilet", statut: "disponible", taille: "À préciser",
+      matieres: ["Wax orange"],
+      description: "Gilet ajusté sans manches en wax orange, à porter sur un col roulé.",
+      photos: ["mode-gilet-wax.jpg"], prix: null, enAvant: true
     },
     {
-      ref: "DF-04", nom: "Cape à épaules structurées", collection: "defile-2025",
-      categorie: "Cape", statut: "sur-commande", taille: "Unique",
-      matieres: ["Wax orange", "Velours vert"],
-      description: "Cape longue à épaulettes architecturées, col en velours vert. Reproductible sur commande.",
-      photos: ["croquis-cape-orange.jpg"], prix: null, enAvant: true
+      ref: "CR-03", nom: "Bustier wax", collection: "creations",
+      categorie: "Haut", statut: "disponible", taille: "À préciser",
+      matieres: ["Wax orange"],
+      description: "Bustier drapé en wax, à porter seul ou par-dessus un manteau comme une ceinture-corset.",
+      photos: ["mode-bustier-wax.jpg"], prix: null, enAvant: true
     },
     {
-      ref: "DF-05", nom: "Redingote wax perlée", collection: "defile-2025",
-      categorie: "Manteau", statut: "disponible", taille: "M",
-      matieres: ["Wax orange", "Tissu perlé vert"],
-      description: "Redingote longue fendue, revers et poignets en tissu perlé vert.",
-      photos: ["croquis-redingote-wax.jpg", "croquis-manteau-wax.jpg"], prix: null, enAvant: true
-    },
-    {
-      ref: "PR-01", nom: "Tunique bicolore", collection: "prototypes",
-      categorie: "Haut", statut: "reservee", taille: "M",
-      matieres: ["Wax orange", "Velours vert"],
-      description: "Prototype de tunique asymétrique, moitié wax, moitié velours.",
-      photos: ["croquis-tunique-bicolore.jpg"], prix: null, enAvant: false
-    },
-    {
-      ref: "PR-02", nom: "Chemise tulle croisé", collection: "prototypes",
-      categorie: "Ensemble", statut: "disponible", taille: "L",
-      matieres: ["Coton blanc", "Tulle vert", "Wax orange"],
-      description: "Chemise blanche ceinturée d'un croisé de tulle vert et wax, pantalon droit orange.",
-      photos: ["croquis-chemise-tulle.jpg"], prix: null, enAvant: false
-    },
-    {
-      ref: "PR-03", nom: "Ensemble cargo", collection: "prototypes",
-      categorie: "Ensemble", statut: "vendue", taille: "L",
-      matieres: ["Toile", "Poches en wax orange"],
-      description: "Étude streetwear : cargo ample, poches plaquées en wax.",
-      photos: ["croquis-ensemble-cargo.jpg"], prix: null, enAvant: false
-    },
-    {
-      ref: "PR-04", nom: "Veste velours", collection: "prototypes",
-      categorie: "Veste", statut: "archive", taille: "M",
-      matieres: ["Velours vert", "Wax"],
-      description: "Prototype de veste courte en velours, poche passepoilée en wax.",
-      photos: ["croquis-veste-velours.jpg"], prix: null, enAvant: false
+      ref: "CR-04", nom: "Robe bustier camel", collection: "creations",
+      categorie: "Robe", statut: "disponible", taille: "À préciser",
+      matieres: ["Tissu effet python camel"],
+      description: "Robe courte à bonnets structurés et fente sur la cuisse, en tissu effet python.",
+      photos: ["mode-robe-bustier-camel.jpg"], prix: null, enAvant: true
     },
 
-    /* Exemple de modèle PRÊT-À-PORTER (collection masquée pour l'instant) */
+    /* Exemple de modèle PRÊT-À-PORTER (collection masquée tant que visible: false) */
     {
-      ref: "CA01-01", nom: "Chemise wax (exemple)", collection: "capsule-01",
-      categorie: "Chemise", statut: "bientot",
+      ref: "CA01-01", nom: "Gilet wax (prêt-à-porter)", collection: "capsule-01",
+      categorie: "Gilet", statut: "bientot",
       tailles: [ { taille: "XS", stock: 2 }, { taille: "S", stock: 4 }, { taille: "M", stock: 4 }, { taille: "L", stock: 1 }, { taille: "XL", stock: 0 } ],
-      matieres: ["Coton", "Wax"],
-      description: "Exemple de modèle décliné en plusieurs tailles. Passez la collection capsule-01 en visible: true pour le voir.",
-      photos: ["croquis-chemise-tulle.jpg"], prix: 180, enAvant: false
+      matieres: ["Wax"],
+      description: "Exemple : le gilet wax décliné en plusieurs tailles. Passez capsule-01 en visible: true pour le voir.",
+      photos: ["mode-gilet-wax.jpg"], prix: 120, enAvant: false
     }
   ],
 

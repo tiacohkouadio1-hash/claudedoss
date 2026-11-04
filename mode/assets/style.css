@@ -34,8 +34,11 @@ button { font: inherit; color: inherit; }
 .entete.plein { background: color-mix(in srgb, var(--papier) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--trait); }
 .entete.sur-image:not(.plein) { color: #fff; }
 .logo { text-decoration: none; line-height: 1; display: flex; flex-direction: column; align-items: flex-start; }
-.logo .petit { font-size: 10px; letter-spacing: .4em; text-transform: uppercase; margin-left: 4px; }
-.logo .script { font-family: var(--f-script); font-size: clamp(30px, 4vw, 42px); line-height: .95; }
+.logo-nom { display: inline-flex; align-items: flex-end; font-family: var(--f-texte); font-weight: 300; font-size: clamp(30px, 3.4vw, 40px); letter-spacing: .14em; line-height: .8; }
+.logo-nom .ciseaux { height: .86em; width: auto; color: #c8322a; margin: 0 .1em 0 -.04em; }
+.logo-ville { display: block; align-self: stretch; border-top: 1px solid currentColor; margin-top: 6px; padding-top: 4px; font-size: 11px; font-weight: 600; letter-spacing: .32em; text-align: center; }
+.grand-logo { font-size: clamp(64px, 12vw, 140px); }
+.pied .grand.logo { display: inline-flex; font-family: inherit; }
 .logo img { height: 46px; width: auto; }
 .burger { background: none; border: 0; cursor: pointer; width: 46px; height: 34px; display: grid; align-content: space-between; padding: 6px 0; }
 .burger span { display: block; height: 1.5px; background: currentColor; }
@@ -100,7 +103,11 @@ h2.titre { font-family: var(--f-titre); text-transform: uppercase; font-weight: 
 .carte .ref { color: var(--gris); font-size: 12px; letter-spacing: .12em; white-space: nowrap; }
 .carte .sous { color: var(--gris); font-size: 13.5px; margin-top: 2px; }
 .carte.indispo .visuel img { filter: grayscale(.55); opacity: .82; }
-.sans-photo { width: 100%; height: 100%; display: grid; place-items: center; background: linear-gradient(150deg, var(--wax) 0 50%, var(--velours) 50% 100%); color: #fff; font-family: var(--f-titre); font-size: 2rem; letter-spacing: .06em; }
+.sans-photo { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding: 18px; padding-top: 52px; color: #fff; background: var(--velours); }
+.sans-photo.wax { background: var(--wax); }
+.sans-photo.encre { background: var(--encre); }
+.sans-photo strong { font-family: var(--f-titre); text-transform: uppercase; font-weight: 500; font-size: clamp(22px, 3vw, 38px); line-height: 1; }
+.sans-photo .caps { font-size: 10.5px; opacity: .75; }
 
 /* Pastilles de statut */
 .statut { position: absolute; top: 12px; left: 12px; z-index: 2; background: var(--papier); color: var(--encre); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; padding: 5px 10px; }
@@ -196,4 +203,60 @@ h2.titre { font-family: var(--f-titre); text-transform: uppercase; font-weight: 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
   .apparait { opacity: 1; transform: none; }
+}
+
+/* ---------- Contrôles complémentaires ---------- */
+.bouton.contour-clair { background: transparent; color: #fff; border-color: #fff; }
+.bouton.contour-clair:hover { background: #fff; color: var(--encre); }
+.legende .infos strong { font-weight: 700; }
+.famille .caps { opacity: .9; }
+
+/* ---------- Polaroïds (décoration) ---------- */
+.polaroids { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; }
+@media (max-width: 1000px) { .polaroids { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 560px) { .polaroids { grid-template-columns: repeat(2, 1fr); gap: 14px; } }
+.polaroid { background: #fff; padding: 10px 10px 0; box-shadow: 0 8px 24px rgba(60,45,20,.12); transition: transform .3s; }
+.polaroid:nth-child(odd) { transform: rotate(-1.5deg); }
+.polaroid:nth-child(even) { transform: rotate(1.2deg); }
+.polaroid:hover { transform: rotate(0) translateY(-4px); }
+.polaroid.apparait:not(.vu) { opacity: 0; }
+.polaroid img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.polaroid figcaption { font-family: var(--f-script); font-size: 26px; text-align: center; padding: 6px 0 10px; color: #4a3b22; line-height: 1.1; }
+
+/* ---------- Thème IYAM Décoration : crème, olive, doré ---------- */
+body.theme-deco {
+  --papier: #f8f2e8; --creme: #efe5d4; --encre: #3a2e1c; --gris: #7a6a52; --trait: #e0d3bd;
+  --wax: #b08a4a; --wax-clair: #e3c58a; --velours: #6b6a3c; --velours-clair: #8a8a55;
+  --f-titre: "Cormorant Garamond", Georgia, serif;
+}
+.theme-deco h1, .theme-deco h2.titre, .theme-deco .manifeste { text-transform: uppercase; letter-spacing: .04em; font-weight: 500; }
+.legende-deco h1 { max-width: none; font-size: clamp(44px, 8vw, 104px); }
+.legende-deco h1 .script { display: block; font-family: var(--f-script); text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--wax-clair); font-size: .9em; line-height: 1.1; }
+.sous-heros { text-transform: uppercase; letter-spacing: .2em; font-size: 14px; margin-top: 8px; }
+.devise { font-family: var(--f-script); font-size: clamp(32px, 5vw, 56px); line-height: 1.2; text-align: center; max-width: 22ch; margin: 0 auto; color: var(--velours); }
+.prestations { list-style: none; display: grid; gap: 0; margin-top: 30px; }
+.prestations li { display: grid; grid-template-columns: 60px 1fr; gap: 18px; padding: 22px 0; border-top: 1px solid var(--trait); }
+.prestations .num { font-family: var(--f-titre); font-size: 28px; color: var(--wax); line-height: 1; }
+.prestations h3 { text-transform: uppercase; letter-spacing: .1em; font-size: 15px; }
+.prestations p { color: var(--gris); margin-top: 4px; }
+.pourquoi { background: var(--velours); color: #fff; padding: clamp(28px, 4vw, 44px); }
+.pourquoi h3 { font-family: var(--f-script); font-weight: 400; font-size: 40px; line-height: 1.1; }
+.pourquoi ul { list-style: none; margin-top: 18px; display: grid; gap: 12px; font-size: 17px; }
+.pourquoi li::before { content: "✓"; color: var(--wax-clair); margin-right: 12px; font-weight: 700; }
+.pourquoi img { margin-top: 24px; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.valeurs { display: flex; justify-content: center; gap: clamp(20px, 6vw, 70px); flex-wrap: wrap; margin-top: 34px; }
+.valeurs span { text-transform: uppercase; letter-spacing: .24em; font-size: 13px; color: var(--wax); }
+.valeurs span::before { content: "✦ "; }
+.galerie-deco { columns: 3 260px; column-gap: 18px; }
+.galerie-deco figure { break-inside: avoid; margin-bottom: 18px; }
+.galerie-deco img { width: 100%; }
+.galerie-deco figcaption { color: var(--gris); margin-top: 8px; font-size: 11px; }
+.contact-univers { padding: 28px 0; border-top: 1px solid var(--trait); }
+.contact-univers h3 { font-family: var(--f-titre); text-transform: uppercase; font-size: 40px; line-height: 1; margin-top: 6px; }
+
+/* Retouches : cadrage des photos portées et filigrane allégé sur téléphone */
+.carte .visuel img, .famille img, .galerie .principale img { object-position: center 22%; }
+@media (max-width: 700px) {
+  .fantomes span:nth-child(n+3) { display: none; }
+  .fantomes span { font-size: 30px; }
 }

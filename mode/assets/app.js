@@ -6,7 +6,7 @@
    ========================================================================== */
 (function () {
   "use strict";
-  var C = window.CATALOGUE;
+  var C = window.CATALOGUE, S = window.SITE, D = window.DECORATION;
   var M = C.marque, R = C.reglages;
   var PAGE = document.body.getAttribute("data-page");
 
@@ -64,10 +64,15 @@
   }
   function visuel(p, classe) {
     var ph = p.photos || [];
-    if (!ph.length) return '<div class="sans-photo">' + esc(p.ref) + "</div>";
+    if (!ph.length) return sansPhoto(p);
     var h = '<img src="' + esc(img(ph[0])) + '" alt="' + esc(p.nom) + '" loading="lazy">';
     if (ph[1] && classe !== "simple") h += '<img class="second" src="' + esc(img(ph[1])) + '" alt="" loading="lazy">';
     return h;
+  }
+  // En attendant les photos : un aplat aux couleurs de la marque, avec le nom de la pièce
+  function sansPhoto(p) {
+    var teintes = ["wax", "velours", "encre"];
+    return '<div class="sans-photo ' + teintes[(p._i || 0) % 3] + '"><span class="caps">' + esc(p.ref) + "</span><strong>" + esc(p.nom) + '</strong><span class="caps">Photo à venir</span></div>';
   }
   function carte(p) {
     var indispo = p.statut === "vendue" || p.statut === "reservee";
@@ -85,16 +90,23 @@
   }
 
   /* ---------------- En-tête, menu, pied de page ---------------- */
-  function logoHTML() {
-    if (M.logo) return '<img src="' + esc(img(M.logo)) + '" alt="' + esc(M.nom) + '">';
-    return '<span class="petit">Maison</span><span class="script">' + esc(M.nom) + "</span>";
+  // Logo : le nom de la maison, dont le « A » est remplacé par une paire de ciseaux rouges (comme sur les étiquettes)
+  var CISEAUX = '<svg class="ciseaux" viewBox="0 0 40 52" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3.4"><circle cx="9" cy="43" r="6"/><circle cx="31" cy="43" r="6"/></g>' +
+    '<g fill="currentColor"><path d="M12.5 38.5 L35.5 1.5 L38.5 3.5 L16.5 40.5Z"/><path d="M27.5 38.5 L4.5 1.5 L1.5 3.5 L23.5 40.5Z"/></g></svg>';
+  function logoHTML(classe) {
+    var m = S.maison;
+    if (m.logo) return '<img src="' + esc(img(m.logo)) + '" alt="' + esc(m.nom) + '">';
+    var k = m.nom.toUpperCase().indexOf("A");
+    var lettres = k < 0 ? esc(m.nom) : esc(m.nom.slice(0, k)) + CISEAUX + esc(m.nom.slice(k + 1));
+    return '<span class="logo-nom ' + (classe || "") + '" role="img" aria-label="' + esc(m.nom) + '">' + lettres + "</span>" +
+      (m.surTitre ? '<span class="logo-ville">' + esc(m.surTitre) + "</span>" : "");
   }
   var LIENS = [
-    ["index.html", "Accueil"], ["catalogue.html", "Catalogue"],
+    ["index.html", "Accueil"], ["catalogue.html", "Mode"], ["decoration.html", "Décoration"],
     ["pop-up.html", "Pop-up stores"], ["maison.html", "La maison"]
   ];
   function chrome() {
-    var surImage = PAGE === "accueil";
+    var surImage = PAGE === "accueil" || PAGE === "decoration";
     var courant = location.pathname.split("/").pop() || "index.html";
     var entete = document.createElement("header");
     entete.className = "entete" + (surImage ? " sur-image" : " plein");
@@ -127,74 +139,110 @@
 
     var pied = document.createElement("footer");
     pied.className = "pied";
-    pied.innerHTML = '<div class="wrap"><div class="grand">' + esc(M.nom) + "</div>" +
-      '<div class="pied-grille"><div><p style="max-width:44ch;opacity:.85">' + esc(M.signature) + ". " + esc(M.ville) + ".</p></div>" +
+    pied.innerHTML = '<div class="wrap"><div class="grand logo">' + logoHTML("grand-logo") + "</div>" +
+      '<div class="pied-grille"><div><p style="max-width:44ch;opacity:.85">' + esc(S.maison.presentation) + "</p></div>" +
       '<div><h4 class="caps">Explorer</h4>' + LIENS.map(function (l) { return '<a href="' + l[0] + '">' + l[1] + "</a>"; }).join("") + "</div>" +
-      '<div><h4 class="caps">Contact</h4><a href="mailto:' + esc(M.email) + '">' + esc(M.email) + '</a><a href="' + esc(M.instagram) + '" target="_blank" rel="noopener">Instagram</a></div></div>' +
-      '<div class="pied-bas"><span>© ' + new Date().getFullYear() + " " + esc(M.nom) + "</span><span>Pièces uniques & prêt-à-porter</span></div></div>";
+      '<div><h4 class="caps">Contact</h4><a href="mailto:' + esc(M.email) + '">Mode · ' + esc(M.email) + '</a><a href="' + esc(M.instagram) + '" target="_blank" rel="noopener">Mode · Instagram</a>' +
+      (D ? '<a href="mailto:' + esc(D.email) + '">IYAM · ' + esc(D.email) + '</a><a href="https://instagram.com/' + esc(D.instagram) + '" target="_blank" rel="noopener">IYAM · @' + esc(D.instagram) + "</a>" : "") + "</div></div>" +
+      '<div class="pied-bas"><span>© ' + new Date().getFullYear() + " " + esc(S.maison.nom) + "</span><span>Mode · Décoration</span></div></div>";
     document.body.appendChild(pied);
   }
 
-  /* ---------------- Accueil ---------------- */
+  /* ---------------- Accueil : diaporama des univers ---------------- */
   function pageAccueil() {
-    var une = pieces.filter(function (p) { return p.enAvant && p.photos && p.photos.length; });
-    if (!une.length) une = pieces.filter(function (p) { return p.photos && p.photos.length; }).slice(0, 5);
-
-    // Diaporama plein écran
+    var U = S.univers;
     var heros = $("#heros");
-    var POS = [[6, 22], [8, 72], [58, 30], [64, 78], [30, 52]];
-    heros.innerHTML = une.map(function (p, i) {
-      return '<div class="diapo' + (i === 0 ? " active" : "") + '"><img src="' + esc(img(p.photos[0])) + '" alt=""' + (i ? ' loading="lazy"' : "") + "></div>";
+    // Chaque univers peut avoir plusieurs photos : on les enchaîne, univers par univers
+    var slides = [];
+    U.forEach(function (u, k) { (u.images || [u.image]).forEach(function (im) { slides.push({ u: k, image: im }); }); });
+    var POS = [[10, 6], [16, 58], [62, 8], [70, 60], [38, 40]];
+    heros.innerHTML = slides.map(function (sl, i) {
+      return '<div class="diapo' + (i === 0 ? " active" : "") + '"><img src="' + esc(img(sl.image)) + '" alt=""' + (i ? ' loading="lazy"' : "") + "></div>";
     }).join("") +
       '<div class="fantomes" aria-hidden="true"></div>' +
       '<div class="legende"><h1 id="hTitre"></h1><div class="infos" id="hInfos"></div></div>' +
-      '<div class="points">' + une.map(function (p, i) { return '<button aria-label="' + esc(p.nom) + '"' + (i === 0 ? ' class="active"' : "") + "></button>"; }).join("") + "</div>";
+      '<div class="points">' + slides.map(function (sl, i) { return '<button aria-label="' + esc(U[sl.u].titre) + " — photo " + (i + 1) + '"' + (i === 0 ? ' class="active"' : "") + "></button>"; }).join("") + "</div>";
     var diapos = heros.querySelectorAll(".diapo"), points = heros.querySelectorAll(".points button");
     var i = 0, minuteur;
     function montrer(n) {
-      i = (n + une.length) % une.length;
+      i = (n + slides.length) % slides.length;
       diapos.forEach(function (d, k) { d.classList.toggle("active", k === i); });
       points.forEach(function (d, k) { d.classList.toggle("active", k === i); });
-      var p = une[i], c = collection(p.collection);
-      $("#hTitre").textContent = p.nom;
-      $("#hInfos").innerHTML = esc(c ? c.titre : "") + "<br>" + esc((p.matieres || []).join(" · ")) +
-        '<br><a href="piece.html?ref=' + encodeURIComponent(p.ref) + '">Voir la pièce</a>';
-      // Les noms des autres pièces flottent en filigrane, comme des lieux sur une carte
-      var autres = une.filter(function (_, k) { return k !== i; }).slice(0, 3);
-      heros.querySelector(".fantomes").innerHTML = autres.map(function (a, k) {
-        var pos = POS[(i + k) % POS.length];
-        return '<span style="top:' + pos[0] + "%;left:" + pos[1] + '%">' + esc(a.nom.replace(/\s*\(.*\)$/, "")) + "</span>";
+      var ui = slides[i].u, u = U[ui];
+      $("#hTitre").textContent = u.titre;
+      $("#hInfos").innerHTML = "<strong>" + esc(u.sousTitre) + "</strong><br>" + u.infos.map(esc).join("<br>") +
+        '<br><a href="' + esc(u.lien) + '">' + esc(u.bouton) + "</a>";
+      // En filigrane : les autres univers et leurs mots-clés, comme les adresses d'une maison
+      var mots = [];
+      U.forEach(function (a, k) { if (k !== ui) mots.push(a.titre); });
+      mots = mots.concat(u.motsCles || []).slice(0, 4);
+      heros.querySelector(".fantomes").innerHTML = mots.map(function (m, k) {
+        var pos = POS[k % POS.length];
+        return '<span style="top:' + pos[0] + "%;left:" + pos[1] + '%">' + esc(m) + "</span>";
       }).join("");
     }
-    function lancer() { clearInterval(minuteur); if (une.length > 1) minuteur = setInterval(function () { montrer(i + 1); }, 6000); }
+    function lancer() { clearInterval(minuteur); if (slides.length > 1) minuteur = setInterval(function () { montrer(i + 1); }, 5500); }
     points.forEach(function (b, k) { b.addEventListener("click", function () { montrer(k); lancer(); }); });
+    var tx = null;
+    heros.addEventListener("touchstart", function (e) { tx = e.touches[0].clientX; }, { passive: true });
+    heros.addEventListener("touchend", function (e) {
+      if (tx === null) return; var dx = e.changedTouches[0].clientX - tx; tx = null;
+      if (Math.abs(dx) > 40) { montrer(i + (dx < 0 ? 1 : -1)); lancer(); }
+    });
     montrer(0); lancer();
 
-    $("#manifeste").innerHTML = esc(M.accroche).replace(/(Wax|velours|tulle|exemplaire unique)/gi, "<em>$1</em>");
-    $("#presentation").textContent = M.presentation;
+    $("#presentation").textContent = S.maison.presentation;
 
-    // Familles dans l'ordre choisi dans les réglages
-    $("#familles").innerHTML = R.ordreFamilles.map(function (f) {
-      var F = C.familles[f];
-      var dans = pieces.filter(function (p) { return familleDe(p) === f; });
-      var photo = dans.find(function (p) { return p.photos && p.photos.length; });
-      var aVenir = !dans.length;
-      return '<a class="famille apparait' + (aVenir ? " a-venir" : "") + '" href="' + (aVenir ? "pop-up.html" : "catalogue.html?famille=" + f) + '">' +
-        (photo ? '<img src="' + esc(img(photo.photos[0])) + '" alt="" loading="lazy">' : "") +
-        (aVenir ? '<span class="bientot caps">Bientôt</span>' : "") +
-        "<div><h3>" + esc(F.titre) + "</h3><p>" + esc(F.description) + '</p><p class="caps" style="margin-top:14px">' +
-        (aVenir ? "Être informé·e" : dans.length + " pièce" + (dans.length > 1 ? "s" : "") + " →") + "</p></div></a>";
+    // Cartes des univers
+    $("#univers").innerHTML = U.map(function (u) {
+      return '<a class="famille apparait univers-' + esc(u.id) + '" href="' + esc(u.lien) + '">' +
+        '<img src="' + esc(img((u.images || [u.image])[0])) + '" alt="" loading="lazy"><div><p class="caps">' + esc(u.sousTitre) + "</p><h3>" + esc(u.titre) + "</h3><p>" +
+        u.infos.map(esc).join(" · ") + '</p><p class="caps" style="margin-top:14px">' + esc(u.bouton) + " →</p></div></a>";
     }).join("");
 
+    // Mode : sélection de pièces
     var selection = pieces.filter(function (p) { return ACHETABLE[p.statut]; }).slice(0, 6);
     if (selection.length < 3) selection = pieces.slice(0, 6);
     $("#selection").innerHTML = selection.map(carte).join("");
+
+    // Décoration : les occasions
+    if (D) $("#occasionsAccueil").innerHTML = D.occasions.map(polaroid).join("");
 
     var prochain = popupsTries().avenir[0];
     if (prochain) {
       $("#bandeauPopup").hidden = false;
       $("#bandeauPopup .contenu").innerHTML = evenementHTML(prochain, false);
     }
+  }
+
+  function polaroid(o) {
+    return '<figure class="polaroid apparait"><img src="' + esc(img(o.photo)) + '" alt="' + esc(o.titre) + '" loading="lazy"><figcaption>' + esc(o.titre) + "</figcaption></figure>";
+  }
+
+  /* ---------------- Décoration (IYAM) ---------------- */
+  function pageDecoration() {
+    $("#dHeros").innerHTML = '<div class="diapo active"><img src="' + esc(img(D.photoHeros)) + '" alt=""></div>' +
+      '<div class="legende legende-deco"><div><p class="caps">' + esc(D.nom) + " " + esc(D.sousNom) + "</p>" +
+      "<h1>" + esc(D.titre) + ' <span class="script">' + esc(D.titreScript) + "</span></h1>" +
+      '<p class="sous-heros">' + esc(D.sousTitre) + "</p></div>" +
+      '<div class="infos">' + esc(D.accroche) + '<br><a href="#contact">Demander un devis</a></div></div>';
+    $("#dDevise").textContent = D.devise;
+    $("#dPresentation").textContent = D.presentation || "";
+    $("#dOccasions").innerHTML = D.occasions.map(polaroid).join("");
+    $("#dPrestations").innerHTML = D.prestations.map(function (p, k) {
+      return '<li class="apparait"><span class="num">' + String(k + 1).padStart(2, "0") + "</span><div><h3>" + esc(p.titre) + "</h3><p>" + esc(p.texte) + "</p></div></li>";
+    }).join("");
+    $("#dPourquoi").innerHTML = D.pourquoi.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("");
+    $("#dValeurs").innerHTML = D.valeurs.map(function (t) { return "<span>" + esc(t) + "</span>"; }).join("");
+    $("#dGalerie").innerHTML = D.galerie.map(function (g) {
+      return '<figure class="apparait"><img src="' + esc(img(g.photo)) + '" alt="' + esc(g.legende) + '" loading="lazy"><figcaption class="caps">' + esc(g.legende) + "</figcaption></figure>";
+    }).join("");
+    var corps = "Bonjour,\n\nJe souhaite un devis pour une décoration.\n\nType d'événement :\nDate :\nLieu :\nNombre d'invités :\nThème / couleurs souhaitées :\nBudget indicatif :\n";
+    $("#dContact").innerHTML =
+      '<a class="bouton clair" href="mailto:' + esc(D.email) + "?subject=" + encodeURIComponent("Demande de devis — décoration") + "&body=" + encodeURIComponent(corps) + '">Demander un devis</a>' +
+      (D.whatsapp ? '<a class="bouton contour-clair" href="https://wa.me/' + esc(D.whatsapp) + "?text=" + encodeURIComponent("Bonjour, je souhaite un devis pour une décoration.") + '" target="_blank" rel="noopener">WhatsApp</a>' : "") +
+      '<a class="bouton contour-clair" href="https://instagram.com/' + esc(D.instagram) + '" target="_blank" rel="noopener">@' + esc(D.instagram) + "</a>";
+    $("#dEmail").innerHTML = esc(D.email) + (D.telephone ? " · " + '<a href="tel:' + esc(D.telephone.replace(/\s/g, "")) + '">' + esc(D.telephone) + "</a>" : "");
   }
 
   /* ---------------- Catalogue ---------------- */
@@ -277,10 +325,10 @@
       zone.innerHTML = '<div><h1 style="font-family:var(--f-titre);text-transform:uppercase;font-size:48px">Pièce introuvable</h1><p class="intro">Cette référence n\'existe pas ou n\'est plus présentée.</p><div class="actions"><a class="bouton" href="catalogue.html">Retour au catalogue</a></div></div>';
       return;
     }
-    document.title = p.nom + " — " + M.nom;
+    document.title = p.nom + " — " + S.maison.nom;
     var c = collection(p.collection), ph = p.photos || [];
     var galerie = '<div class="galerie"><div class="principale">' +
-      (ph.length ? '<img id="photoPrincipale" src="' + esc(img(ph[0])) + '" alt="' + esc(p.nom) + '">' : '<div class="sans-photo">' + esc(p.ref) + "</div>") + "</div>" +
+      (ph.length ? '<img id="photoPrincipale" src="' + esc(img(ph[0])) + '" alt="' + esc(p.nom) + '">' : sansPhoto(p)) + "</div>" +
       (ph.length > 1 ? '<div class="vignettes">' + ph.map(function (f, k) {
         return '<button data-src="' + esc(img(f)) + '" aria-current="' + (k === 0) + '" aria-label="Photo ' + (k + 1) + '"><img src="' + esc(img(f)) + '" alt=""></button>';
       }).join("") + "</div>" : "") + "</div>";
@@ -367,12 +415,15 @@
 
   /* ---------------- La maison ---------------- */
   function pageMaison() {
-    $("#mPresentation").textContent = M.presentation;
-    var photo = pieces.find(function (p) { return p.photos && p.photos.length; });
-    if (photo) $("#mPhoto").innerHTML = '<img src="' + esc(img(photo.photos[0])) + '" alt="' + esc(photo.nom) + '">';
-    $("#mContact").innerHTML =
-      '<a class="bouton" href="mailto:' + esc(M.email) + '">' + esc(M.email) + "</a>" +
-      '<a class="bouton contour" href="' + esc(M.instagram) + '" target="_blank" rel="noopener">Instagram</a>';
+    $("#mPresentation").textContent = S.maison.presentation;
+    $("#mPhoto").innerHTML = '<img src="images/iyam-etiquettes.jpg" alt="Étiquettes IYAM Paris">';
+    $("#mUnivers").innerHTML = S.univers.map(function (u) {
+      var email = u.id === "decoration" && D ? D.email : M.email;
+      var tel = u.id === "decoration" && D && D.whatsapp ? '<a class="bouton contour" href="https://wa.me/' + esc(D.whatsapp) + '" target="_blank" rel="noopener">WhatsApp · ' + esc(D.telephone) + "</a>" : "";
+      var insta = u.id === "decoration" && D ? "https://instagram.com/" + D.instagram : M.instagram;
+      return '<div class="contact-univers"><p class="caps sur-titre">' + esc(u.sousTitre) + "</p><h3>" + esc(u.titre) + "</h3>" +
+        '<div class="actions"><a class="bouton" href="mailto:' + esc(email) + '">' + esc(email) + '</a><a class="bouton contour" href="' + esc(insta) + '" target="_blank" rel="noopener">Instagram</a>' + tel + "</div></div>";
+    }).join("");
   }
 
   /* ---------------- Apparition au défilement ---------------- */
@@ -385,8 +436,8 @@
 
   /* ---------------- Démarrage ---------------- */
   chrome();
-  ({ accueil: pageAccueil, catalogue: pageCatalogue, piece: pagePiece, popup: pagePopup, maison: pageMaison }[PAGE] || function () {})();
-  document.querySelectorAll("[data-marque]").forEach(function (el) { el.textContent = M.nom; });
-  document.title = document.title.replace("{marque}", M.nom);
+  ({ accueil: pageAccueil, catalogue: pageCatalogue, piece: pagePiece, popup: pagePopup, maison: pageMaison, decoration: pageDecoration }[PAGE] || function () {})();
+  document.querySelectorAll("[data-marque]").forEach(function (el) { el.textContent = S.maison.nom; });
+  document.title = document.title.replace("{marque}", S.maison.nom);
   observer();
 })();

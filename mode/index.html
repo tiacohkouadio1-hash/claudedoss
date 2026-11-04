@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{marque} — Créations & pièces de défilé</title>
-  <meta name="description" content="Catalogue de créations : pièces de défilé et prototypes en exemplaire unique, prêt-à-porter à venir.">
+  <title>{marque} — Mode & décoration à Paris</title>
+  <meta name="description" content="Une maison de création : pièces de défilé et prototypes en exemplaire unique, et décoration d'événements avec IYAM Décoration.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Oswald:wght@400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Oswald:wght@400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body data-page="accueil">
   <main>
-    <section class="heros" id="heros" aria-label="Pièces à la une"></section>
+    <section class="heros" id="heros" aria-label="Nos univers"></section>
 
     <section class="bloc">
       <div class="wrap deux-col">
         <div>
           <p class="caps sur-titre">La maison</p>
-          <p class="manifeste" id="manifeste" style="margin-top:14px"></p>
+          <p class="manifeste" style="margin-top:14px">Deux métiers, <em>une même main</em>.</p>
         </div>
         <div>
           <p class="intro" id="presentation"></p>
@@ -32,17 +32,27 @@
         <div class="entete-section">
           <div><p class="caps sur-titre">Les univers</p><h2 class="titre">Explorer</h2></div>
         </div>
-        <div class="familles" id="familles"></div>
+        <div class="familles" id="univers"></div>
       </div>
     </section>
 
     <section class="bloc">
       <div class="wrap">
         <div class="entete-section">
-          <div><p class="caps sur-titre">Sélection</p><h2 class="titre">Pièces disponibles</h2></div>
+          <div><p class="caps sur-titre">Mode</p><h2 class="titre">Pièces disponibles</h2></div>
           <a class="lien-fleche caps" href="catalogue.html">Tout le catalogue</a>
         </div>
         <div class="grille" id="selection"></div>
+      </div>
+    </section>
+
+    <section class="bloc fond-creme">
+      <div class="wrap">
+        <div class="entete-section">
+          <div><p class="caps sur-titre">IYAM Décoration</p><h2 class="titre">Pour tous vos événements</h2></div>
+          <a class="lien-fleche caps" href="decoration.html">Découvrir la décoration</a>
+        </div>
+        <div class="polaroids" id="occasionsAccueil"></div>
       </div>
     </section>
 
@@ -54,7 +64,9 @@
       </div>
     </section>
   </main>
+  <script src="data/site.js"></script>
   <script src="data/catalogue.js"></script>
+  <script src="data/decoration.js"></script>
   <script src="assets/app.js"></script>
 </body>
 </html>

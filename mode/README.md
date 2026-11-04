@@ -1,17 +1,27 @@
-# Site catalogue — créations, défilés & prêt-à-porter
+# IYAM — site de la maison (mode & décoration)
 
-Site vitrine en forme de **catalogue évolutif** : il présente aujourd'hui les
-prototypes et pièces de défilé (exemplaires uniques, une seule taille) et
-accueillera demain le **prêt-à-porter** (plusieurs tailles, stocks) et les
-**pop-up stores**, sans rien reconstruire.
+Un seul site pour les deux métiers de IYAM, avec un accueil inspiré des sites de
+« maisons » : un grand diaporama où chaque univers a ses photos.
+
+- **Mode (IYAM Paris)** : un **catalogue évolutif**. Il présente aujourd'hui les
+  pièces de défilé et les créations (exemplaires uniques, une seule taille) et
+  accueillera demain le **prêt-à-porter** (plusieurs tailles, stocks) et les
+  **pop-up stores**, sans rien reconstruire.
+- **Décoration (IYAM Décoration créative)** : prestations, types d'événements,
+  réalisations et demande de devis (e-mail, WhatsApp, Instagram).
 
 Le site est statique (HTML/CSS/JS, aucune installation). Ouvrez `index.html` dans
 un navigateur, ou lancez `python3 -m http.server` dans ce dossier.
 
-## Le principe : un seul fichier à modifier
+## Le principe : le contenu est dans `data/`
 
-Tout le contenu se trouve dans **`data/catalogue.js`**. Les pages se construisent
-toutes seules à partir de ce fichier.
+| Fichier               | Contenu                                                        |
+|-----------------------|----------------------------------------------------------------|
+| `data/site.js`        | La maison : nom (logo IY✂M), présentation, univers et photos du diaporama |
+| `data/catalogue.js`   | La mode : pièces, collections, tailles, statuts, pop-up stores  |
+| `data/decoration.js`  | La décoration : prestations, événements, galerie, contacts     |
+
+Les pages se construisent toutes seules à partir de ces fichiers. Pour la mode :
 
 | Je veux…                                  | Je modifie dans `data/catalogue.js`                       |
 |-------------------------------------------|-----------------------------------------------------------|
@@ -23,13 +33,14 @@ toutes seules à partir de ce fichier.
 | Annoncer un pop-up store                  | ajouter un bloc dans `popups`                             |
 | Mettre le prêt-à-porter en premier        | `reglages.ordreFamilles: ["pret-a-porter", "creation"]`   |
 | Afficher les prix                         | `reglages.afficherPrix: true`                             |
-| Remplacer le nom écrit par un logo        | `marque.logo: "logo.png"` (fichier dans `images/`)        |
+| Ajouter une réalisation déco              | une ligne dans `galerie` de `data/decoration.js`          |
+| Changer les photos du diaporama d'accueil | `images` de chaque univers dans `data/site.js`            |
 
 ### Ajouter une pièce unique (création / défilé)
 
 ```js
 {
-  ref: "DF-06", nom: "Nom de la pièce", collection: "defile-2025",
+  ref: "DF-02", nom: "Nom de la pièce", collection: "defile",
   categorie: "Robe", statut: "disponible", taille: "38",
   matieres: ["Wax", "Velours"],
   description: "Quelques lignes sur la pièce.",
@@ -73,28 +84,32 @@ Chaque bouton ouvre un e-mail déjà rempli avec la référence de la pièce.
 - Placez-les dans `images/`, au format **portrait 3:4** (par exemple 1200 × 1600 px).
 - Nommez-les d'après la référence : `df-06-face.jpg`, `df-06-dos.jpg`…
 - La 1re photo est la photo principale. La 2e apparaît au survol dans le catalogue.
-- Une pièce sans photo affiche un aplat wax/velours avec sa référence.
-- Les visuels actuels sont **découpés dans vos croquis**, en attendant les photos.
+- Une pièce sans photo affiche un aplat coloré avec son nom (« Photo à venir »).
+- Les visuels des types d'événements (baby shower, bride, baptême…) viennent du
+  flyer : remplacez-les par vos propres photos au fil des réalisations.
 
 ## Les pages
 
 | Page              | Contenu                                                                    |
 |-------------------|----------------------------------------------------------------------------|
-| `index.html`      | Diaporama plein écran des pièces `enAvant`, univers, sélection, prochain pop-up |
+| `index.html`      | Diaporama des univers, présentation, sélection mode, événements déco, prochain pop-up |
+| `decoration.html` | IYAM Décoration : prestations, événements, galerie, devis               |
 | `catalogue.html`  | Toutes les pièces, avec filtres (univers, collection, type, statut, taille) |
 | `piece.html?ref=` | Fiche d'une pièce : photos, taille(s), matières, demande par e-mail        |
 | `pop-up.html`     | Pop-up à venir et passés (classés automatiquement selon la date)           |
-| `maison.html`     | Présentation et contact                                                    |
+| `maison.html`     | Présentation et contacts des deux univers                                  |
 
 Les filtres du catalogue s'inscrivent dans l'adresse (ex.
-`catalogue.html?collection=defile-2025`) : on peut partager un lien vers une
+`catalogue.html?collection=defile`) : on peut partager un lien vers une
 sélection, par exemple sur Instagram.
 
 ## Fichiers
 
 ```
 mode/
-├── data/catalogue.js   ← le contenu (à modifier)
+├── data/site.js        ← la maison et ses univers
+├── data/catalogue.js   ← la mode (à modifier)
+├── data/decoration.js  ← la décoration (à modifier)
 ├── images/             ← les photos
 ├── assets/style.css    ← couleurs et mise en page (palette dans :root)
 ├── assets/app.js       ← le moteur (pas besoin d'y toucher)
