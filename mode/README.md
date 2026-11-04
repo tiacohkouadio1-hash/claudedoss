@@ -1,7 +1,9 @@
 # IYAM — site de la maison (mode & décoration)
 
-Un seul site pour les deux métiers de IYAM, avec un accueil inspiré des sites de
-« maisons » : un grand diaporama où chaque univers a ses photos.
+Un seul site pour les deux métiers de IYAM. L'accueil reprend le style des sites
+de « maisons » : bloc logo « IY✂M Paris — présente — Maison *Iyam* », photo plein
+écran, et une roue de noms (le nom actif au centre, les autres inclinés en arc).
+La page Décoration reprend le style du flyer IYAM : crème, olive, doré, script.
 
 - **Mode (IYAM Paris)** : un **catalogue évolutif**. Il présente aujourd'hui les
   pièces de défilé et les créations (exemplaires uniques, une seule taille) et
@@ -17,7 +19,7 @@ un navigateur, ou lancez `python3 -m http.server` dans ce dossier.
 
 | Fichier               | Contenu                                                        |
 |-----------------------|----------------------------------------------------------------|
-| `data/site.js`        | La maison : nom (logo IY✂M), présentation, univers et photos du diaporama |
+| `data/site.js`        | La maison : nom (logo IY✂M), présentation, univers, et la **roue de l'accueil** (`scenes`) |
 | `data/catalogue.js`   | La mode : pièces, collections, tailles, statuts, pop-up stores  |
 | `data/decoration.js`  | La décoration : prestations, événements, galerie, contacts     |
 
@@ -34,7 +36,7 @@ Les pages se construisent toutes seules à partir de ces fichiers. Pour la mode 
 | Mettre le prêt-à-porter en premier        | `reglages.ordreFamilles: ["pret-a-porter", "creation"]`   |
 | Afficher les prix                         | `reglages.afficherPrix: true`                             |
 | Ajouter une réalisation déco              | une ligne dans `galerie` de `data/decoration.js`          |
-| Changer les photos du diaporama d'accueil | `images` de chaque univers dans `data/site.js`            |
+| Changer la roue de l'accueil              | `scenes` dans `data/site.js` (nom, photo, 2 lignes, lien) |
 
 ### Ajouter une pièce unique (création / défilé)
 

@@ -5,10 +5,10 @@
    ========================================================================== */
 window.DECORATION = {
   nom: "IYAM",
-  sousNom: "Décoration créative",
+  sousNom: "Décoration",
   titre: "Sublimez",
   titreScript: "vos moments",
-  sousTitre: "créons des souvenirs",
+  sousTitre: "créons des souvenirs inoubliables",
   accroche: "Petits & moyens événements · Devis gratuit sur demande",
   presentation: "Je vous accompagne pour décorer vos événements avec goût, créativité et attention aux détails, afin de faire de chaque instant un moment inoubliable.",
   devise: "Chaque détail compte, chaque moment mérite d'être unique.",
@@ -29,12 +29,12 @@ window.DECORATION = {
   ],
 
   prestations: [
-    { titre: "Décoration sur-mesure",            texte: "Un concept personnalisé selon votre thème, vos envies et votre budget." },
-    { titre: "Ballons & mise en scène",          texte: "Arches, colonnes et compositions de ballons, installées sur place." },
-    { titre: "Fonds & backdrops",                texte: "Drapés, fonds photo et décors pour mettre en valeur le cœur de la fête." },
-    { titre: "Fleurs & éléments déco",           texte: "Bouquets séchés, fleurs, vases, chiffres lumineux : location ou fourniture." },
-    { titre: "Déco tables & espaces",            texte: "Art de la table, centres de table, candy bar, buffets et coin photo." },
-    { titre: "Idées créatives & personnalisées", texte: "Écoute, conseils et petites attentions pour un événement à votre image." }
+    { titre: "Décoration sur-mesure", icone: "sur-mesure",            texte: "Un concept personnalisé selon votre thème, vos envies et votre budget." },
+    { titre: "Ballons & mise en scène", icone: "ballons",          texte: "Arches, colonnes et compositions de ballons, installées sur place." },
+    { titre: "Fonds & backdrops", icone: "backdrop",                texte: "Drapés, fonds photo et décors pour mettre en valeur le cœur de la fête." },
+    { titre: "Fleurs & éléments déco", icone: "fleurs",           texte: "Bouquets séchés, fleurs, vases, chiffres lumineux : location ou fourniture." },
+    { titre: "Déco tables & espaces", icone: "table",            texte: "Art de la table, centres de table, candy bar, buffets et coin photo." },
+    { titre: "Idées créatives & personnalisées", icone: "idees", texte: "Écoute, conseils et petites attentions pour un événement à votre image." }
   ],
 
   pourquoi: ["Écoute & conseil", "Déco créative & élégante", "Matériel de qualité", "Passion & attention aux détails"],

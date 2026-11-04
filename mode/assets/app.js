@@ -110,7 +110,12 @@
     var courant = location.pathname.split("/").pop() || "index.html";
     var entete = document.createElement("header");
     entete.className = "entete" + (surImage ? " sur-image" : " plein");
-    entete.innerHTML = '<a class="logo" href="index.html">' + logoHTML() + "</a>" +
+    // Bloc logo à la manière d'une maison : « IY✂M PARIS — présente — Maison <script> »
+    var BLOC = { accueil: ["Maison", "Iyam"], catalogue: ["Atelier", "Couture"], piece: ["Atelier", "Couture"],
+                 decoration: ["Maison", "Décoration"], popup: ["Les", "Pop-up"], maison: ["La", "Maison"] }[PAGE] || ["Maison", "Iyam"];
+    entete.innerHTML = '<a class="logo lockup" href="index.html" aria-label="' + esc(S.maison.nom) + ' — accueil">' +
+      '<span class="l-marque">' + logoHTML("petit-logo").replace(/<span class="logo-ville">.*<\/span>$/, "") + '<span class="l-ville">' + esc(S.maison.surTitre || "") + "</span></span>" +
+      '<span class="l-presente">présente</span><span class="l-maison">' + esc(BLOC[0]) + '</span><span class="l-script">' + esc(BLOC[1]) + "</span></a>" +
       '<button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>';
     document.body.prepend(entete);
 
@@ -148,64 +153,73 @@
     document.body.appendChild(pied);
   }
 
-  /* ---------------- Accueil : diaporama des univers ---------------- */
+  /* ---------------- Accueil : la « roue » des scènes (style maison de restaurants) ----------------
+     Le nom de la scène active est à l'horizontale ; les autres tournent sur un arc,
+     inclinés et transparents, au-dessus et en dessous — comme les adresses d'une maison. */
   function pageAccueil() {
-    var U = S.univers;
+    var SC = S.scenes || [];
     var heros = $("#heros");
-    // Chaque univers peut avoir plusieurs photos : on les enchaîne, univers par univers
-    var slides = [];
-    U.forEach(function (u, k) { (u.images || [u.image]).forEach(function (im) { slides.push({ u: k, image: im }); }); });
-    var POS = [[10, 6], [16, 58], [62, 8], [70, 60], [38, 40]];
-    heros.innerHTML = slides.map(function (sl, i) {
-      return '<div class="diapo' + (i === 0 ? " active" : "") + '"><img src="' + esc(img(sl.image)) + '" alt=""' + (i ? ' loading="lazy"' : "") + "></div>";
+    heros.innerHTML = SC.map(function (sc, i) {
+      return '<div class="diapo' + (i === 0 ? " active" : "") + '"><img src="' + esc(img(sc.image)) + '" alt=""' + (i ? ' loading="lazy"' : "") + "></div>";
     }).join("") +
-      '<div class="fantomes" aria-hidden="true"></div>' +
-      '<div class="legende"><h1 id="hTitre"></h1><div class="infos" id="hInfos"></div></div>' +
-      '<div class="points">' + slides.map(function (sl, i) { return '<button aria-label="' + esc(U[sl.u].titre) + " — photo " + (i + 1) + '"' + (i === 0 ? ' class="active"' : "") + "></button>"; }).join("") + "</div>";
-    var diapos = heros.querySelectorAll(".diapo"), points = heros.querySelectorAll(".points button");
-    var i = 0, minuteur;
-    function montrer(n) {
-      i = (n + slides.length) % slides.length;
-      diapos.forEach(function (d, k) { d.classList.toggle("active", k === i); });
-      points.forEach(function (d, k) { d.classList.toggle("active", k === i); });
-      var ui = slides[i].u, u = U[ui];
-      $("#hTitre").textContent = u.titre;
-      $("#hInfos").innerHTML = "<strong>" + esc(u.sousTitre) + "</strong><br>" + u.infos.map(esc).join("<br>") +
-        '<br><a href="' + esc(u.lien) + '">' + esc(u.bouton) + "</a>";
-      // En filigrane : les autres univers et leurs mots-clés, comme les adresses d'une maison
-      var mots = [];
-      U.forEach(function (a, k) { if (k !== ui) mots.push(a.titre); });
-      mots = mots.concat(u.motsCles || []).slice(0, 4);
-      heros.querySelector(".fantomes").innerHTML = mots.map(function (m, k) {
-        var pos = POS[k % POS.length];
-        return '<span style="top:' + pos[0] + "%;left:" + pos[1] + '%">' + esc(m) + "</span>";
-      }).join("");
+      '<div class="roue" aria-hidden="true">' + SC.map(function (sc, i) {
+        return '<button class="nom-roue" tabindex="-1" data-i="' + i + '"><span>' + esc(sc.titre) + "</span></button>";
+      }).join("") + "</div>" +
+      '<a class="adresse" id="adresse" href="#"></a>' +
+      '<div class="compteur caps"><button class="prec" aria-label="Scène précédente">←</button><span id="compteur"></span><button class="suiv" aria-label="Scène suivante">→</button></div>' +
+      '<h1 class="sr" id="titreAccessible"></h1>';
+    var diapos = heros.querySelectorAll(".diapo"), noms = heros.querySelectorAll(".nom-roue");
+    var n = SC.length, i = 0, minuteur;
+    function montrer(k) {
+      i = (k + n) % n;
+      diapos.forEach(function (d, j) { d.classList.toggle("active", j === i); });
+      noms.forEach(function (el, j) {
+        var d = j - i;                                 // écart avec la scène active, ramené dans [-n/2, n/2]
+        if (d > n / 2) d -= n; if (d < -n / 2) d += n;
+        el.style.setProperty("--d", d);
+        el.classList.toggle("actif", d === 0);
+        el.classList.toggle("loin", Math.abs(d) > 1);
+        el.classList.toggle("cache", Math.abs(d) > 2);
+      });
+      var sc = SC[i], a = $("#adresse");
+      a.href = sc.lien;
+      a.innerHTML = sc.lignes.map(esc).join("<br>") + '<span class="voir">Découvrir →</span>';
+      $("#compteur").textContent = String(i + 1).padStart(2, "0") + " / " + String(n).padStart(2, "0");
+      $("#titreAccessible").textContent = "IYAM — " + sc.titre;
     }
-    function lancer() { clearInterval(minuteur); if (slides.length > 1) minuteur = setInterval(function () { montrer(i + 1); }, 5500); }
-    points.forEach(function (b, k) { b.addEventListener("click", function () { montrer(k); lancer(); }); });
-    var tx = null;
-    heros.addEventListener("touchstart", function (e) { tx = e.touches[0].clientX; }, { passive: true });
+    function lancer() { clearInterval(minuteur); if (n > 1) minuteur = setInterval(function () { montrer(i + 1); }, 5000); }
+    function aller(k) { montrer(k); lancer(); }
+    noms.forEach(function (el) { el.addEventListener("click", function () {
+      var j = +el.dataset.i; if (j === i) location.href = SC[i].lien; else aller(j);
+    }); });
+    heros.querySelector(".prec").addEventListener("click", function () { aller(i - 1); });
+    heros.querySelector(".suiv").addEventListener("click", function () { aller(i + 1); });
+    document.addEventListener("keydown", function (e) {
+      if (window.scrollY > window.innerHeight * 0.5) return;
+      if (e.key === "ArrowDown" || e.key === "ArrowRight") aller(i + 1);
+      if (e.key === "ArrowUp" || e.key === "ArrowLeft") aller(i - 1);
+    });
+    var ty = null, tx = null;
+    heros.addEventListener("touchstart", function (e) { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
     heros.addEventListener("touchend", function (e) {
       if (tx === null) return; var dx = e.changedTouches[0].clientX - tx; tx = null;
-      if (Math.abs(dx) > 40) { montrer(i + (dx < 0 ? 1 : -1)); lancer(); }
+      if (Math.abs(dx) > 40) aller(i + (dx < 0 ? 1 : -1));
     });
     montrer(0); lancer();
 
     $("#presentation").textContent = S.maison.presentation;
 
-    // Cartes des univers
+    var U = S.univers;
     $("#univers").innerHTML = U.map(function (u) {
       return '<a class="famille apparait univers-' + esc(u.id) + '" href="' + esc(u.lien) + '">' +
-        '<img src="' + esc(img((u.images || [u.image])[0])) + '" alt="" loading="lazy"><div><p class="caps">' + esc(u.sousTitre) + "</p><h3>" + esc(u.titre) + "</h3><p>" +
+        '<img src="' + esc(img(u.image)) + '" alt="" loading="lazy"><div><p class="caps">' + esc(u.sousTitre) + "</p><h3>" + esc(u.titre) + "</h3><p>" +
         u.infos.map(esc).join(" · ") + '</p><p class="caps" style="margin-top:14px">' + esc(u.bouton) + " →</p></div></a>";
     }).join("");
 
-    // Mode : sélection de pièces
     var selection = pieces.filter(function (p) { return ACHETABLE[p.statut]; }).slice(0, 6);
     if (selection.length < 3) selection = pieces.slice(0, 6);
     $("#selection").innerHTML = selection.map(carte).join("");
 
-    // Décoration : les occasions
     if (D) $("#occasionsAccueil").innerHTML = D.occasions.map(polaroid).join("");
 
     var prochain = popupsTries().avenir[0];
@@ -219,30 +233,50 @@
     return '<figure class="polaroid apparait"><img src="' + esc(img(o.photo)) + '" alt="' + esc(o.titre) + '" loading="lazy"><figcaption>' + esc(o.titre) + "</figcaption></figure>";
   }
 
-  /* ---------------- Décoration (IYAM) ---------------- */
+  /* ---------------- Décoration (style du flyer IYAM) ---------------- */
+  var ICONES = {
+    "sur-mesure": '<circle cx="24" cy="24" r="4"/><circle cx="24" cy="14" r="5"/><circle cx="33.5" cy="21" r="5"/><circle cx="30" cy="32" r="5"/><circle cx="18" cy="32" r="5"/><circle cx="14.5" cy="21" r="5"/>',
+    "ballons": '<path d="M9 38a15 15 0 0 1 30 0"/><circle cx="9" cy="34" r="3.2"/><circle cx="11" cy="26" r="3.2"/><circle cx="16" cy="19" r="3.2"/><circle cx="24" cy="16" r="3.2"/><circle cx="32" cy="19" r="3.2"/><circle cx="37" cy="26" r="3.2"/><circle cx="39" cy="34" r="3.2"/>',
+    "backdrop": '<path d="M7 9h34"/><path d="M10 9v31M38 9v31"/><path d="M10 9c3 9 9 12 14 12s11-3 14-12"/><path d="M17 15v25M31 15v25"/>',
+    "fleurs": '<path d="M18 28h12l-2 12h-8z"/><path d="M24 28V12"/><path d="M24 20c-6 0-9-4-9-8 5 0 9 3 9 8zM24 17c5 0 8-3 8-7-4 0-8 2-8 7z"/>',
+    "table": '<path d="M8 36h32"/><rect x="13" y="22" width="5" height="14" rx="1"/><rect x="21.5" y="18" width="5" height="18" rx="1"/><rect x="30" y="24" width="5" height="12" rx="1"/><path d="M15.5 17c-1.5 2 0 3.5 0 3.5s1.5-1.5 0-3.5zM24 13c-1.5 2 0 3.5 0 3.5s1.5-1.5 0-3.5zM32.5 19c-1.5 2 0 3.5 0 3.5s1.5-1.5 0-3.5z"/>',
+    "whatsapp": '<path d="M10 38l2.2-7A14 14 0 1 1 17 36z"/><path d="M19 17c0 6 6 12 12 12l2-3-3.5-2-2 1.5c-2-1-4-3-5-5l1.5-2-2-3.5z"/>',
+    "instagram": '<rect x="9" y="9" width="30" height="30" rx="9"/><circle cx="24" cy="24" r="7"/><circle cx="32.5" cy="15.5" r="1.2" fill="currentColor"/>',
+    "email": '<rect x="7" y="12" width="34" height="24" rx="3"/><path d="M8 14l16 12 16-12"/>',
+    "idees": '<path d="M24 9a10 10 0 0 0-6 18v4h12v-4a10 10 0 0 0-6-18z"/><path d="M19 35h10M20.5 39h7"/><path d="M24 3v2M10 10l1.5 1.5M38 10l-1.5 1.5M5 22h2M41 22h2"/>'
+  };
+  function icone(nom) {
+    return '<svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + (ICONES[nom] || ICONES["sur-mesure"]) + "</svg>";
+  }
+  var COEUR = '<svg class="coeur" viewBox="0 0 24 22" aria-hidden="true"><path d="M12 21s-9-5.6-9-12A5 5 0 0 1 12 6a5 5 0 0 1 9 3c0 6.4-9 12-9 12z" fill="currentColor"/></svg>';
+
   function pageDecoration() {
-    $("#dHeros").innerHTML = '<div class="diapo active"><img src="' + esc(img(D.photoHeros)) + '" alt=""></div>' +
-      '<div class="legende legende-deco"><div><p class="caps">' + esc(D.nom) + " " + esc(D.sousNom) + "</p>" +
-      "<h1>" + esc(D.titre) + ' <span class="script">' + esc(D.titreScript) + "</span></h1>" +
-      '<p class="sous-heros">' + esc(D.sousTitre) + "</p></div>" +
-      '<div class="infos">' + esc(D.accroche) + '<br><a href="#contact">Demander un devis</a></div></div>';
-    $("#dDevise").textContent = D.devise;
-    $("#dPresentation").textContent = D.presentation || "";
+    $("#dHeros").innerHTML =
+      '<div class="flyer-photo"><img src="' + esc(img(D.photoHeros)) + '" alt="Décoration IYAM : arche de ballons, drapé et bouquet séché"></div>' +
+      '<div class="flyer-texte">' +
+        '<div class="flyer-marque"><span class="fm-nom">' + esc(D.nom) + '</span><span class="fm-sous">' + esc(D.sousNom) + "</span>" +
+        '<span class="filet">' + COEUR + "</span></div>" +
+        '<h1><span class="serif">' + esc(D.titre) + '</span> <span class="script">' + esc(D.titreScript) + " " + COEUR + "</span></h1>" +
+        '<p class="fl-sous">' + esc(D.sousTitre) + "</p>" +
+        '<p class="fl-texte">' + esc(D.presentation) + "</p>" +
+        '<p class="pinceau">' + esc(D.devise) + "</p>" +
+      "</div>";
     $("#dOccasions").innerHTML = D.occasions.map(polaroid).join("");
-    $("#dPrestations").innerHTML = D.prestations.map(function (p, k) {
-      return '<li class="apparait"><span class="num">' + String(k + 1).padStart(2, "0") + "</span><div><h3>" + esc(p.titre) + "</h3><p>" + esc(p.texte) + "</p></div></li>";
+    $("#dPrestations").innerHTML = D.prestations.map(function (p) {
+      return '<li class="apparait"><span class="pastille">' + icone(p.icone) + "</span><h3>" + esc(p.titre) + "</h3><p>" + esc(p.texte) + "</p></li>";
     }).join("");
     $("#dPourquoi").innerHTML = D.pourquoi.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("");
     $("#dValeurs").innerHTML = D.valeurs.map(function (t) { return "<span>" + esc(t) + "</span>"; }).join("");
     $("#dGalerie").innerHTML = D.galerie.map(function (g) {
-      return '<figure class="apparait"><img src="' + esc(img(g.photo)) + '" alt="' + esc(g.legende) + '" loading="lazy"><figcaption class="caps">' + esc(g.legende) + "</figcaption></figure>";
+      return '<figure class="apparait"><img src="' + esc(img(g.photo)) + '" alt="' + esc(g.legende) + '" loading="lazy"><figcaption>' + esc(g.legende) + "</figcaption></figure>";
     }).join("");
     var corps = "Bonjour,\n\nJe souhaite un devis pour une décoration.\n\nType d'événement :\nDate :\nLieu :\nNombre d'invités :\nThème / couleurs souhaitées :\nBudget indicatif :\n";
+    var mail = "mailto:" + D.email + "?subject=" + encodeURIComponent("Demande de devis — décoration") + "&body=" + encodeURIComponent(corps);
+    $("#dDevis").href = mail;
     $("#dContact").innerHTML =
-      '<a class="bouton clair" href="mailto:' + esc(D.email) + "?subject=" + encodeURIComponent("Demande de devis — décoration") + "&body=" + encodeURIComponent(corps) + '">Demander un devis</a>' +
-      (D.whatsapp ? '<a class="bouton contour-clair" href="https://wa.me/' + esc(D.whatsapp) + "?text=" + encodeURIComponent("Bonjour, je souhaite un devis pour une décoration.") + '" target="_blank" rel="noopener">WhatsApp</a>' : "") +
-      '<a class="bouton contour-clair" href="https://instagram.com/' + esc(D.instagram) + '" target="_blank" rel="noopener">@' + esc(D.instagram) + "</a>";
-    $("#dEmail").innerHTML = esc(D.email) + (D.telephone ? " · " + '<a href="tel:' + esc(D.telephone.replace(/\s/g, "")) + '">' + esc(D.telephone) + "</a>" : "");
+      (D.whatsapp ? '<a href="https://wa.me/' + esc(D.whatsapp) + "?text=" + encodeURIComponent("Bonjour, je souhaite un devis pour une décoration.") + '" target="_blank" rel="noopener"><span class="rond">' + icone("whatsapp") + "</span>" + esc(D.telephone) + "</a>" : "") +
+      '<a href="https://instagram.com/' + esc(D.instagram) + '" target="_blank" rel="noopener"><span class="rond">' + icone("instagram") + "</span>" + esc(D.instagram) + "</a>" +
+      '<a href="' + mail + '"><span class="rond">' + icone("email") + "</span>" + esc(D.email) + "</a>";
   }
 
   /* ---------------- Catalogue ---------------- */

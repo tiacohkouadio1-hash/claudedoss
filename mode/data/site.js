@@ -1,8 +1,8 @@
 /* ==========================================================================
    LA MAISON — ce qui est commun aux deux univers (mode & décoration).
-   Chaque univers apparaît dans le diaporama d'accueil (une ou plusieurs photos),
-   à la manière des « adresses » d'une maison de restaurants.
-   Pour ajouter un 3e univers plus tard : ajouter un bloc dans `univers`.
+   `scenes`  : la roue de l'accueil — chaque scène = un nom, une photo plein écran
+               et deux lignes d'infos, comme les adresses d'une maison de restaurants.
+   `univers` : les grandes cartes « Explorer » (mode, décoration…).
    ========================================================================== */
 window.SITE = {
   maison: {
@@ -19,7 +19,7 @@ window.SITE = {
       sousTitre: "IYAM Paris · Créations & défilés",
       infos: ["Pièces uniques", "Prêt-à-porter à venir"],
       motsCles: ["Défilés", "Prototypes", "Prêt-à-porter"],
-      images: ["mode-wax-plumes-escalier.jpg", "mode-lin-passepoil-face.jpg", "mode-gilet-wax.jpg"],
+      image: "mode-wax-plumes-face.jpg",
       lien: "catalogue.html",
       bouton: "Voir le catalogue"
     },
@@ -29,9 +29,19 @@ window.SITE = {
       sousTitre: "IYAM Décoration",
       infos: ["Petits & moyens événements", "Sur-mesure"],
       motsCles: ["Anniversaire", "Baptême", "Baby shower"],
-      images: ["deco-arche-anniversaire.jpg", "deco-table-fleurs.jpg", "deco-chiffres-lumineux.jpg"],
+      image: "deco-arche-anniversaire.jpg",
       lien: "decoration.html",
       bouton: "Découvrir IYAM"
     }
+  ],
+
+  /* Roue de l'accueil : ajoutez, retirez ou réordonnez librement les scènes */
+  scenes: [
+    { titre: "Défilé",          image: "mode-wax-plumes-escalier.jpg",  lignes: ["IYAM Paris", "Pièces de défilé"],              lien: "catalogue.html?collection=defile" },
+    { titre: "Décoration",      image: "deco-arche-anniversaire.jpg",   lignes: ["IYAM Décoration créative", "Petits & moyens événements"], lien: "decoration.html" },
+    { titre: "Créations",       image: "mode-lin-passepoil-face.jpg",   lignes: ["Pièces uniques", "Prêt-à-porter à venir"],     lien: "catalogue.html?collection=creations" },
+    { titre: "Art de la table", image: "deco-table-fleurs.jpg",         lignes: ["Tables & espaces", "Devis gratuit sur demande"], lien: "decoration.html#prestations" },
+    { titre: "Wax",             image: "mode-gilet-wax.jpg",            lignes: ["Gilet wax", "Pièce unique · disponible"],      lien: "piece.html?ref=CR-02" },
+    { titre: "Anniversaire",    image: "deco-chiffres-lumineux.jpg",    lignes: ["Ballons & mise en scène", "Chiffres lumineux"], lien: "decoration.html#galerie" }
   ]
 };

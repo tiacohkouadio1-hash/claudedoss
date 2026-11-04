@@ -4,60 +4,55 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Décoration — {marque}</title>
-  <meta name="description" content="IYAM Décoration : décoration créative pour petits et moyens événements — baby shower, anniversaire, bride to be, baptême.">
+  <meta name="description" content="IYAM Décoration créative : décoration pour petits et moyens événements — baby shower, anniversaire, bride to be, baptême. Devis gratuit sur demande.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Oswald:wght@400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..700&family=Cormorant+Garamond:wght@400;500;600&family=Oswald:wght@400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body data-page="decoration" class="theme-deco">
   <main>
-    <section class="heros" id="dHeros" aria-label="IYAM Décoration"></section>
-
-    <section class="bloc">
-      <div class="wrap">
-        <p class="devise apparait" id="dDevise"></p>
-        <p class="intro apparait" id="dPresentation" style="text-align:center;margin:22px auto 0"></p>
-      </div>
-    </section>
+    <section class="flyer" id="dHeros" aria-label="IYAM Décoration"></section>
 
     <section class="bloc fond-creme">
       <div class="wrap">
-        <div class="entete-section"><div><p class="caps sur-titre">Pour tous vos moments</p><h2 class="titre">Des décos uniques, à votre image</h2></div></div>
-        <div class="polaroids" id="dOccasions"></div>
+        <h2 class="titre-flyer">Pour tous vos événements</h2>
+        <p class="sous-flyer">petits &amp; moyens événements</p>
+        <div class="polaroids" id="dOccasions" style="margin-top:40px"></div>
       </div>
     </section>
 
-    <section class="bloc">
-      <div class="wrap deux-col" style="align-items:start">
-        <div>
-          <p class="caps sur-titre">Mes prestations</p>
-          <h2 class="titre">Du concept à l'installation</h2>
-          <ul class="prestations" id="dPrestations"></ul>
-        </div>
-        <div class="pourquoi apparait">
-          <h3>Pourquoi me choisir ?</h3>
-          <ul id="dPourquoi"></ul>
-          <img src="images/deco-table-fleurs.jpg" alt="Table dressée : tulle, fleurs orange et assiettes à liseré doré" loading="lazy">
-        </div>
-      </div>
-      <div class="wrap valeurs" id="dValeurs"></div>
-    </section>
-
-    <section class="bloc fond-creme">
+    <section class="bloc" id="prestations">
       <div class="wrap">
-        <div class="entete-section"><div><p class="caps sur-titre">Réalisations</p><h2 class="titre">Galerie</h2></div></div>
-        <div class="galerie-deco" id="dGalerie"></div>
+        <h2 class="titre-flyer">Mes prestations</h2>
+        <ul class="prestations-flyer" id="dPrestations"></ul>
+
+        <div class="trio">
+          <div class="carte-check apparait">
+            <h3>Pourquoi me choisir ?</h3>
+            <ul id="dPourquoi"></ul>
+          </div>
+          <p class="citation apparait">Chaque détail compte,<br>chaque moment mérite d'être unique.<svg class="coeur" viewBox="0 0 24 22" aria-hidden="true"><path d="M12 21s-9-5.6-9-12A5 5 0 0 1 12 6a5 5 0 0 1 9 3c0 6.4-9 12-9 12z"/></svg></p>
+          <div class="devis apparait"><a class="pinceau" id="dDevis" href="#">Devis gratuit<small>sur demande</small></a></div>
+        </div>
       </div>
     </section>
 
-    <section class="bloc fond-velours" id="contact">
+    <section class="bloc fond-creme" id="galerie">
       <div class="wrap">
-        <p class="caps sur-titre">Découvrez mon univers</p>
-        <h2 class="titre">Votre événement, notre passion</h2>
-        <p class="intro">Racontez-moi votre projet : type d'événement, date, lieu, nombre d'invités et ambiance souhaitée. Je reviens vers vous avec une proposition sur-mesure.</p>
-        <div class="actions" id="dContact"></div>
-        <p class="caps" style="margin-top:22px;opacity:.8" id="dEmail"></p>
+        <h2 class="titre-flyer">Mes réalisations</h2>
+        <p class="sous-flyer">des décos uniques, à votre image</p>
+        <div class="galerie-deco" id="dGalerie" style="margin-top:40px"></div>
+      </div>
+    </section>
+
+    <section class="bloc" id="contact">
+      <div class="wrap">
+        <h2 class="titre-flyer">Découvrez mon univers</h2>
+        <p class="sous-flyer">votre événement, notre passion</p>
+        <div class="barre-contact" id="dContact"></div>
+        <div class="wrap valeurs" id="dValeurs"></div>
+        <p class="slogan">IYAM Décoration créative — donnons vie à vos émotions</p>
       </div>
     </section>
   </main>
